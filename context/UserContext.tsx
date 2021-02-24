@@ -43,13 +43,14 @@ export const UserContextProvider: React.FC = ({ children }) => {
         );
         const signer = provider.getSigner();
         const address = await signer.getAddress();
-        const seaport = new OpenSeaPort(signer, {
+        const seaport = new OpenSeaPort(provider, {
             networkName: Network.Main,
         });
 
+        console.log("address", address);
         window.seaport = seaport;
 
-        return { address, provider, seaport };
+        return { address, provider, seaport: () => console.log("123") };
     };
 
     /**
