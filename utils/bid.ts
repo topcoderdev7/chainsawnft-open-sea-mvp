@@ -21,6 +21,7 @@ export const bid = async (
             tokenAddress,
             schemaName, // WyvernSchemaName. If omitted, defaults to 'ERC721'. Other options include 'ERC20' and 'ERC1155'
         },
+        quantity: 1,
         accountAddress,
         // Value of the offer, in units of the payment token (or wrapped ETH if none is specified):
         startAmount,

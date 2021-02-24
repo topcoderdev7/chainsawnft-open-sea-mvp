@@ -7,6 +7,7 @@ import {
     useCallback,
 } from "react";
 import { ethers } from "ethers";
+import Web3 from "web3";
 import { makeSeaport } from "../utils/seaport";
 
 let m: Magic; // Magic requires window to function
@@ -43,7 +44,8 @@ export const UserContextProvider: React.FC = ({ children }) => {
         );
         const signer = provider.getSigner();
         const address = await signer.getAddress();
-        const seaport = makeSeaport(provider);
+        const web3 = new Web3(m.rpcProvider as any);
+        const seaport = makeSeaport(web3.currentProvider);
 
         return { address, provider, seaport };
     };

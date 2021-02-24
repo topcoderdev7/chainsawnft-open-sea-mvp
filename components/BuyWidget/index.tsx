@@ -46,6 +46,8 @@ const BuyWidget: React.FC<{ address: string; id: string }> = ({
         );
     };
 
+    const fromETHToUsd = (ethAmount: string) => parseFloat(ethAmount) * 2;
+
     return (
         <div>
             <h3>Buy</h3>
@@ -55,6 +57,12 @@ const BuyWidget: React.FC<{ address: string; id: string }> = ({
                     step="0.001"
                     value={amount}
                     onChange={(e: any) => setAmount(e.target.value)}
+                />
+                <input
+                    disabled
+                    type="number"
+                    step="0.001"
+                    value={fromETHToUsd(amount)}
                 />
                 <button>Buy</button>
             </form>
