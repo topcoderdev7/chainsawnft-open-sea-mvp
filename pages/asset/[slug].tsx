@@ -1,12 +1,18 @@
 import { ethers } from "ethers";
 import slugify from "slugify";
+import dynamic from "next/dynamic";
 import { makeSeaport } from "../../utils/seaport";
 import { LIST_OF_TOKENS } from "../../utils/constants";
 import { getAsset } from "../../utils/asset";
 import Asset from "../../components/Asset";
 import { NFT } from "../../types";
-import Orders from "../../components/Orders";
-import BuyWidget from "../../components/BuyWidget";
+
+const BuyWidgetNoSsr = dynamic(() => import("../../components/Orders"), {
+    ssr: false,
+});
+const OrdersNoSsr = dynamic(() => import("../../components/BuyWidget"), {
+    ssr: false,
+});
 
 const SingleAssetPage: React.FC<{ asset: NFT }> = ({
     asset: { description, imageUrl, name, address, id },
@@ -15,8 +21,8 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({
         <div>
             <h2>Single Asset Page</h2>
             <Asset name={name} imageUrl={imageUrl} description={description} />
-            <BuyWidget address={address} id={id} />
-            <Orders address={address} id={id} />
+            <BuyWidgetNoSsr address={address} id={id} />
+            <OrdersNoSsr address={address} id={id} />
         </div>
     );
 };
