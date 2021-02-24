@@ -6,15 +6,16 @@ import { getAsset } from "../../utils/asset";
 import Asset from "../../components/Asset";
 import { NFT } from "../../types";
 import Orders from "../../components/Orders";
+import BuyWidget from "../../components/BuyWidget";
 
 const SingleAssetPage: React.FC<{ asset: NFT }> = ({
     asset: { description, imageUrl, name, address, id },
 }) => {
-    console.log("SingleAssetPage address", address);
     return (
         <div>
             <h2>Single Asset Page</h2>
             <Asset name={name} imageUrl={imageUrl} description={description} />
+            <BuyWidget address={address} id={id} />
             <Orders address={address} id={id} />
         </div>
     );
