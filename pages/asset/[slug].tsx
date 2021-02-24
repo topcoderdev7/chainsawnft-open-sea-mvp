@@ -7,10 +7,10 @@ import { getAsset } from "../../utils/asset";
 import Asset from "../../components/Asset";
 import { NFT } from "../../types";
 
-const BuyWidgetNoSsr = dynamic(() => import("../../components/Orders"), {
+const BuyWidgetNoSsr = dynamic(() => import("../../components/BuyWidget"), {
     ssr: false,
 });
-const OrdersNoSsr = dynamic(() => import("../../components/BuyWidget"), {
+const OrdersNoSsr = dynamic(() => import("../../components/Orders"), {
     ssr: false,
 });
 
