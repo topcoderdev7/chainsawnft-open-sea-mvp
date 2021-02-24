@@ -23,4 +23,7 @@ export interface NFT {
     name: string;
     buyOrders: BuyOrder[];
     sellOrders: SellOrder[];
+
+    address: string;
+    id: string;
 }
