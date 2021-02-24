@@ -1,8 +1,15 @@
+import { ethers } from "ethers";
 import Head from "next/head";
+import { stringify } from "querystring";
 import Signup from "../components/Signup";
 import styles from "../styles/Index.module.scss";
+import { makeSeaport } from "../utils/seaport";
+import { LIST_OF_TOKENS } from "../utils/constants";
+import { getAsset } from "../utils/asset";
+import Asset from "../components/Asset";
 
-export const Home = (): JSX.Element => {
+export const Home = ({ assets }): JSX.Element => {
+    console.log("assets", assets);
     return (
         <div className={styles.container}>
             <Head>
@@ -11,36 +18,73 @@ export const Home = (): JSX.Element => {
             </Head>
 
             <main>
-                <h1 className={styles.title}>
-                    Welcome to{" "}
-                    <a href="https://nextjs.org">Next.js with Magic!</a>
-                </h1>
-                <p className={styles.description}>
-                    Edit the login tool by editing{" "}
-                    <code>components/Signup</code>
-                </p>
                 <Signup />
-                <p className={styles.description}>
-                    Get started by editing <code>pages/index.tsx</code>
-                </p>
-            </main>
-
-            <footer>
-                <a
-                    href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Powered by{" "}
-                    <img
-                        src="/vercel.svg"
-                        alt="Vercel Logo"
-                        className={styles.logo}
+                {assets.map(({ description, imageUrl, name }) => (
+                    <Asset
+                        description={description}
+                        imageUrl={imageUrl}
+                        name={name}
                     />
-                </a>
-            </footer>
+                ))}
+            </main>
         </div>
     );
 };
 
 export default Home;
+
+export async function getStaticProps(context) {
+    // Get seaport
+    const seaport = makeSeaport(
+        new ethers.providers.InfuraProvider(
+            "homestead",
+            "6a62f311d4e04880945ba1dc8424690a",
+        ),
+    );
+
+    console.log("seaport", seaport);
+
+    // Fetch the assets through seaport
+    const assets = await Promise.all(
+        LIST_OF_TOKENS.map(
+            async ({ address, id }: { address: string; id: string }) => {
+                const result = await getAsset(seaport, address, id);
+                return result;
+            },
+        ),
+    );
+
+    console.log("assets", assets);
+
+    return {
+        props: {
+            assets: assets.map(
+                ({ buyOrders, description, imageUrl, name, sellOrders }) => ({
+                    buyOrders: buyOrders.map(
+                        ({
+                            hash,
+                            paymentTokenContract: { ethPrice, usdPrice },
+                        }) => ({
+                            hash,
+                            ethPrice,
+                            usdPrice,
+                        }),
+                    ),
+                    description,
+                    imageUrl,
+                    name,
+                    sellOrders: sellOrders.map(
+                        ({
+                            hash,
+                            paymentTokenContract: { ethPrice, usdPrice },
+                        }) => ({
+                            hash,
+                            ethPrice,
+                            usdPrice,
+                        }),
+                    ),
+                }),
+            ),
+        }, // will be passed to the page component as props
+    };
+}

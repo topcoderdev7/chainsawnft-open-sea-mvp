@@ -7,7 +7,7 @@ import {
     useCallback,
 } from "react";
 import { ethers } from "ethers";
-import { OpenSeaPort, Network } from "opensea-js";
+import { makeSeaport } from "../utils/seaport";
 
 let m: Magic; // Magic requires window to function
 
@@ -43,14 +43,9 @@ export const UserContextProvider: React.FC = ({ children }) => {
         );
         const signer = provider.getSigner();
         const address = await signer.getAddress();
-        const seaport = new OpenSeaPort(provider, {
-            networkName: Network.Main,
-        });
+        const seaport = makeSeaport(provider);
 
-        console.log("address", address);
-        window.seaport = seaport;
-
-        return { address, provider, seaport: () => console.log("123") };
+        return { address, provider, seaport };
     };
 
     /**
