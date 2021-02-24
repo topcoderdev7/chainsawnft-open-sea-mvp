@@ -1,6 +1,7 @@
 import { ethers } from "ethers";
 import Head from "next/head";
-import { stringify } from "querystring";
+import Link from "next/link";
+import slugify from "slugify";
 import Signup from "../components/Signup";
 import styles from "../styles/Index.module.scss";
 import { makeSeaport } from "../utils/seaport";
@@ -9,7 +10,6 @@ import { getAsset } from "../utils/asset";
 import Asset from "../components/Asset";
 
 export const Home = ({ assets }): JSX.Element => {
-    console.log("assets", assets);
     return (
         <div className={styles.container}>
             <Head>
@@ -20,11 +20,15 @@ export const Home = ({ assets }): JSX.Element => {
             <main>
                 <Signup />
                 {assets.map(({ description, imageUrl, name }) => (
-                    <Asset
-                        description={description}
-                        imageUrl={imageUrl}
-                        name={name}
-                    />
+                    <Link href={`/asset/${slugify(name)}`} key={name}>
+                        <a>
+                            <Asset
+                                description={description}
+                                imageUrl={imageUrl}
+                                name={name}
+                            />
+                        </a>
+                    </Link>
                 ))}
             </main>
         </div>
@@ -38,11 +42,9 @@ export async function getStaticProps(context) {
     const seaport = makeSeaport(
         new ethers.providers.InfuraProvider(
             "homestead",
-            "6a62f311d4e04880945ba1dc8424690a",
+            process.env.NEXT_PUBLIC_INFURA_KEY,
         ),
     );
-
-    console.log("seaport", seaport);
 
     // Fetch the assets through seaport
     const assets = await Promise.all(
@@ -53,8 +55,6 @@ export async function getStaticProps(context) {
             },
         ),
     );
-
-    console.log("assets", assets);
 
     return {
         props: {

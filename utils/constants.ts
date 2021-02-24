@@ -10,20 +10,4 @@ export const LIST_OF_TOKENS = [
         address: "0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb",
         id: "7078",
     },
-    {
-        address: "0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb",
-        id: "7078",
-    },
-    {
-        address: "0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb",
-        id: "7078",
-    },
-    {
-        address: "0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb",
-        id: "7078",
-    },
-    {
-        address: "0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb",
-        id: "7078",
-    },
 ];
