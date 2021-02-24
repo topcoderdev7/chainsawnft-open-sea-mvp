@@ -1,23 +1,27 @@
 # nextjs-magic-eslint-jest
+
 If there's one template you should use in 2021
 This is the one
 
 ## NextJS
+
 Hands down the simplest and easiest framework to build production ready React Apps
 
 ## Magic
+
 Easy access to login, authentication, session management, ethereum wallets
 
 ## Eslint
+
 Stop wasting time formatting code, there's a tool for that
 
 ## Jest
-Test the code that matters, when it matters
 
+Test the code that matters, when it matters
 
 # Instructions
 
-## Clone 
+## Clone
 
 ```bash
 git clone https://github.com/GalloDaSballo/nextjs-magic-eslint-jest
@@ -36,10 +40,10 @@ yarn dev
 ```
 
 ## Architecture
+
 See `context/UserContext.tsx` for implementation of Login, Logout and Session Persistence
 
 See `components/Signup` for Login / Signup component
-
 
 This template was built on top of Template: NextJS Typescript Boilerplate
 

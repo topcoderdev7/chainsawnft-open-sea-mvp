@@ -103,11 +103,16 @@ export const UserContextProvider: React.FC = ({ children }) => {
 
                 if (isLoggedIn) {
                     const { email } = await m.user.getMetadata();
-                    const { address, provider } = await getAddressAndProvider();
+                    const {
+                        address,
+                        provider,
+                        seaport,
+                    } = await getAddressAndProvider();
                     setUser({
                         email: String(email),
                         address,
                         provider,
+                        seaport,
                     });
                 }
             } catch (err) {
