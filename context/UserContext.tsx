@@ -6,28 +6,53 @@ import {
     useContext,
     useCallback,
 } from "react";
+import { ethers } from "ethers";
+import { OpenSeaPort, Network } from "opensea-js";
 
 let m: Magic; // Magic requires window to function
 
 interface User {
     email: string;
+    address: string;
+    provider: ethers.providers.Web3Provider;
+    seaport: any;
 }
 
 type UserContextData = {
     user: User | null;
     logout: () => void;
     login: (_email: string) => void;
+    seaport: any;
 };
 
 const UserContext = createContext<UserContextData>({
     user: null,
     login: (_email) => null,
     logout: () => null,
+    seaport: null,
 });
 export default UserContext;
 
 export const UserContextProvider: React.FC = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
+
+    /**
+     * Given the Magic Provider, return address and provider
+     */
+    const getAddressAndProvider = async () => {
+        const provider = new ethers.providers.Web3Provider(
+            m.rpcProvider as any,
+        );
+        const signer = provider.getSigner();
+        const address = await signer.getAddress();
+        const seaport = new OpenSeaPort(signer, {
+            networkName: Network.Main,
+        });
+
+        window.seaport = seaport;
+
+        return { address, provider, seaport };
+    };
 
     /**
      * Logs the user out of magic
@@ -49,8 +74,16 @@ export const UserContextProvider: React.FC = ({ children }) => {
     const login = async (email: string) => {
         try {
             await m.auth.loginWithMagicLink({ email });
+            const {
+                address,
+                provider,
+                seaport,
+            } = await getAddressAndProvider();
             setUser({
                 email,
+                address,
+                provider,
+                seaport,
             });
         } catch (err) {
             logout();
@@ -70,8 +103,11 @@ export const UserContextProvider: React.FC = ({ children }) => {
 
                 if (isLoggedIn) {
                     const { email } = await m.user.getMetadata();
+                    const { address, provider } = await getAddressAndProvider();
                     setUser({
                         email: String(email),
+                        address,
+                        provider,
                     });
                 }
             } catch (err) {
