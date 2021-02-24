@@ -22,14 +22,12 @@ type UserContextData = {
     user: User | null;
     logout: () => void;
     login: (_email: string) => void;
-    seaport: any;
 };
 
 const UserContext = createContext<UserContextData>({
     user: null,
     login: (_email) => null,
     logout: () => null,
-    seaport: null,
 });
 export default UserContext;
 
