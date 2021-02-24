@@ -10,7 +10,7 @@ import { getAsset } from "../utils/asset";
 import Asset from "../components/Asset";
 import { NFT } from "../types";
 
-export const Home: React.FC<{ assets: NFT[] }> = ({ assets }): JSX.Element => {
+export const Home: React.FC<{ assets: NFT[] }> = ({ assets }) => {
     return (
         <div className={styles.container}>
             <Head>
