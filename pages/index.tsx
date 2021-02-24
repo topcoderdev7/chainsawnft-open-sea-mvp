@@ -8,8 +8,9 @@ import { makeSeaport } from "../utils/seaport";
 import { LIST_OF_TOKENS } from "../utils/constants";
 import { getAsset } from "../utils/asset";
 import Asset from "../components/Asset";
+import { NFT } from "../types";
 
-export const Home = ({ assets }): JSX.Element => {
+export const Home: React.FC<{ assets: NFT[] }> = ({ assets }): JSX.Element => {
     return (
         <div className={styles.container}>
             <Head>
