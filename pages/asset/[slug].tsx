@@ -33,7 +33,7 @@ export async function getStaticPaths() {
         paths: tokens.map((asset) => ({
             params: { slug: asset.slug },
         })),
-        fallback: true,
+        fallback: false,
     };
 }
 
