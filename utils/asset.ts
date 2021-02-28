@@ -10,13 +10,13 @@ import { NFT } from "../types";
 export const getAsset = async (
     seaport: any,
     address: string,
-    id: string,
+    tokenId: string,
 ): Promise<NFT> => {
     const result = await seaport.api.getAsset({
         tokenAddress: address,
-        tokenId: id,
+        tokenId,
     });
 
     console.log("getAsset address", address);
-    return { ...result, address, id };
+    return { ...result, address, tokenId };
 };

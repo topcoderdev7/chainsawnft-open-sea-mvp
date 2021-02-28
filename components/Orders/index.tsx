@@ -1,7 +1,10 @@
 import useOrders from "../../hooks/useOrders";
 
-const Orders: React.FC<{ address: string; id: string }> = ({ address, id }) => {
-    const { buyOrders, sellOrders } = useOrders(address, id);
+const Orders: React.FC<{ address: string; tokenId: string }> = ({
+    address,
+    tokenId,
+}) => {
+    const { buyOrders, sellOrders } = useOrders(address, tokenId);
     return (
         <div>
             <h3>List of orders</h3>

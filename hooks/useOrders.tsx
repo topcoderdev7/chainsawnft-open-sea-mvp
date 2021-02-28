@@ -9,7 +9,7 @@ import { makeSeaport } from "../utils/seaport";
  * @param address
  * @param id
  */
-const useOrders = (address: string, id: string) => {
+const useOrders = (address: string, tokenId: string) => {
     const [latestBuyOrders, setBuyOrders] = useState<BuyOrder[]>([]);
     const [latestSellOrders, setSellOrders] = useState<SellOrder[]>([]);
 
@@ -24,13 +24,13 @@ const useOrders = (address: string, id: string) => {
             const { buyOrders, sellOrders } = await getAsset(
                 seaport,
                 address,
-                id,
+                tokenId,
             );
             setBuyOrders(buyOrders);
             setSellOrders(sellOrders);
         };
         fetchOrders();
-    }, [address, id]);
+    }, [address, tokenId]);
 
     return { buyOrders: latestBuyOrders, sellOrders: latestSellOrders };
 };

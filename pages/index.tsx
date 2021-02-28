@@ -1,12 +1,9 @@
 import { ethers } from "ethers";
 import Head from "next/head";
 import Link from "next/link";
-import slugify from "slugify";
 import Signup from "../components/Signup";
 import styles from "../styles/Index.module.scss";
-import { makeSeaport } from "../utils/seaport";
-import { LIST_OF_TOKENS } from "../utils/constants";
-import { getAsset } from "../utils/asset";
+import { API_URL } from "../utils/constants";
 import Asset from "../components/Asset";
 import { NFT } from "../types";
 
@@ -20,8 +17,8 @@ export const Home: React.FC<{ assets: NFT[] }> = ({ assets }) => {
 
             <main>
                 <Signup />
-                {assets.map(({ description, imageUrl, name }) => (
-                    <Link href={`/asset/${slugify(name)}`} key={name}>
+                {assets.map(({ description, imageUrl, name, slug }) => (
+                    <Link href={`/asset/${slug}`} key={name}>
                         <a>
                             <Asset
                                 description={description}
@@ -39,53 +36,12 @@ export const Home: React.FC<{ assets: NFT[] }> = ({ assets }) => {
 export default Home;
 
 export async function getStaticProps(context) {
-    // Get seaport
-    const seaport = makeSeaport(
-        new ethers.providers.InfuraProvider(
-            "homestead",
-            process.env.NEXT_PUBLIC_INFURA_KEY,
-        ),
-    );
-
-    // Fetch the assets through seaport
-    const assets = await Promise.all(
-        LIST_OF_TOKENS.map(
-            async ({ address, id }: { address: string; id: string }) => {
-                const result = await getAsset(seaport, address, id);
-                return result;
-            },
-        ),
-    );
+    const tokenRes = await fetch(`${API_URL}/tokens?_limit=-1`);
+    const tokens = await tokenRes.json();
 
     return {
         props: {
-            assets: assets.map(
-                ({ buyOrders, description, imageUrl, name, sellOrders }) => ({
-                    buyOrders: buyOrders.map(
-                        ({
-                            hash,
-                            paymentTokenContract: { ethPrice, usdPrice },
-                        }) => ({
-                            hash,
-                            ethPrice,
-                            usdPrice,
-                        }),
-                    ),
-                    description,
-                    imageUrl,
-                    name,
-                    sellOrders: sellOrders.map(
-                        ({
-                            hash,
-                            paymentTokenContract: { ethPrice, usdPrice },
-                        }) => ({
-                            hash,
-                            ethPrice,
-                            usdPrice,
-                        }),
-                    ),
-                }),
-            ),
-        }, // will be passed to the page component as props
+            assets: tokens,
+        },
     };
 }

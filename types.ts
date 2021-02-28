@@ -21,9 +21,11 @@ export interface NFT {
     description: string;
     imageUrl: string;
     name: string;
+    address: string;
+    tokenId: string;
+
+    slug: string;
+
     buyOrders: BuyOrder[];
     sellOrders: SellOrder[];
-
-    address: string;
-    id: string;
 }

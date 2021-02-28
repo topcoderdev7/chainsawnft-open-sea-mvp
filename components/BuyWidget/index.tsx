@@ -3,11 +3,11 @@ import { useUser } from "../../context/UserContext";
 import useOrders from "../../hooks/useOrders";
 import { bid } from "../../utils/bid";
 
-const BuyWidget: React.FC<{ address: string; id: string }> = ({
+const BuyWidget: React.FC<{ address: string; tokenId: string }> = ({
     address,
-    id,
+    tokenId,
 }) => {
-    const { buyOrders, sellOrders } = useOrders(address, id);
+    const { buyOrders, sellOrders } = useOrders(address, tokenId);
     const user = useUser();
 
     const [amount, setAmount] = useState("");
@@ -39,7 +39,7 @@ const BuyWidget: React.FC<{ address: string; id: string }> = ({
         const tx = await bid(
             user.seaport,
             address,
-            id,
+            tokenId,
             "ERC721",
             user.address,
             parseFloat(amount || "0"),

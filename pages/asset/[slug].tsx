@@ -1,9 +1,5 @@
-import { ethers } from "ethers";
-import slugify from "slugify";
 import dynamic from "next/dynamic";
-import { makeSeaport } from "../../utils/seaport";
-import { LIST_OF_TOKENS } from "../../utils/constants";
-import { getAsset } from "../../utils/asset";
+import { API_URL } from "../../utils/constants";
 import Asset from "../../components/Asset";
 import { NFT } from "../../types";
 
@@ -15,14 +11,14 @@ const OrdersNoSsr = dynamic(() => import("../../components/Orders"), {
 });
 
 const SingleAssetPage: React.FC<{ asset: NFT }> = ({
-    asset: { description, imageUrl, name, address, id },
+    asset: { description, imageUrl, name, address, tokenId },
 }) => {
     return (
         <div>
             <h2>Single Asset Page</h2>
             <Asset name={name} imageUrl={imageUrl} description={description} />
-            <BuyWidgetNoSsr address={address} id={id} />
-            <OrdersNoSsr address={address} id={id} />
+            <BuyWidgetNoSsr address={address} tokenId={tokenId} />
+            <OrdersNoSsr address={address} tokenId={tokenId} />
         </div>
     );
 };
@@ -30,53 +26,21 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({
 export default SingleAssetPage;
 
 export async function getStaticPaths() {
-    // Get seaport
-    const seaport = makeSeaport(
-        new ethers.providers.InfuraProvider(
-            "homestead",
-            process.env.NEXT_PUBLIC_INFURA_KEY,
-        ),
-    );
-
-    // Fetch the assets through seaport
-    const assets = await Promise.all(
-        LIST_OF_TOKENS.map(
-            async ({ address, id }: { address: string; id: string }) => {
-                const result = await getAsset(seaport, address, id);
-                return result;
-            },
-        ),
-    );
+    const tokenRes = await fetch(`${API_URL}/tokens?_limit=-1`);
+    const tokens = await tokenRes.json();
 
     return {
-        paths: assets.map((asset) => ({
-            params: { slug: slugify(asset.name) },
+        paths: tokens.map((asset) => ({
+            params: { slug: asset.name },
         })),
         fallback: true,
     };
 }
 
 export async function getStaticProps({ params }) {
-    console.log("params", params);
-    // Get seaport
-    const seaport = makeSeaport(
-        new ethers.providers.InfuraProvider(
-            "homestead",
-            process.env.NEXT_PUBLIC_INFURA_KEY,
-        ),
-    );
-
-    // Fetch the assets through seaport
-    const assets = await Promise.all(
-        LIST_OF_TOKENS.map(
-            async ({ address, id }: { address: string; id: string }) => {
-                const result = await getAsset(seaport, address, id);
-                return result;
-            },
-        ),
-    );
-
-    const found = assets.find((asset) => slugify(asset.name) === params.slug);
+    const tokenRes = await fetch(`${API_URL}/tokens?slug=${params.slug}`);
+    const tokens = await tokenRes.json();
+    const found = tokens[0];
 
     return {
         props: {
@@ -86,7 +50,7 @@ export async function getStaticProps({ params }) {
                 imageUrl: found.imageUrl,
                 name: found.name,
                 address: found.address,
-                id: found.id,
+                tokenId: found.tokenId,
             },
         },
     };
