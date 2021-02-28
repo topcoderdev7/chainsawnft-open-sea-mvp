@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useState, FormEvent } from "react";
 import { useUser, useLogin, useLogout } from "../../context/UserContext";
 
@@ -19,6 +20,9 @@ const Signup = (): JSX.Element => {
         return (
             <section className={styles.signup}>
                 <span>Logged in as {user.email}</span>
+                <Link href="/settings">
+                    <button>Change your name</button>
+                </Link>
                 <button onClick={logout}>Logout</button>
             </section>
         );
