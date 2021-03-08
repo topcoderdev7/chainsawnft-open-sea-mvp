@@ -59,9 +59,8 @@ export const UserContextProvider: React.FC = ({ children }) => {
             setUser(null);
         } catch (err) {
             // Do nothing
-            setUser(user);
         }
-    }, [user]);
+    }, []);
 
     /**
      * Login with magic, enrich context with address and provider for convenience
@@ -112,11 +111,11 @@ export const UserContextProvider: React.FC = ({ children }) => {
                     });
                 }
             } catch (err) {
-                logout();
+                setUser(null);
             }
         };
         persistUser();
-    }, [logout]);
+    }, []);
 
     return (
         <UserContext.Provider

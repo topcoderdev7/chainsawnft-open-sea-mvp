@@ -21,7 +21,7 @@ const useProfile = (user) => {
                     return null;
                 }
                 const token = await getToken();
-                const res = await fetch(`${API_URL}/profiles`, {
+                const res = await fetch(`${API_URL}/profiles/${user.address}`, {
                     method: "GET",
                     headers: {
                         Authorization: `Bearer ${token}`,
