@@ -22,4 +22,12 @@ export interface SellOrder {
 /**
  * Interface for an NFT retrieved from seaport.api.getAsset
  */
-export type NFT = OpenSeaAsset;
+export interface NFT extends OpenSeaAsset {
+    description: string;
+    imageUrl: string;
+    name: string;
+    address: string;
+    tokenId: string;
+
+    slug: string;
+}
