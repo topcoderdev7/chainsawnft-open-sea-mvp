@@ -1,5 +1,6 @@
 import { ethers } from "ethers";
 import { useEffect, useState } from "react";
+import { OrderSide } from "opensea-js/lib/types";
 import { BuyOrder, SellOrder } from "../types";
 import { getAsset } from "../utils/asset";
 import { makeSeaport } from "../utils/seaport";

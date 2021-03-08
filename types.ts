@@ -1,5 +1,8 @@
+import { BigNumber } from "ethers";
+
 export interface BuyOrder {
     hash: string;
+    basePrice: BigNumber;
     paymentTokenContract: {
         ethPrice: string; // The price in ETH
         usdPrice: string;
@@ -8,6 +11,7 @@ export interface BuyOrder {
 
 export interface SellOrder {
     hash: string;
+    basePrice: BigNumber;
     paymentTokenContract: {
         ethPrice: string; // The price in ETH
         usdPrice: string;
