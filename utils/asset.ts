@@ -17,6 +17,6 @@ export const getAsset = async (
         tokenId,
     });
 
-    console.log("getAsset address", address);
+    console.log("asset result", result);
     return { ...result, address, tokenId };
 };

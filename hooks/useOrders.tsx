@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { Order } from "opensea-js/lib/types";
+import { Order, OpenSeaAccount } from "opensea-js/lib/types";
 import { useEffect, useState } from "react";
 import { getAsset } from "../utils/asset";
 import { makeSeaport } from "../utils/seaport";
@@ -12,6 +12,7 @@ import { makeSeaport } from "../utils/seaport";
 const useOrders = (address: string, tokenId: string) => {
     const [latestBuyOrders, setBuyOrders] = useState<Order[]>([]);
     const [latestSellOrders, setSellOrders] = useState<Order[]>([]);
+    const [assetOwner, setAssetOwner] = useState<OpenSeaAccount | null>(null);
 
     useEffect(() => {
         const fetchOrders = async () => {
@@ -21,18 +22,23 @@ const useOrders = (address: string, tokenId: string) => {
                     process.env.NEXT_PUBLIC_INFURA_KEY,
                 ),
             );
-            const { buyOrders, sellOrders } = await getAsset(
+            const { buyOrders, sellOrders, owner } = await getAsset(
                 seaport,
                 address,
                 tokenId,
             );
             setBuyOrders(buyOrders);
             setSellOrders(sellOrders);
+            setAssetOwner(owner);
         };
         fetchOrders();
     }, [address, tokenId]);
 
-    return { buyOrders: latestBuyOrders, sellOrders: latestSellOrders };
+    return {
+        buyOrders: latestBuyOrders,
+        sellOrders: latestSellOrders,
+        owner: assetOwner,
+    };
 };
 
 export default useOrders;
