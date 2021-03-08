@@ -1,4 +1,5 @@
 import { BigNumber } from "ethers";
+import { OpenSeaAsset } from "opensea-js/lib/types";
 
 export interface BuyOrder {
     hash: string;
@@ -21,15 +22,4 @@ export interface SellOrder {
 /**
  * Interface for an NFT retrieved from seaport.api.getAsset
  */
-export interface NFT {
-    description: string;
-    imageUrl: string;
-    name: string;
-    address: string;
-    tokenId: string;
-
-    slug: string;
-
-    buyOrders: BuyOrder[];
-    sellOrders: SellOrder[];
-}
+export type NFT = OpenSeaAsset;
