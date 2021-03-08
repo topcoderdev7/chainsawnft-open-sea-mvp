@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Signup from "../Signup";
+import WethManager from "../WethManager";
 
 const Header: React.FC = () => (
     <div>
@@ -7,6 +8,7 @@ const Header: React.FC = () => (
             <a>Home</a>
         </Link>
         <Signup />
+        <WethManager />
     </div>
 );
 

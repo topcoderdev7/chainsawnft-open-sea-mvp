@@ -5,6 +5,7 @@ const Orders: React.FC<{ address: string; tokenId: string }> = ({
     tokenId,
 }) => {
     const { buyOrders, sellOrders } = useOrders(address, tokenId);
+    console.log("buyOrders", buyOrders);
     return (
         <div>
             <h3>List of orders</h3>

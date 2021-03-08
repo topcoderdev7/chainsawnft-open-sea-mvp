@@ -40,7 +40,7 @@ const BuyWidget: React.FC<{ address: string; tokenId: string }> = ({
             user.seaport,
             address,
             tokenId,
-            "ERC721",
+            "ERC1155",
             user.address,
             parseFloat(amount || "0"),
         );

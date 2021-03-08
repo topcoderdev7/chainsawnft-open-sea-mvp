@@ -20,6 +20,7 @@ const useProfile = (user) => {
                 if (!user) {
                     return null;
                 }
+                console.log("user address", user.address);
                 const token = await getToken();
                 const res = await fetch(`${API_URL}/profiles/${user.address}`, {
                     method: "GET",
@@ -56,6 +57,7 @@ const SettingsPage: React.FC = () => {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
                     username: newName,
@@ -63,10 +65,11 @@ const SettingsPage: React.FC = () => {
                 }),
             });
         } else {
-            await fetch(`${API_URL}/profiles/${profile}`, {
+            await fetch(`${API_URL}/profiles/`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
                     username: newName,
@@ -88,7 +91,7 @@ const SettingsPage: React.FC = () => {
     return (
         <div>
             <h2>Settings</h2>
-            <p>Your username {profile}</p>
+            <p>Your username {profile?.username}</p>
             <h2>Change your Username</h2>
             {loading ? "Changing your name" : ""}
             <form onSubmit={handleSubmit}>
