@@ -1,7 +1,6 @@
 import { ethers } from "ethers";
+import { Order } from "opensea-js/lib/types";
 import { useEffect, useState } from "react";
-import { OrderSide } from "opensea-js/lib/types";
-import { BuyOrder, SellOrder } from "../types";
 import { getAsset } from "../utils/asset";
 import { makeSeaport } from "../utils/seaport";
 
@@ -11,8 +10,8 @@ import { makeSeaport } from "../utils/seaport";
  * @param id
  */
 const useOrders = (address: string, tokenId: string) => {
-    const [latestBuyOrders, setBuyOrders] = useState<BuyOrder[]>([]);
-    const [latestSellOrders, setSellOrders] = useState<SellOrder[]>([]);
+    const [latestBuyOrders, setBuyOrders] = useState<Order[]>([]);
+    const [latestSellOrders, setSellOrders] = useState<Order[]>([]);
 
     useEffect(() => {
         const fetchOrders = async () => {
