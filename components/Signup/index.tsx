@@ -20,9 +20,11 @@ const Signup = (): JSX.Element => {
         return (
             <section className={styles.signup}>
                 <span>Logged in as {user.email}</span>
+                <span>Address in as {user.address}</span>
                 <Link href="/settings">
                     <button>Change your name</button>
                 </Link>
+                <span>TODO Balance of ETH, Balance of WETH</span>
                 <button onClick={logout}>Logout</button>
             </section>
         );

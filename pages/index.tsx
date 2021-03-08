@@ -16,7 +16,6 @@ export const Home: React.FC<{ assets: NFT[] }> = ({ assets }) => {
             </Head>
 
             <main>
-                <Signup />
                 {assets.map(({ description, imageUrl, name, slug }) => (
                     <Link href={`/asset/${slug}`} key={name}>
                         <a>
