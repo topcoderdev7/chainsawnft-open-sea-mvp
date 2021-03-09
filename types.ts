@@ -16,3 +16,37 @@ export interface NFT extends OpenSeaAsset {
 
     slug: string;
 }
+
+/** STRAPI INTERFACES */
+/**
+ * Model definition for collection
+ */
+export interface Collection {
+    id: string;
+    name?: string;
+    imageUrl?: string;
+    artist?: Artist;
+    assets: any[];
+    slug?: string;
+}
+
+/**
+ * Model definition for artist
+ */
+export interface Artist {
+    id: string;
+    Name?: string;
+    slug?: string;
+    imageUrl?: string;
+    collections: Collection[];
+}
+
+/**
+ * Model definition for profile
+ */
+export interface Profile {
+    id: string;
+    user?: any;
+    username?: string;
+    address?: string;
+}
