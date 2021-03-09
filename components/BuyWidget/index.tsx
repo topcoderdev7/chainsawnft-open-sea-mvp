@@ -6,12 +6,12 @@ import useWETHBalance from "../../hooks/useWETHBalance";
 import { bid } from "../../utils/bid";
 import { fromStringToBN } from "../../utils/inputs";
 
+import styles from "./BuyWidget.module.scss";
+
 enum Status {
     Wrapping = 0,
     Sending,
 }
-
-import styles from "./BuyWidget.module.scss";
 
 const BuyWidget: React.FC<{ address: string; tokenId: string }> = ({
     address,

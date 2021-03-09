@@ -40,10 +40,10 @@ const Header: React.FC = () => (
         </div>
         {/* <Link href="/">
             <a>Home</a>
-        </Link>
-        <Signup />
+        </Link> */}
+        {/* <Signup /> */}
         <Link href="/deposit">Deposit ETH / WETH</Link>
-    </div>
+    </header>
 );
 
 export default Header;

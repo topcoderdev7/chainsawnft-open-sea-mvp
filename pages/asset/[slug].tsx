@@ -22,13 +22,6 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
                     <h1>{asset.name}</h1>
                     <p>Description:</p>
                     <span>{asset.description}</span>
-                    <p>More info:</p>
-                    <ul>
-                        <li>
-                            Published:{" "}
-                            {new Date(asset.publishedAt).toLocaleDateString()}
-                        </li>
-                    </ul>
                 </div>
                 <div className={styles.right}>
                     <BuyWidgetNoSsr
@@ -72,7 +65,6 @@ export async function getStaticProps({ params }) {
                 name: found.name,
                 address: found.address,
                 tokenId: found.tokenId,
-                publishedAt: found.published_at,
             },
         },
     };
