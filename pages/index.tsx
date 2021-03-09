@@ -1,11 +1,9 @@
 import { ethers } from "ethers";
 import Head from "next/head";
-import Link from "next/link";
-import Signup from "../components/Signup";
 import styles from "../styles/Index.module.scss";
 import { API_URL } from "../utils/constants";
-import Asset from "../components/Asset";
 import { NFT } from "../types";
+import Auctions from "../components/Auctions";
 
 export const Home: React.FC<{ assets: NFT[] }> = ({ assets }) => {
     return (
@@ -15,21 +13,7 @@ export const Home: React.FC<{ assets: NFT[] }> = ({ assets }) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <main>
-                <h1>test</h1>
-                test22
-                {assets.map(({ description, imageUrl, name, slug }) => (
-                    <Link href={`/asset/${slug}`} key={name}>
-                        <a>
-                            <Asset
-                                description={description}
-                                imageUrl={imageUrl}
-                                name={name}
-                            />
-                        </a>
-                    </Link>
-                ))}
-            </main>
+            <Auctions assets={assets} />
         </div>
     );
 };
