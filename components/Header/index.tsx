@@ -7,7 +7,11 @@ const Header: React.FC = () => (
     <header>
         <div className={styles.header}>
             <div className={styles.left}>
-                <img src="/images/logo.png" alt="Chainsaw" />
+                <Link href="/">
+                    <a>
+                        <img src="/images/logo.png" alt="Chainsaw" />
+                    </a>
+                </Link>
             </div>
             <div className={styles.right}>
                 <div>
@@ -38,10 +42,8 @@ const Header: React.FC = () => (
                 <img src="/images/logoclear.png" alt="Chainsaw" />
             </div>
         </div>
-        {/* <Link href="/">
-            <a>Home</a>
-        </Link> */}
-        {/* <Signup /> */}
+
+        <Signup />
         <Link href="/deposit">Deposit ETH / WETH</Link>
     </header>
 );

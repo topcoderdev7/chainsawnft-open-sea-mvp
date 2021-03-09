@@ -8,10 +8,7 @@ const Orders: React.FC<{ address: string; tokenId: string }> = ({
     address,
     tokenId,
 }) => {
-    const { buyOrders, sellOrders, owner } = useOrders(
-        "0x495f947276749ce646f68ac8c248420045cb7b5e",
-        "88170941023983939473756233746161686074440532447362694659937317918787680337921",
-    );
+    const { buyOrders, sellOrders, owner } = useOrders(address, tokenId);
     console.log(buyOrders, sellOrders);
     return (
         <div className={styles.orders}>
