@@ -14,3 +14,6 @@ export const LIST_OF_TOKENS = [
 
 export const API_URL =
     process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
+
+// Max ETH we always keep for withdrawals
+export const MAX_ETH = 0.01;
