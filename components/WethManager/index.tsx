@@ -1,7 +1,7 @@
 import { BigNumber } from "ethers";
 import { useState } from "react";
 import { useUser } from "../../context/UserContext";
-import { wrapEth } from "../../utils/weth";
+import { wrapETH } from "../../utils/weth";
 
 const WethManager: React.FC = () => {
     const user = useUser();
@@ -12,7 +12,7 @@ const WethManager: React.FC = () => {
         setLoading(true);
         try {
             const signer = user.provider.getSigner();
-            await wrapEth(BigNumber.from("1000000000000000"), signer);
+            await wrapETH(BigNumber.from("1000000000000000"), signer);
         } catch (err) {
             alert(`Exception  ${err}`);
         }

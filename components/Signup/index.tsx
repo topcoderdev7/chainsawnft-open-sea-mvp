@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { useState, FormEvent } from "react";
+import { utils } from "ethers";
 import { useUser, useLogin, useLogout } from "../../context/UserContext";
+import useWETHBalance from "../../hooks/useWETHBalance";
+import useETHBalance from "../../hooks/useETHBalance";
 
 import styles from "./Signup.module.scss";
 
@@ -8,6 +11,8 @@ const Signup = (): JSX.Element => {
     const user = useUser();
     const logout = useLogout();
     const [email, setEmail] = useState("");
+    const [ethBalance] = useETHBalance();
+    const [wethBalance] = useWETHBalance();
 
     const login = useLogin();
 
@@ -20,7 +25,11 @@ const Signup = (): JSX.Element => {
         return (
             <section className={styles.signup}>
                 <span>Logged in as {user.email}</span>
-                <span>Address in as {user.address}</span>
+                <span>Your Address {user.address}</span>
+                <span>Your ETH Balance: {utils.formatEther(ethBalance)}</span>
+                <span>
+                    Your WETH Balance: {utils.formatEther(wethBalance)}{" "}
+                </span>
                 <Link href="/settings">
                     <button>Change your name</button>
                 </Link>
