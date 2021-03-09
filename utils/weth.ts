@@ -4,7 +4,7 @@ const WETH_ADDR = "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2";
 const WETH_ABI = [
     "function deposit() public payable",
     "function withdraw(uint wad) public",
-    "function balanceOf(address account) public view virtual override returns (uint256)",
+    "function balanceOf(address account) public returns (uint256)",
 ];
 
 /**

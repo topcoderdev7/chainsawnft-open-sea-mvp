@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import { utils } from "ethers";
 import { useUser, useLogin, useLogout } from "../../context/UserContext";
 import useWETHBalance from "../../hooks/useWETHBalance";
@@ -11,8 +11,8 @@ const Signup = (): JSX.Element => {
     const user = useUser();
     const logout = useLogout();
     const [email, setEmail] = useState("");
-    const [ethBalance] = useETHBalance();
-    const [wethBalance] = useWETHBalance();
+    const [ethBalance, reloadEthBalance] = useETHBalance();
+    const [wethBalance, reloadWethBalance] = useWETHBalance();
 
     const login = useLogin();
 
@@ -20,6 +20,14 @@ const Signup = (): JSX.Element => {
         e.preventDefault();
         login(email);
     };
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            reloadWethBalance();
+            reloadEthBalance();
+        }, 10000);
+        return () => clearInterval(interval);
+    }, [reloadWethBalance, reloadEthBalance]);
 
     if (user) {
         return (
