@@ -1,12 +1,8 @@
-import Link from "next/link";
+import { NFT } from "../../types";
 import Asset from "../Asset";
 import styles from "./Auctions.module.scss";
 
-interface AuctionsProps {
-    assets: unknown[];
-}
-
-const Auctions = ({ assets }: AuctionsProps) => {
+const Auctions: React.FC<{ assets: NFT[] }> = ({ assets }) => {
     return (
         <main className={styles.auctions}>
             <h1 className={styles.title}>live auctions</h1>
