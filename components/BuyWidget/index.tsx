@@ -1,10 +1,10 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
+import { utils } from "ethers";
 import { useUser } from "../../context/UserContext";
 import useOrders from "../../hooks/useOrders";
 import useWETHBalance from "../../hooks/useWETHBalance";
 import { bid } from "../../utils/bid";
 import { fromStringToBN } from "../../utils/inputs";
-import { wrapETH } from "../../utils/weth";
 
 enum Status {
     Wrapping = 0,
@@ -27,8 +27,10 @@ const BuyWidget: React.FC<{ address: string; tokenId: string }> = ({
         const findMax = () => {
             let max = 0;
             buyOrders.forEach((buyOrder) => {
-                if (parseFloat(buyOrder.paymentTokenContract.ethPrice) > max) {
-                    max = parseFloat(buyOrder.paymentTokenContract.ethPrice);
+                if (parseFloat(buyOrder.basePrice.toString()) > max) {
+                    max = parseFloat(
+                        utils.formatEther(buyOrder.basePrice.toString()),
+                    );
                 }
             });
             sellOrders.forEach((sellOrder) => {
