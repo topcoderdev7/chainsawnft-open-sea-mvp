@@ -3,6 +3,8 @@ import { useUser } from "../../context/UserContext";
 import useOrders from "../../hooks/useOrders";
 import { bid } from "../../utils/bid";
 
+import styles from "./BuyWidget.module.scss";
+
 const BuyWidget: React.FC<{ address: string; tokenId: string }> = ({
     address,
     tokenId,
@@ -49,7 +51,7 @@ const BuyWidget: React.FC<{ address: string; tokenId: string }> = ({
     const fromETHToUsd = (ethAmount: string) => parseFloat(ethAmount) * 2;
 
     return (
-        <div>
+        <div className={styles.purchase}>
             <h3>Buy</h3>
             <form onSubmit={handleSubmit}>
                 <input
@@ -60,11 +62,14 @@ const BuyWidget: React.FC<{ address: string; tokenId: string }> = ({
                 />
                 <input
                     disabled
-                    type="number"
+                    type="hidden"
                     step="0.001"
                     value={fromETHToUsd(amount)}
                 />
-                <button>Buy</button>
+                <div className={styles.buttonContainer}>
+                    <span>{fromETHToUsd(amount)}$</span>
+                    <button>Buy</button>
+                </div>
             </form>
         </div>
     );
