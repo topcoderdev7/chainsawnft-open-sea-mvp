@@ -12,13 +12,16 @@ const Orders: React.FC<{ address: string; tokenId: string }> = ({
         <div className={styles.orders}>
             <h3>List of orders</h3>
             {owner ? <p>Owned by {owner.address}</p> : ""}
-            <div className={styles.orderList}>
-                <h4>Buy Orders</h4>
-                {buyOrders.map((buyOrder) => (
-                    <p>Ξ{utils.formatEther(buyOrder.basePrice.toString())}</p>
-                ))}
-                {!buyOrders.length && <p>No orders yet</p>}
-            </div>
+            <h4>Buy Orders</h4>
+            {buyOrders.map((buyOrder) => (
+                <p>
+                    Bid Placed by {buyOrder.makerAccount.address} Ξ
+                    {utils.formatEther(buyOrder.basePrice.toString())} at{" "}
+                    {new Date(
+                        Number(buyOrder.listingTime.toString()) * 1000,
+                    ).toString()}
+                </p>
+            ))}
 
             <div className={styles.orderList}>
                 <h4>Sell Orders</h4>

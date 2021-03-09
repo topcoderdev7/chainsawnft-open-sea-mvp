@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Signup from "../Signup";
-import WethManager from "../WethManager";
 
 import styles from "./Header.module.scss";
 
@@ -41,10 +40,10 @@ const Header: React.FC = () => (
         </div>
         {/* <Link href="/">
             <a>Home</a>
-        </Link> */}
-        {/* <Signup /> */}
-        {/* <WethManager /> */}
-    </header>
+        </Link>
+        <Signup />
+        <Link href="/deposit">Deposit ETH / WETH</Link>
+    </div>
 );
 
 export default Header;

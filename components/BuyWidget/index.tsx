@@ -1,7 +1,15 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
+import { utils } from "ethers";
 import { useUser } from "../../context/UserContext";
 import useOrders from "../../hooks/useOrders";
+import useWETHBalance from "../../hooks/useWETHBalance";
 import { bid } from "../../utils/bid";
+import { fromStringToBN } from "../../utils/inputs";
+
+enum Status {
+    Wrapping = 0,
+    Sending,
+}
 
 import styles from "./BuyWidget.module.scss";
 
@@ -11,16 +19,20 @@ const BuyWidget: React.FC<{ address: string; tokenId: string }> = ({
 }) => {
     const { buyOrders, sellOrders } = useOrders(address, tokenId);
     const user = useUser();
+    const [wethBalance] = useWETHBalance();
 
     const [amount, setAmount] = useState("");
-    // Find max ETH VALUE
+    const [status, setStatus] = useState<Status | null>(null);
 
+    // Find max ETH VALUE
     useEffect(() => {
         const findMax = () => {
             let max = 0;
             buyOrders.forEach((buyOrder) => {
-                if (parseFloat(buyOrder.paymentTokenContract.ethPrice) > max) {
-                    max = parseFloat(buyOrder.paymentTokenContract.ethPrice);
+                if (parseFloat(buyOrder.basePrice.toString()) > max) {
+                    max = parseFloat(
+                        utils.formatEther(buyOrder.basePrice.toString()),
+                    );
                 }
             });
             sellOrders.forEach((sellOrder) => {
@@ -33,10 +45,24 @@ const BuyWidget: React.FC<{ address: string; tokenId: string }> = ({
         findMax();
     }, [buyOrders, sellOrders]);
 
+    // Convert input to BN so we can use with Ethers
+    const BNAmount = useMemo(() => fromStringToBN(amount, 18), [amount]);
+
+    /**
+     * Calculate if we need more WETH, wrap that
+     * @param e
+     * @returns
+     */
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
 
-        /// TODO BID
+        // Check Weth Balance, wrap enough to get to X
+        const needed = BNAmount.sub(wethBalance);
+        if (needed.gt(0)) {
+            // Wrap more WETH
+            alert(`You need more weth ${needed.toString()}`);
+            return;
+        }
         // USER SEAPORT
         const tx = await bid(
             user.seaport,
