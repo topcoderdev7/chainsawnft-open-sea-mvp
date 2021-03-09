@@ -84,7 +84,7 @@ const BuyWidget: React.FC<{ address: string; tokenId: string }> = ({
                     type="number"
                     step="0.001"
                     value={amount}
-                    onChange={(e: any) => setAmount(e.target.value)}
+                    onChange={(e) => setAmount(e.target.value)}
                 />
                 <input
                     disabled
