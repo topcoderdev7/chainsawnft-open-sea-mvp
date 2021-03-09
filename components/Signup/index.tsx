@@ -41,7 +41,6 @@ const Signup = (): JSX.Element => {
                 <Link href="/settings">
                     <button>Change your name</button>
                 </Link>
-                <span>TODO Balance of ETH, Balance of WETH</span>
                 <button onClick={logout}>Logout</button>
             </section>
         );
