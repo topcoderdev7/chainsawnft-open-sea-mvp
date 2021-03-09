@@ -3,13 +3,7 @@ import React from "react";
 import styles from "./Bid.module.scss";
 
 interface BidProps {
-    buyOrder: {
-        makerAccount: {
-            address: string;
-        };
-        listingTime: string;
-        basePrice: number;
-    };
+    buyOrder: any;
 }
 
 const Bid = ({ buyOrder }: BidProps) => {
