@@ -1,12 +1,9 @@
 import { utils } from "ethers";
 import React from "react";
+import { BuyOrder } from "../../types";
 import styles from "./Bid.module.scss";
 
-interface BidProps {
-    buyOrder: any;
-}
-
-const Bid = ({ buyOrder }: BidProps) => {
+const Bid: React.FC<{ buyOrder: BuyOrder }> = ({ buyOrder }) => {
     const date = new Date(
         Number(buyOrder.listingTime.toString()) * 1000,
     ).toISOString();

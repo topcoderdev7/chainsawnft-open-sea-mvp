@@ -1,23 +1,8 @@
-import { BigNumber } from "ethers";
-import { OpenSeaAsset } from "opensea-js/lib/types";
+import { OpenSeaAsset, Order } from "opensea-js/lib/types";
 
-export interface BuyOrder {
-    hash: string;
-    basePrice: BigNumber;
-    paymentTokenContract: {
-        ethPrice: string; // The price in ETH
-        usdPrice: string;
-    };
-}
+export type BuyOrder = Order;
 
-export interface SellOrder {
-    hash: string;
-    basePrice: BigNumber;
-    paymentTokenContract: {
-        ethPrice: string; // The price in ETH
-        usdPrice: string;
-    };
-}
+export type SellOrder = Order;
 
 /**
  * Interface for an NFT retrieved from seaport.api.getAsset
