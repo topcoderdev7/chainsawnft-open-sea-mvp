@@ -4,7 +4,7 @@ import { API_URL } from "../utils/constants";
 import { Artist } from "../types";
 import Artists from "../components/Artists";
 
-export const Home: React.FC<{ artists: Artist[] }> = ({ artists }) => {
+export const ArtistsHome: React.FC<{ artists: Artist[] }> = ({ artists }) => {
     console.log(artists);
     return (
         <div className={styles.container}>
@@ -18,7 +18,7 @@ export const Home: React.FC<{ artists: Artist[] }> = ({ artists }) => {
     );
 };
 
-export default Home;
+export default ArtistsHome;
 
 export async function getStaticProps(context) {
     const artistRes = await fetch(`${API_URL}/artists`);
