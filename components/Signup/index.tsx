@@ -38,9 +38,16 @@ const Signup = (): JSX.Element => {
                 <span>
                     Your WETH Balance: {utils.formatEther(wethBalance)}{" "}
                 </span>
-                <Link href="/settings">
-                    <button>Change your name</button>
-                </Link>
+                <ul>
+                    <li>
+                        <Link href="/settings">
+                            <a>Change your name</a>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href="/deposit">Deposit ETH / WETH</Link>
+                    </li>
+                </ul>
                 <button onClick={logout}>Logout</button>
             </section>
         );

@@ -15,6 +15,9 @@ const Header: React.FC = () => (
             </div>
             <div className={styles.right}>
                 <div>
+                    <Signup />
+                </div>
+                <div>
                     <div className={styles.social}>
                         <a href="https://www.instagram.com/chainsaw_nft">
                             <img src="/logos/instagram.png" alt="discord" />
@@ -42,9 +45,6 @@ const Header: React.FC = () => (
                 <img src="/images/logoclear.png" alt="Chainsaw" />
             </div>
         </div>
-
-        <Signup />
-        <Link href="/deposit">Deposit ETH / WETH</Link>
     </header>
 );
 
