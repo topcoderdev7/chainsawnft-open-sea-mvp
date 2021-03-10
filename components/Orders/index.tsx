@@ -20,14 +20,16 @@ const Orders: React.FC<{ address: string; tokenId: string }> = ({
             <div className={styles.ordersSection}>
                 <h4>Buy Orders</h4>
                 {buyOrders.map((buyOrder) => (
-                    <Bid buyOrder={buyOrder} />
+                    <Bid key={buyOrder.hash} buyOrder={buyOrder} />
                 ))}
                 {!buyOrders.length && <p>No orders yet</p>}
             </div>
             <div className={styles.ordersSection}>
                 <h4>Sell Orders</h4>
                 {sellOrders.map((sellOrder) => (
-                    <p>Ξ{utils.formatEther(sellOrder.basePrice.toString())}</p>
+                    <p key={sellOrder.hash}>
+                        Ξ{utils.formatEther(sellOrder.basePrice.toString())}
+                    </p>
                 ))}
                 {!sellOrders.length && <p>No orders yet</p>}
             </div>
