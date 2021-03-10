@@ -1,7 +1,8 @@
 import { API_URL } from "../../utils/constants";
 import { Artist, Collection as CollectionInterface } from "../../types";
-import styles from "../../styles/artist.module.scss";
 import Collection from "../../components/Collection";
+
+import styles from "../../styles/artist.module.scss";
 
 const SingleArtistPage: React.FC<{ artist: Artist }> = ({ artist }) => {
     return (
@@ -25,6 +26,7 @@ const SingleArtistPage: React.FC<{ artist: Artist }> = ({ artist }) => {
                                 key={collection.slug}
                                 imageUrl={collection.imageUrl}
                                 name={collection.name}
+                                slug={collection.slug}
                                 id={collection.id}
                                 assets={collection.assets}
                             />
