@@ -17,11 +17,7 @@ const Asset: React.FC<{
                     <div>
                         <h3>{name}</h3>
                     </div>
-                    <Link href={`/asset/${slug}`}>
-                        <a>
-                            <p>{description}</p>
-                        </a>
-                    </Link>
+                    <p>{description}</p>
                     <span>Reserve price: 1.2 ETH</span>
                 </div>
             </div>
