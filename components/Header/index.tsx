@@ -33,8 +33,13 @@ const Header: React.FC = () => (
                             </Link>
                         </div>
                         <div>
-                            <Link href="/artist">
+                            <Link href="/artists">
                                 <a>ARTISTS</a>
+                            </Link>
+                        </div>
+                        <div>
+                            <Link href="/collections">
+                                <a>Collections</a>
                             </Link>
                         </div>
                     </div>

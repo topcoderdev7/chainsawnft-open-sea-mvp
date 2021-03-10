@@ -22,7 +22,7 @@ const Asset: React.FC<{
                             <p>{description}</p>
                         </a>
                     </Link>
-                    <span>Reserve price: 1.2 ETH</span>
+                    <span>Reserve price: TODO ETH</span>
                 </div>
             </div>
         </a>
