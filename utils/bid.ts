@@ -1,3 +1,5 @@
+import { OpenSeaPort } from "opensea-js";
+import { WyvernSchemaName } from "opensea-js/lib/types";
 /**
  * Given a seaport (with signer), place a bid on the given asset for the given startAmount
  * @param seaport
@@ -8,7 +10,7 @@
  * @param startAmount
  */
 export const bid = async (
-    seaport: any,
+    seaport: OpenSeaPort,
     tokenAddress: string,
     tokenId: string,
     schemaName: string,
@@ -19,7 +21,10 @@ export const bid = async (
         asset: {
             tokenId,
             tokenAddress,
-            schemaName, // WyvernSchemaName. If omitted, defaults to 'ERC721'. Other options include 'ERC20' and 'ERC1155'
+            schemaName:
+                schemaName === "ERC1155"
+                    ? WyvernSchemaName.ERC1155
+                    : WyvernSchemaName.ERC721, // WyvernSchemaName. If omitted, defaults to 'ERC721'. Other options include 'ERC20' and 'ERC1155'
         },
         quantity: 1,
         accountAddress,

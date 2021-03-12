@@ -9,7 +9,7 @@ export const Home: React.FC<{ assets: NFT[] }> = ({ assets }) => {
     return (
         <div className={styles.container}>
             <Head>
-                <title>Create Next App</title>
+                <title>Chainsaw NFT</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
@@ -20,7 +20,7 @@ export const Home: React.FC<{ assets: NFT[] }> = ({ assets }) => {
 
 export default Home;
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
     const tokenRes = await fetch(`${API_URL}/tokens?_limit=-1`);
     const tokens = await tokenRes.json();
 

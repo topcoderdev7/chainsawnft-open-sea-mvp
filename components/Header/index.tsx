@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Signup from "../Signup";
+import UserSignup from "../UserSignup";
 
 import styles from "./Header.module.scss";
 
@@ -15,7 +15,7 @@ const Header: React.FC = () => (
             </div>
             <div className={styles.right}>
                 <div>
-                    <Signup />
+                    <UserSignup />
                 </div>
                 <div>
                     <div className={styles.social}>

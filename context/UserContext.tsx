@@ -12,7 +12,7 @@ import { makeSeaport } from "../utils/seaport";
 
 let m: Magic; // Magic requires window to function
 
-interface User {
+export interface User {
     email: string;
     address: string;
     provider: ethers.providers.Web3Provider;

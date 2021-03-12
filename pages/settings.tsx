@@ -1,14 +1,35 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState, useEffect, FormEvent } from "react";
-import { useUser } from "../context/UserContext";
+import { useLogout, useUser, User } from "../context/UserContext";
 import { API_URL } from "../utils/constants";
 import { getToken } from "../utils/magic";
+import { hasGivenWETHAllowance } from "../utils/weth";
 
 interface Profile {
     id: number;
     username: string;
     address: string;
 }
+
+const useHasGivenAllowance = (user: User) => {
+    const [allowance, setAllowance] = useState<boolean>(false);
+
+    useEffect(() => {
+        const checkAllowance = async () => {
+            if (user) {
+                const result = await hasGivenWETHAllowance(
+                    user.address,
+                    user.provider,
+                );
+                setAllowance(result);
+            }
+        };
+        checkAllowance();
+    }, [user]);
+
+    return allowance;
+};
 
 const useProfile = (user) => {
     const [profile, setProfile] = useState<Profile | null>(null);
@@ -44,9 +65,18 @@ const useProfile = (user) => {
 
 const SettingsPage: React.FC = () => {
     const user = useUser();
+    const logout = useLogout();
+    const router = useRouter();
     const profile = useProfile(user);
     const [newName, setNewName] = useState("");
     const [loading, setLoading] = useState(false);
+
+    const allowance = useHasGivenAllowance(user);
+
+    const logoutAndExit = async () => {
+        await logout();
+        router.push("/");
+    };
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
@@ -82,7 +112,7 @@ const SettingsPage: React.FC = () => {
 
     if (!user) {
         return (
-            <Link href="/">
+            <Link href="/login">
                 <a>Please Login First</a>
             </Link>
         );
@@ -101,6 +131,14 @@ const SettingsPage: React.FC = () => {
                 />
                 <button type="submit">Change Name</button>
             </form>
+
+            <hr />
+            <button onClick={logoutAndExit}>Logout</button>
+            <div>
+                {allowance
+                    ? "You've given allowance"
+                    : "You need to give allowance"}
+            </div>
         </div>
     );
 };

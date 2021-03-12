@@ -8,11 +8,10 @@ import styles from "../styles/Index.module.scss";
 export const CollectionsHome: React.FC<{ collections: Collection[] }> = ({
     collections,
 }) => {
-    console.log(collections);
     return (
         <div className={styles.container}>
             <Head>
-                <title>Create Next App</title>
+                <title>Chainsaw NFT</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
@@ -23,7 +22,7 @@ export const CollectionsHome: React.FC<{ collections: Collection[] }> = ({
 
 export default CollectionsHome;
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
     const collectionRes = await fetch(`${API_URL}/collections`);
     const collections = await collectionRes.json();
 

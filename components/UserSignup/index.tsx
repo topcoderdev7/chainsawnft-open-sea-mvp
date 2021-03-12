@@ -5,20 +5,12 @@ import { useUser, useLogin } from "../../context/UserContext";
 import useWETHBalance from "../../hooks/useWETHBalance";
 import useETHBalance from "../../hooks/useETHBalance";
 
-import styles from "./Signup.module.scss";
+import styles from "./UserSignup.module.scss";
 
-const Signup = (): JSX.Element => {
+const UserSignup = (): JSX.Element => {
     const user = useUser();
-    const [email, setEmail] = useState("");
     const [ethBalance, reloadEthBalance] = useETHBalance();
     const [wethBalance, reloadWethBalance] = useWETHBalance();
-
-    const login = useLogin();
-
-    const handleSubmit = (e: FormEvent) => {
-        e.preventDefault();
-        login(email);
-    };
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -55,19 +47,11 @@ const Signup = (): JSX.Element => {
 
     return (
         <section className={styles.signup}>
-            <span>Log in to your wallet</span>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="hello@example.com"
-                />
-
-                <button type="submit">Log in</button>
-            </form>
+            <Link href="/login">
+                <a>Signup</a>
+            </Link>
         </section>
     );
 };
 
-export default Signup;
+export default UserSignup;

@@ -6,10 +6,12 @@ import { MAX_ETH } from "../utils/constants";
 import { wrapETH } from "../utils/weth";
 import QRCode from "../components/QrCode";
 import CopyUserAddress from "../components/CopyUserAddress";
+import useWETHBalance from "../hooks/useWETHBalance";
 
 const DepositPage: React.FC = () => {
     const user = useUser();
     const [ethBalance, reloadEthBalance] = useETHBalance();
+    const [wethBalance, reloadWethBalance] = useWETHBalance();
     useEffect(() => {
         const interval = setInterval(() => {
             reloadEthBalance();
@@ -28,7 +30,14 @@ const DepositPage: React.FC = () => {
     return (
         <div>
             <h2>Deposit ETH</h2>
-            <div>ETH Balance: {utils.formatEther(ethBalance.toString())}</div>
+            <div>
+                ETH Balance (Used for gas and converted into WETH):{" "}
+                {utils.formatEther(ethBalance.toString())}
+            </div>
+            <div>
+                WETH Balance (Used for bidding):{" "}
+                {utils.formatEther(wethBalance.toString())}
+            </div>
             {ethBalance.gt(0) && ethBalance.lt(MAX_ETH) && (
                 <p>
                     We keep a small portion of ETH so you can withdraw at any

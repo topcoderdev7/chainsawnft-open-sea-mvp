@@ -5,11 +5,10 @@ import { Artist } from "../types";
 import Artists from "../components/Artists";
 
 export const ArtistsHome: React.FC<{ artists: Artist[] }> = ({ artists }) => {
-    console.log(artists);
     return (
         <div className={styles.container}>
             <Head>
-                <title>Create Next App</title>
+                <title>Chainsaw NFT</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
@@ -20,7 +19,7 @@ export const ArtistsHome: React.FC<{ artists: Artist[] }> = ({ artists }) => {
 
 export default ArtistsHome;
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
     const artistRes = await fetch(`${API_URL}/artists`);
     const artists = await artistRes.json();
 
