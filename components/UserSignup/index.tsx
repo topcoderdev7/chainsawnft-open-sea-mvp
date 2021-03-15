@@ -1,24 +1,13 @@
 import Link from "next/link";
-import { useState, FormEvent, useEffect } from "react";
 import { utils } from "ethers";
-import { useUser, useLogin } from "../../context/UserContext";
-import useWETHBalance from "../../hooks/useWETHBalance";
-import useETHBalance from "../../hooks/useETHBalance";
+import { useUser } from "../../context/UserContext";
 
 import styles from "./UserSignup.module.scss";
+import { useBalances } from "../../context/BalanceContext";
 
 const UserSignup = (): JSX.Element => {
     const user = useUser();
-    const [ethBalance, reloadEthBalance] = useETHBalance();
-    const [wethBalance, reloadWethBalance] = useWETHBalance();
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            reloadWethBalance();
-            reloadEthBalance();
-        }, 10000);
-        return () => clearInterval(interval);
-    }, [reloadWethBalance, reloadEthBalance]);
+    const { eth: ethBalance, weth: wethBalance } = useBalances();
 
     if (user) {
         return (

@@ -1,16 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
 import { BigNumber } from "ethers";
-import { useUser } from "../context/UserContext";
+import { User } from "../context/UserContext";
 import getETHBalance from "../utils/getETHBalance";
 
-const useETHBalance = (): [BigNumber, () => Promise<void>] => {
-    const user = useUser();
+const useETHBalance = (user: User): [BigNumber, () => Promise<void>] => {
     const [balance, setBalance] = useState<BigNumber>(BigNumber.from("0"));
 
     const fetchUserETH = useCallback(async () => {
         if (!user) {
             setBalance(BigNumber.from("0"));
-
             return;
         }
         try {
@@ -23,7 +21,7 @@ const useETHBalance = (): [BigNumber, () => Promise<void>] => {
 
     useEffect(() => {
         fetchUserETH();
-    }, [fetchUserETH, user?.provider]);
+    }, [fetchUserETH]);
 
     return [balance, fetchUserETH];
 };

@@ -1,35 +1,17 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState, useEffect, FormEvent } from "react";
-import { useLogout, useUser, User } from "../context/UserContext";
+import { useLogout, useUser } from "../context/UserContext";
 import { API_URL } from "../utils/constants";
 import { getToken } from "../utils/magic";
-import { hasGivenWETHAllowance } from "../utils/weth";
+import useHasGivenWETHAllowance from "../hooks/useHasGivenWETHAllowance";
+import { useAllowance } from "../context/BalanceContext";
 
 interface Profile {
     id: number;
     username: string;
     address: string;
 }
-
-const useHasGivenAllowance = (user: User) => {
-    const [allowance, setAllowance] = useState<boolean>(false);
-
-    useEffect(() => {
-        const checkAllowance = async () => {
-            if (user) {
-                const result = await hasGivenWETHAllowance(
-                    user.address,
-                    user.provider,
-                );
-                setAllowance(result);
-            }
-        };
-        checkAllowance();
-    }, [user]);
-
-    return allowance;
-};
 
 const useProfile = (user) => {
     const [profile, setProfile] = useState<Profile | null>(null);
@@ -71,7 +53,7 @@ const SettingsPage: React.FC = () => {
     const [newName, setNewName] = useState("");
     const [loading, setLoading] = useState(false);
 
-    const allowance = useHasGivenAllowance(user);
+    const allowance = useAllowance();
 
     const logoutAndExit = async () => {
         await logout();

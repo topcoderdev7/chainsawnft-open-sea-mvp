@@ -1,16 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
 import { BigNumber } from "ethers";
-import { useUser } from "../context/UserContext";
+import { User } from "../context/UserContext";
 import { getWETHBalance } from "../utils/weth";
 
-const useWETHBalance = (): [BigNumber, () => Promise<void>] => {
-    const user = useUser();
+const useWETHBalance = (user: User): [BigNumber, () => Promise<void>] => {
     const [balance, setBalance] = useState<BigNumber>(BigNumber.from("0"));
 
     const fetchUserWETH = useCallback(async () => {
         if (!user) {
             setBalance(BigNumber.from("0"));
-
             return;
         }
         try {
@@ -26,7 +24,7 @@ const useWETHBalance = (): [BigNumber, () => Promise<void>] => {
 
     useEffect(() => {
         fetchUserWETH();
-    }, [fetchUserWETH, user?.provider]);
+    }, [fetchUserWETH]);
 
     return [balance, fetchUserWETH];
 };

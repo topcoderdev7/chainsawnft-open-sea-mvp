@@ -2,11 +2,11 @@ import { FormEvent, useEffect, useMemo, useState } from "react";
 import { utils } from "ethers";
 import { useUser } from "../../context/UserContext";
 import useOrders from "../../hooks/useOrders";
-import useWETHBalance from "../../hooks/useWETHBalance";
 import { bid } from "../../utils/bid";
 import { fromStringToBN } from "../../utils/inputs";
 
 import styles from "./BuyWidget.module.scss";
+import { useBalances } from "../../context/BalanceContext";
 
 enum Status {
     Wrapping = 0,
@@ -19,7 +19,7 @@ const BuyWidget: React.FC<{ address: string; tokenId: string }> = ({
 }) => {
     const { buyOrders, sellOrders } = useOrders(address, tokenId);
     const user = useUser();
-    const [wethBalance] = useWETHBalance();
+    const { weth: wethBalance } = useBalances();
 
     const [amount, setAmount] = useState("");
     const [status, setStatus] = useState<Status | null>(null);

@@ -7,17 +7,11 @@ import { wrapETH } from "../utils/weth";
 import QRCode from "../components/QrCode";
 import CopyUserAddress from "../components/CopyUserAddress";
 import useWETHBalance from "../hooks/useWETHBalance";
+import { useBalances } from "../context/BalanceContext";
 
 const DepositPage: React.FC = () => {
     const user = useUser();
-    const [ethBalance, reloadEthBalance] = useETHBalance();
-    const [wethBalance, reloadWethBalance] = useWETHBalance();
-    useEffect(() => {
-        const interval = setInterval(() => {
-            reloadEthBalance();
-        }, 1000);
-        return () => clearInterval(interval);
-    }, [reloadEthBalance]);
+    const { eth: ethBalance, weth: wethBalance } = useBalances();
 
     const convertEthToWeth = async () => {
         await wrapETH(ethBalance.sub(MAX_ETH), user.provider.getSigner());
