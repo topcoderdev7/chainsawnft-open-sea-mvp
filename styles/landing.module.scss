@@ -1,0 +1,5 @@
+@import "./mixins";
+.container {
+  @include landingContainer();
+  text-align: center
+}

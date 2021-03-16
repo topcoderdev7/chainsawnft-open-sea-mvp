@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 import { useProfile, useSetProfile } from "../../context/ProfileContext";
+import styles from "../../styles/landing.module.scss";
 
 export const UsernamePage = () => {
     const [name, setName] = useState("");
@@ -26,7 +27,7 @@ export const UsernamePage = () => {
     }
 
     return (
-        <div>
+        <div className={styles.container}>
             <h2>Add your Username</h2>
             <h3>{loading ? "Loading" : ""}</h3>
             <form onSubmit={handleSubmit}>

@@ -6,6 +6,7 @@ import { useUser } from "../../context/UserContext";
 import { MAX_ETH } from "../../utils/constants";
 import { wrapETH } from "../../utils/weth";
 import { useAllowance, useBalances } from "../../context/BalanceContext";
+import styles from "../../styles/landing.module.scss";
 
 const WETHPage: React.FC = () => {
     const user = useUser();
@@ -26,7 +27,7 @@ const WETHPage: React.FC = () => {
     }
 
     return (
-        <div>
+        <div className={styles.container}>
             {allowance && (
                 <p>
                     It seems like you already gave allowance, are you sure you
