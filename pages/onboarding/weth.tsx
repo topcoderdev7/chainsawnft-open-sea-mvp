@@ -1,16 +1,24 @@
 import { utils } from "ethers";
 import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/router";
 import { useUser } from "../../context/UserContext";
 import { MAX_ETH } from "../../utils/constants";
 import { wrapETH } from "../../utils/weth";
-import { useBalances } from "../../context/BalanceContext";
+import { useAllowance, useBalances } from "../../context/BalanceContext";
 
 const WETHPage: React.FC = () => {
     const user = useUser();
     const { eth: ethBalance, weth: wethBalance } = useBalances();
+    const [loading, setLoading] = useState(false);
+    const router = useRouter();
+    const allowance = useAllowance();
 
     const convertEthToWeth = async () => {
+        setLoading(true);
         await wrapETH(ethBalance.sub(MAX_ETH), user.provider.getSigner());
+        setLoading(false);
+        router.push("/onboarding/success");
     };
 
     if (!user) {
@@ -19,6 +27,12 @@ const WETHPage: React.FC = () => {
 
     return (
         <div>
+            {allowance && (
+                <p>
+                    It seems like you already gave allowance, are you sure you
+                    need to do this again?
+                </p>
+            )}
             <h2>Approve ETH to WETH</h2>
             <div>
                 We&rsquo;ll wrap your ETH into WETH and you can start trading

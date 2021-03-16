@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
-import { useSetProfile } from "../../context/ProfileContext";
+import { useProfile, useSetProfile } from "../../context/ProfileContext";
 
 export const UsernamePage = () => {
     const [name, setName] = useState("");
     const [loading, setLoading] = useState(false);
     const setProfile = useSetProfile();
+    const profile = useProfile();
     const router = useRouter();
 
     const handleSubmit = async (e: FormEvent) => {
@@ -16,6 +17,13 @@ export const UsernamePage = () => {
         setLoading(false);
         router.push("/onboarding/eth");
     };
+
+    if (profile) {
+        console.log(
+            "Redirected from /onboarding/username because they already have profile",
+        );
+        router.push("/onboarding/eth");
+    }
 
     return (
         <div>
