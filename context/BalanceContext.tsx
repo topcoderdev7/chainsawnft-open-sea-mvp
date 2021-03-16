@@ -23,11 +23,11 @@ export const BalanceContextProvider: React.FC = ({ children }) => {
     const [weth, reloadWETH] = useWETHBalance(user);
     console.log("weth", weth);
     const [eth, reloadETH] = useETHBalance(user);
-    const [
+    const {
         allowance,
-        reloadAllowance,
-        loadingAllowance,
-    ] = useHasGivenWETHAllowance(user);
+        reload: reloadAllowance,
+        loading: loadingAllowance,
+    } = useHasGivenWETHAllowance(user);
 
     // Reload balances and allowance every 10 seconds
     useEffect(() => {

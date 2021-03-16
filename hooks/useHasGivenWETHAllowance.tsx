@@ -26,6 +26,6 @@ const useHasGivenWETHAllowance = (user: User) => {
         checkAllowance();
     }, [checkAllowance]);
 
-    return [allowance, checkAllowance, loading];
+    return { allowance, reload: checkAllowance, loading };
 };
 export default useHasGivenWETHAllowance;
