@@ -1,55 +1,16 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState, useEffect, FormEvent } from "react";
+import { useState, FormEvent } from "react";
 import { useLogout, useUser } from "../context/UserContext";
-import { API_URL } from "../utils/constants";
-import { getToken } from "../utils/magic";
-import useHasGivenWETHAllowance from "../hooks/useHasGivenWETHAllowance";
 import { useAllowance } from "../context/BalanceContext";
-
-interface Profile {
-    id: number;
-    username: string;
-    address: string;
-}
-
-const useProfile = (user) => {
-    const [profile, setProfile] = useState<Profile | null>(null);
-
-    useEffect(() => {
-        // eslint-disable-next-line consistent-return
-        const fetchProfile = async (): Promise<void> => {
-            try {
-                if (!user) {
-                    return null;
-                }
-                console.log("user address", user.address);
-                const token = await getToken();
-                const res = await fetch(`${API_URL}/profiles/${user.address}`, {
-                    method: "GET",
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-                const data = await res.json();
-                if (data.error) {
-                    return null;
-                }
-                setProfile(data);
-            } catch (err) {
-                console.log("Exception in fetchProfile", err);
-            }
-        };
-        fetchProfile();
-    }, [user]);
-    return profile;
-};
+import { useProfile, useSetProfile } from "../context/ProfileContext";
 
 const SettingsPage: React.FC = () => {
     const user = useUser();
     const logout = useLogout();
     const router = useRouter();
-    const profile = useProfile(user);
+    const profile = useProfile();
+    const setProfile = useSetProfile();
     const [newName, setNewName] = useState("");
     const [loading, setLoading] = useState(false);
 
@@ -63,32 +24,7 @@ const SettingsPage: React.FC = () => {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         setLoading(true);
-        const token = await getToken();
-        if (profile) {
-            await fetch(`${API_URL}/profiles/${profile.id}`, {
-                method: "PUT",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    username: newName,
-                    address: user.address,
-                }),
-            });
-        } else {
-            await fetch(`${API_URL}/profiles/`, {
-                method: "POST",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    username: newName,
-                    address: user.address,
-                }),
-            });
-        }
+        await setProfile(newName);
         setLoading(false);
     };
 

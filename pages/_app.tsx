@@ -4,16 +4,21 @@ import { UserContextProvider } from "../context/UserContext";
 
 import "../styles/global.scss";
 import Layout from "../components/Layout";
+import AllowanceReminder from "../components/AllowanceReminder";
 import { BalanceContextProvider } from "../context/BalanceContext";
+import { ProfileContextProvider } from "../context/ProfileContext";
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
     return (
         <UserContextProvider>
-            <BalanceContextProvider>
-                <Layout>
-                    <Component {...pageProps} />
-                </Layout>
-            </BalanceContextProvider>
+            <ProfileContextProvider>
+                <BalanceContextProvider>
+                    <Layout>
+                        <Component {...pageProps} />
+                        <AllowanceReminder />
+                    </Layout>
+                </BalanceContextProvider>
+            </ProfileContextProvider>
         </UserContextProvider>
     );
 };
