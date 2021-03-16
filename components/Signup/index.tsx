@@ -7,9 +7,9 @@ const Signup = (): JSX.Element => {
     const [email, setEmail] = useState("");
     const login = useLogin();
 
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        login(email);
+        await login(email);
     };
 
     return (

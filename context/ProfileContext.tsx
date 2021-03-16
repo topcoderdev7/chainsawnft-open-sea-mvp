@@ -39,6 +39,7 @@ export const ProfileContextProvider: React.FC = ({ children }) => {
     const fetchProfile = useCallback(async (): Promise<void> => {
         try {
             if (!user) {
+                setProfile(null);
                 return null;
             }
             const res = await fetch(`${API_URL}/profiles/${user.address}`, {

@@ -17,12 +17,15 @@ const BuyWidget: React.FC<{ address: string; tokenId: string }> = ({
     address,
     tokenId,
 }) => {
-    const { buyOrders, sellOrders } = useOrders(address, tokenId);
+    const { buyOrders, sellOrders, reload: reloadOrders } = useOrders(
+        address,
+        tokenId,
+    );
     const user = useUser();
     const { weth: wethBalance } = useBalances();
 
     const [amount, setAmount] = useState("");
-    const [status, setStatus] = useState<Status | null>(null);
+    const [loading, setLoading] = useState(false);
 
     // Find max ETH VALUE
     useEffect(() => {
@@ -63,15 +66,22 @@ const BuyWidget: React.FC<{ address: string; tokenId: string }> = ({
             alert(`You need more weth ${needed.toString()}`);
             return;
         }
+        setLoading(true);
         // USER SEAPORT
-        const tx = await bid(
-            user.seaport,
-            address,
-            tokenId,
-            "ERC1155",
-            user.address,
-            parseFloat(amount || "0"),
-        );
+        try {
+            const tx = await bid(
+                user.seaport,
+                address,
+                tokenId,
+                "ERC1155",
+                user.address,
+                parseFloat(amount || "0"),
+            );
+            await reloadOrders();
+        } catch (err) {
+            alert(`Something went wrong ${err}`);
+        }
+        setLoading(false);
     };
 
     const fromETHToUsd = (ethAmount: string) => parseFloat(ethAmount) * 2;
@@ -94,7 +104,9 @@ const BuyWidget: React.FC<{ address: string; tokenId: string }> = ({
                 />
                 <div className={styles.buttonContainer}>
                     <span>{fromETHToUsd(amount)}$</span>
-                    <button>Buy</button>
+                    <button disabled={loading}>
+                        {loading ? "Loading" : "Buy"}
+                    </button>
                 </div>
             </form>
         </div>

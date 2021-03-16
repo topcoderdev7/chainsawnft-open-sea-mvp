@@ -1,10 +1,10 @@
 import { utils } from "ethers";
-import { useUser } from "../context/UserContext";
-import { MAX_ETH } from "../utils/constants";
-import { wrapETH } from "../utils/weth";
-import QRCode from "../components/QrCode";
-import CopyUserAddress from "../components/CopyUserAddress";
-import { useBalances } from "../context/BalanceContext";
+import { useUser } from "../../context/UserContext";
+import { MAX_ETH } from "../../utils/constants";
+import { wrapETH } from "../../utils/weth";
+import QRCode from "../QrCode";
+import CopyUserAddress from "../CopyUserAddress";
+import { useBalances } from "../../context/BalanceContext";
 
 const DepositETH: React.FC = () => {
     const user = useUser();
@@ -20,7 +20,7 @@ const DepositETH: React.FC = () => {
 
     return (
         <div>
-            <h2>Deposit ETH</h2>
+            <h2>Wrap ETH</h2>
             <div>
                 ETH Balance (Used for gas and converted into WETH):{" "}
                 {utils.formatEther(ethBalance.toString())}
@@ -29,15 +29,6 @@ const DepositETH: React.FC = () => {
                 WETH Balance (Used for bidding):{" "}
                 {utils.formatEther(wethBalance.toString())}
             </div>
-            {ethBalance.gt(0) && ethBalance.lt(MAX_ETH) && (
-                <p>
-                    We keep a small portion of ETH so you can withdraw at any
-                    time, if you want to add more funds, please send more ETH or
-                    WETH to the address below
-                </p>
-            )}
-            <QRCode address={user.address} />
-            <CopyUserAddress address={user.address} />
             {ethBalance.gt(MAX_ETH) && (
                 <div>
                     <h2>Convert ETH to WETH!</h2>

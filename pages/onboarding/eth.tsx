@@ -1,14 +1,32 @@
-import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useUser } from "../../context/UserContext";
+import { MAX_ETH } from "../../utils/constants";
+import QRCode from "../../components/QrCode";
+import CopyUserAddress from "../../components/CopyUserAddress";
+import { useBalances } from "../../context/BalanceContext";
 
-export const EthPage = () => {
+const DepositETH: React.FC = () => {
+    const user = useUser();
+    const { eth: ethBalance } = useBalances();
+    const router = useRouter();
+    useEffect(() => {
+        if (ethBalance.gt(MAX_ETH)) {
+            router.push("/onboarding/weth");
+        }
+    }, [router, ethBalance]);
+
+    if (!user) {
+        return <div>Please login</div>;
+    }
+
     return (
         <div>
-            <h2>TODO: ETH</h2>
-            <Link href="/onboarding/weth">
-                <a>Wrap WETH</a>
-            </Link>
+            <h2>Please send ETH to continue</h2>
+            <QRCode address={user.address} />
+            <CopyUserAddress address={user.address} />
         </div>
     );
 };
 
-export default EthPage;
+export default DepositETH;

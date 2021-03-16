@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 import { Order } from "opensea-js/lib/types";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getAsset } from "../utils/asset";
 import { makeSeaport } from "../utils/seaport";
 
@@ -13,28 +13,30 @@ const useOrders = (address: string, tokenId: string) => {
     const [latestBuyOrders, setBuyOrders] = useState<Order[]>([]);
     const [latestSellOrders, setSellOrders] = useState<Order[]>([]);
 
-    useEffect(() => {
-        const fetchOrders = async () => {
-            const seaport = makeSeaport(
-                new ethers.providers.InfuraProvider(
-                    "homestead",
-                    process.env.NEXT_PUBLIC_INFURA_KEY,
-                ),
-            );
-            const { buyOrders, sellOrders, owner } = await getAsset(
-                seaport,
-                address,
-                tokenId,
-            );
-            setBuyOrders(buyOrders);
-            setSellOrders(sellOrders);
-        };
-        fetchOrders();
+    const fetchOrders = useCallback(async () => {
+        const seaport = makeSeaport(
+            new ethers.providers.InfuraProvider(
+                "homestead",
+                process.env.NEXT_PUBLIC_INFURA_KEY,
+            ),
+        );
+        const { buyOrders, sellOrders } = await getAsset(
+            seaport,
+            address,
+            tokenId,
+        );
+        setBuyOrders(buyOrders);
+        setSellOrders(sellOrders);
     }, [address, tokenId]);
+
+    useEffect(() => {
+        fetchOrders();
+    }, [fetchOrders]);
 
     return {
         buyOrders: latestBuyOrders,
         sellOrders: latestSellOrders,
+        reload: fetchOrders,
     };
 };
 
