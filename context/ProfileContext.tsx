@@ -32,18 +32,17 @@ export const ProfileContextProvider: React.FC = ({ children }) => {
     const user = useUser();
     const [profile, setProfile] = useState<Profile | null>(null);
 
+    /**
+     * Fetch Profile given user address
+     */
     // eslint-disable-next-line consistent-return
     const fetchProfile = useCallback(async (): Promise<void> => {
         try {
             if (!user) {
                 return null;
             }
-            const token = await getToken();
             const res = await fetch(`${API_URL}/profiles/${user.address}`, {
                 method: "GET",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
             });
             const data = await res.json();
             if (data.error) {
@@ -55,6 +54,9 @@ export const ProfileContextProvider: React.FC = ({ children }) => {
         }
     }, [user]);
 
+    /**
+     * Update the profile via API and internally
+     */
     const updateProfile = useCallback(
         async (newName: string): Promise<void> => {
             try {
