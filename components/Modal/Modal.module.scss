@@ -17,4 +17,11 @@
     border-radius: 12px;
     left: calc(max(50vw, 320px) / 2);
     top: 32px;
+
+    text-align: center;
+    img {
+        width: 71px;
+        margin-bottom: 34px;
+    }
+    
 }
