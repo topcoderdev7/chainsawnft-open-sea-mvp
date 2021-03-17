@@ -7,11 +7,8 @@ import { fromStringToBN } from "../../utils/inputs";
 
 import styles from "./BuyWidget.module.scss";
 import { useBalances } from "../../context/BalanceContext";
-
-enum Status {
-    Wrapping = 0,
-    Sending,
-}
+import LoadingModal from "../LoadingModal";
+import ResultModal from "../ResultModal";
 
 const BuyWidget: React.FC<{ address: string; tokenId: string }> = ({
     address,
@@ -26,6 +23,10 @@ const BuyWidget: React.FC<{ address: string; tokenId: string }> = ({
 
     const [amount, setAmount] = useState("");
     const [loading, setLoading] = useState(false);
+    const [result, setResult] = useState<{
+        error: boolean;
+        message: string;
+    } | null>(null);
 
     // Find max ETH VALUE
     useEffect(() => {
@@ -79,9 +80,17 @@ const BuyWidget: React.FC<{ address: string; tokenId: string }> = ({
                 user.address,
                 parseFloat(amount || "0"),
             );
+            setResult({
+                error: false,
+                message:
+                    "Success! The order went through! It takes up to 1 minute for the order to show",
+            });
             await reloadOrders();
         } catch (err) {
-            alert(`Something went wrong ${err}`);
+            setResult({
+                error: true,
+                message: err.message ? err.message.toString() : err.toString(),
+            });
         }
         setLoading(false);
     };
@@ -111,6 +120,13 @@ const BuyWidget: React.FC<{ address: string; tokenId: string }> = ({
                     </button>
                 </div>
             </form>
+            {loading && <LoadingModal />}
+            {result && (
+                <ResultModal
+                    handleClose={() => setResult(null)}
+                    result={result}
+                />
+            )}
         </div>
     );
 };
