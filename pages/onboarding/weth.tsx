@@ -8,6 +8,17 @@ import { addWETHAllowance, wrapETH } from "../../utils/weth";
 import { useAllowance, useBalances } from "../../context/BalanceContext";
 import styles from "../../styles/landing.module.scss";
 
+const Loading = () => (
+    <>
+        <img
+            src="/images/loading.svg"
+            className={styles.rotate}
+            alt="Loading"
+        />
+        Approving. Please Wait
+    </>
+);
+
 const WETHPage: React.FC = () => {
     const user = useUser();
     const { eth: ethBalance, weth: wethBalance } = useBalances();
@@ -18,7 +29,6 @@ const WETHPage: React.FC = () => {
     const approveWETH = async () => {
         setLoading(true);
         await addWETHAllowance(user.seaport, user.address);
-
         setLoading(false);
     };
 
@@ -50,7 +60,7 @@ const WETHPage: React.FC = () => {
                         </p>
                         {ethBalance.gt(MAX_ETH) && (
                             <button disabled={loading} onClick={approveWETH}>
-                                {loading ? "Approving. Please Wait" : "Approve"}
+                                {loading ? <Loading /> : "Approve"}
                             </button>
                         )}
                         {ethBalance.lte(MAX_ETH) && (
@@ -79,7 +89,7 @@ const WETHPage: React.FC = () => {
                                 disabled={loading}
                                 onClick={convertEthToWeth}
                             >
-                                {loading ? "Approving. Please Wait" : "Approve"}
+                                {loading ? <Loading /> : "Approve"}
                             </button>
                         )}
                     </div>
