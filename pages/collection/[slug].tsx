@@ -67,7 +67,6 @@ export async function getStaticProps({ params }) {
                 artist: found.artist,
                 assets: found.assets,
                 slug: found.slug,
-                reserve: found.reserve,
             },
         },
     };
