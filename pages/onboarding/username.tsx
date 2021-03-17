@@ -23,7 +23,7 @@ export const UsernamePage = () => {
         console.log(
             "Redirected from /onboarding/username because they already have profile",
         );
-        router.push("/onboarding/eth");
+        // router.push("/onboarding/eth");
     }
 
     return (
@@ -31,13 +31,17 @@ export const UsernamePage = () => {
             <h2>Add your Username</h2>
             <h3>{loading ? "Loading" : ""}</h3>
             <form onSubmit={handleSubmit}>
-                <input value={name} onChange={(e) => setName(e.target.value)} />
+                <input
+                    placeholder="Satoshi"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                />
                 <button type="submit" disabled={loading}>
                     Save
                 </button>
             </form>
             <Link href="/onboarding/eth">
-                <a>I prefer not to</a>
+                <a className={styles.skip}>I prefer not to</a>
             </Link>
         </div>
     );

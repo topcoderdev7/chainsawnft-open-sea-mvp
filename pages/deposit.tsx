@@ -5,6 +5,7 @@ import { wrapETH } from "../utils/weth";
 import QRCode from "../components/QrCode";
 import CopyUserAddress from "../components/CopyUserAddress";
 import { useAllowance, useBalances } from "../context/BalanceContext";
+import styles from "../styles/landing.module.scss";
 
 const DepositETH: React.FC = () => {
     const user = useUser();
@@ -19,7 +20,7 @@ const DepositETH: React.FC = () => {
     }
 
     return (
-        <div>
+        <div className={styles.container}>
             <h2>Deposit ETH</h2>
             {allowance && (
                 <p>

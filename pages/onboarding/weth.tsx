@@ -35,51 +35,75 @@ const WETHPage: React.FC = () => {
 
     return (
         <div className={styles.container}>
-            {!allowance && (
-                <div>
-                    <h2>PART 1 Approve WETH</h2>
-                    <p>
-                        Approve the Router so it can spend your WETH to bid on
-                        art
-                    </p>
-                    {ethBalance.gt(MAX_ETH) && (
-                        <button disabled={loading} onClick={approveWETH}>
-                            {loading ? "Approving. Please Wait" : "Approve"}
-                        </button>
-                    )}
-                </div>
-            )}
+            <div className={styles.card}>
+                {!allowance && (
+                    <div>
+                        <img
+                            className={styles.img}
+                            src="/images/ethereum.svg"
+                            alt="Step 1, Approve WETH"
+                        />
+                        <h2>PART 1 Approve WETH</h2>
+                        <p>
+                            Approve the Router so it can spend your WETH to bid
+                            on art
+                        </p>
+                        {ethBalance.gt(MAX_ETH) && (
+                            <button disabled={loading} onClick={approveWETH}>
+                                {loading ? "Approving. Please Wait" : "Approve"}
+                            </button>
+                        )}
+                        {ethBalance.lte(MAX_ETH) && (
+                            <p>
+                                It seems like you don&rsquo;t have enough ETH to
+                                continue, please
+                                <Link href="/onboarding/eth">
+                                    <a> send more</a>
+                                </Link>
+                            </p>
+                        )}
+                    </div>
+                )}
 
-            {allowance && (
-                <div>
-                    <h2>PART 2 Approve ETH to WETH</h2>
-                    <p>
-                        We&rsquo;ll wrap your ETH into WETH and you can start
-                        trading NOTE: This can take up to 1 minute
-                    </p>
-                    {ethBalance.gt(MAX_ETH) && (
-                        <button disabled={loading} onClick={convertEthToWeth}>
-                            {loading ? "Approving. Please Wait" : "Approve"}
-                        </button>
-                    )}
-                    <p>Current ETH Balance {utils.formatEther(ethBalance)}</p>
-                    <p>Current WETH Balance {utils.formatEther(wethBalance)}</p>
-                </div>
-            )}
+                {allowance && (
+                    <div>
+                        <img
+                            className={styles.img}
+                            src="/images/ethereum.svg"
+                            alt="Step 2, Wrap ETH into WETH"
+                        />
+                        <h2>PART 2 Wrap ETH into WETH</h2>
+                        <p>Wrap your ETH so you can start bidding!</p>
+                        {ethBalance.gt(MAX_ETH) && (
+                            <button
+                                disabled={loading}
+                                onClick={convertEthToWeth}
+                            >
+                                {loading ? "Approving. Please Wait" : "Approve"}
+                            </button>
+                        )}
+                    </div>
+                )}
 
-            {ethBalance.lte(MAX_ETH) && (
-                <p>
-                    You don&rsquo;t have enough ETH,{" "}
-                    <Link href="/onboarding/eth">
-                        <a>please send more ETH</a>
-                    </Link>
+                {ethBalance.lte(MAX_ETH) && (
+                    <p>
+                        You don&rsquo;t have enough ETH,{" "}
+                        <Link href="/onboarding/eth">
+                            <a>please send more ETH</a>
+                        </Link>
+                    </p>
+                )}
+
+                <p className={styles.tiny}>
+                    We&rsquo;ll keep 0.01 as ETH so you can withdraw your funds
+                    at any time
+                    <br />
+                    Current ETH Balance{"  "}
+                    {utils.formatEther(ethBalance) || "0.00"}
+                    <br />
+                    Current WETH Balance {utils.formatEther(wethBalance)}
                 </p>
-            )}
-
-            <p>
-                We&rsquo;ll keep 0.01 as ETH so you can withdraw your funds at
-                any time
-            </p>
+            </div>
         </div>
     );
 };

@@ -4,6 +4,7 @@ import { useState, FormEvent } from "react";
 import { useLogout, useUser } from "../context/UserContext";
 import { useAllowance } from "../context/BalanceContext";
 import { useProfile, useSetProfile } from "../context/ProfileContext";
+import styles from "../styles/landing.module.scss";
 
 const SettingsPage: React.FC = () => {
     const user = useUser();
@@ -37,7 +38,7 @@ const SettingsPage: React.FC = () => {
     }
 
     return (
-        <div>
+        <div className={styles.container}>
             <h2>Settings</h2>
             <p>Your username {profile?.username}</p>
             <h2>Change your Username</h2>
@@ -50,9 +51,8 @@ const SettingsPage: React.FC = () => {
                 <button type="submit">Change Name</button>
             </form>
 
-            <hr />
             <button onClick={logoutAndExit}>Logout</button>
-            <div>
+            <div className={styles.tiny}>
                 {allowance
                     ? "You've given allowance"
                     : "You need to give allowance"}
