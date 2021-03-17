@@ -29,6 +29,9 @@ const UserSignup = (): JSX.Element => {
                     <li>
                         <Link href="/deposit">Deposit ETH</Link>
                     </li>
+                    <li>
+                        <Link href="/my">My Collection</Link>
+                    </li>
                 </ul>
             </section>
         );
