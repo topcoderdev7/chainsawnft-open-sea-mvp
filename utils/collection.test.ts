@@ -84,7 +84,6 @@ describe("balanceOfThisBatch", () => {
             TEST_TOKENS as any[],
         );
 
-        console.log("balances", balances);
         expect(balances.length).toBeGreaterThan(0);
     });
     test("Length of a user that NEVR bought is 0", async () => {
@@ -102,7 +101,6 @@ describe("bulkCheckBalance", () => {
     test("bulkCheckBalance for user with tokens is greater than 0", async () => {
         const formatted = formatTokens(TEST_TOKENS);
         const check = await bulkCheckBalance(formatted, USER_WITH_TOKENS);
-        console.log("check", check);
         expect(check.length).toBeGreaterThan(0);
     });
 });
