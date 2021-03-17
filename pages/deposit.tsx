@@ -4,12 +4,12 @@ import { MAX_ETH } from "../utils/constants";
 import { wrapETH } from "../utils/weth";
 import QRCode from "../components/QrCode";
 import CopyUserAddress from "../components/CopyUserAddress";
-import { useBalances } from "../context/BalanceContext";
+import { useAllowance, useBalances } from "../context/BalanceContext";
 
 const DepositETH: React.FC = () => {
     const user = useUser();
     const { eth: ethBalance, weth: wethBalance } = useBalances();
-
+    const allowance = useAllowance();
     const convertEthToWeth = async () => {
         await wrapETH(ethBalance.sub(MAX_ETH), user.provider.getSigner());
     };
@@ -21,6 +21,12 @@ const DepositETH: React.FC = () => {
     return (
         <div>
             <h2>Deposit ETH</h2>
+            {allowance && (
+                <p>
+                    NOTE: Since you already gave allowance, you can simply send
+                    WETH to save some gas
+                </p>
+            )}
             <div>
                 ETH Balance (Used for gas and converted into WETH):{" "}
                 {utils.formatEther(ethBalance.toString())}
@@ -41,6 +47,10 @@ const DepositETH: React.FC = () => {
             {ethBalance.gt(MAX_ETH) && (
                 <div>
                     <h2>Convert ETH to WETH!</h2>
+                    <p>
+                        You seem to have some ETH, click this button to convert
+                        it to WETH
+                    </p>
                     <button onClick={convertEthToWeth}>
                         Convert ETH to WETH
                     </button>

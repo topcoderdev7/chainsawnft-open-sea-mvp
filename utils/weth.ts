@@ -65,7 +65,7 @@ export const addWETHAllowance = async (
  */
 export const hasGivenWETHAllowance = async (
     accountAddress: string,
-    provider: providers.JsonRpcProvider,
+    provider: providers.JsonRpcProvider, // If issues cast to any
 ): Promise<boolean> => {
     const proxyAddress = WyvernProtocol.getTokenTransferProxyAddress(
         Network.Main,

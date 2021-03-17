@@ -22,7 +22,7 @@ export interface User {
 type UserContextData = {
     user: User | null;
     logout: () => void;
-    login: (_email: string) => void;
+    login: (_email: string) => Promise<User | null>;
 };
 
 const UserContext = createContext<UserContextData>({
@@ -66,7 +66,7 @@ export const UserContextProvider: React.FC = ({ children }) => {
      * Login with magic, enrich context with address and provider for convenience
      * @param email
      */
-    const login = async (email: string) => {
+    const login = async (email: string): Promise<User | null> => {
         try {
             await m.auth.loginWithMagicLink({ email });
             const {
@@ -74,15 +74,18 @@ export const UserContextProvider: React.FC = ({ children }) => {
                 provider,
                 seaport,
             } = await getAddressAndProvider();
-            setUser({
+            const userData: User = {
                 email,
                 address,
                 provider,
                 seaport,
-            });
+            };
+            setUser(userData);
+            return userData;
         } catch (err) {
             logout();
         }
+        return null;
     };
 
     useEffect(() => {

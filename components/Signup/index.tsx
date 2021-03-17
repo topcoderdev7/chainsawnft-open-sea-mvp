@@ -1,15 +1,33 @@
+import { useRouter } from "next/router";
 import { useState, FormEvent } from "react";
 import { useLogin } from "../../context/UserContext";
+import { getInfuraProvider } from "../../utils/infura";
+import { hasGivenWETHAllowance } from "../../utils/weth";
 
 import styles from "./Signup.module.scss";
 
 const Signup = (): JSX.Element => {
     const [email, setEmail] = useState("");
     const login = useLogin();
+    const router = useRouter();
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        await login(email);
+        const user = await login(email);
+        if (user) {
+            console.log("User is loggedin");
+        }
+
+        // Check if they have allowance, if they don't send them to onboarding
+        const allowance = await hasGivenWETHAllowance(
+            user.address,
+            getInfuraProvider(),
+        );
+        if (!allowance) {
+            router.push("/onboarding/username");
+        } else {
+            router.push("/");
+        }
     };
 
     return (

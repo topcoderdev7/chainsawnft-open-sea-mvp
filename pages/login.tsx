@@ -9,6 +9,7 @@ const LoginPage: React.FC = () => {
         return (
             <div className={styles.container}>
                 <h2>Your are logged in</h2>
+                <p>We may redirect you to the onboarding sequence</p>
                 <Link href="/">
                     <a>View Art</a>
                 </Link>

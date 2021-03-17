@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useUser } from "../../context/UserContext";
 import { MAX_ETH } from "../../utils/constants";
-import { wrapETH } from "../../utils/weth";
+import { addWETHAllowance, wrapETH } from "../../utils/weth";
 import { useAllowance, useBalances } from "../../context/BalanceContext";
 import styles from "../../styles/landing.module.scss";
 
@@ -14,6 +14,13 @@ const WETHPage: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
     const allowance = useAllowance();
+
+    const approveWETH = async () => {
+        setLoading(true);
+        await addWETHAllowance(user.seaport, user.address);
+
+        setLoading(false);
+    };
 
     const convertEthToWeth = async () => {
         setLoading(true);
@@ -28,19 +35,38 @@ const WETHPage: React.FC = () => {
 
     return (
         <div className={styles.container}>
+            {!allowance && (
+                <div>
+                    <h2>PART 1 Approve WETH</h2>
+                    <p>
+                        Approve the Router so it can spend your WETH to bid on
+                        art
+                    </p>
+                    {ethBalance.gt(MAX_ETH) && (
+                        <button disabled={loading} onClick={approveWETH}>
+                            {loading ? "Approving. Please Wait" : "Approve"}
+                        </button>
+                    )}
+                </div>
+            )}
+
             {allowance && (
-                <p>
-                    It seems like you already gave allowance, are you sure you
-                    need to do this again?
-                </p>
+                <div>
+                    <h2>PART 2 Approve ETH to WETH</h2>
+                    <p>
+                        We&rsquo;ll wrap your ETH into WETH and you can start
+                        trading NOTE: This can take up to 1 minute
+                    </p>
+                    {ethBalance.gt(MAX_ETH) && (
+                        <button disabled={loading} onClick={convertEthToWeth}>
+                            {loading ? "Approving. Please Wait" : "Approve"}
+                        </button>
+                    )}
+                    <p>Current ETH Balance {utils.formatEther(ethBalance)}</p>
+                    <p>Current WETH Balance {utils.formatEther(wethBalance)}</p>
+                </div>
             )}
-            <h2>Approve ETH to WETH</h2>
-            <div>
-                We&rsquo;ll wrap your ETH into WETH and you can start trading
-            </div>
-            {ethBalance.gt(MAX_ETH) && (
-                <button onClick={convertEthToWeth}>Approve</button>
-            )}
+
             {ethBalance.lte(MAX_ETH) && (
                 <p>
                     You don&rsquo;t have enough ETH,{" "}
