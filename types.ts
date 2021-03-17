@@ -15,6 +15,7 @@ export interface NFT extends OpenSeaAsset {
     tokenId: string;
 
     slug: string;
+    reserve: string;
 }
 
 /** STRAPI INTERFACES */

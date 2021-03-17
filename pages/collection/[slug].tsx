@@ -20,6 +20,7 @@ const SingleCollectionPage: React.FC<{ collection: Collection }> = ({
                         (asset: { token: NFT; id: number }) => {
                             return asset.token ? (
                                 <Asset
+                                    reserve={asset.token.reserve}
                                     description={asset.token.description}
                                     imageUrl={asset.token.imageUrl}
                                     name={asset.token.name}
@@ -66,6 +67,7 @@ export async function getStaticProps({ params }) {
                 artist: found.artist,
                 assets: found.assets,
                 slug: found.slug,
+                reserve: found.reserve,
             },
         },
     };

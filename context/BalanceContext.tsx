@@ -21,7 +21,6 @@ export default BalanceContext;
 export const BalanceContextProvider: React.FC = ({ children }) => {
     const user = useUser();
     const [weth, reloadWETH] = useWETHBalance(user);
-    console.log("weth", weth);
     const [eth, reloadETH] = useETHBalance(user);
     const {
         allowance,
@@ -60,6 +59,5 @@ export const useAllowance = () => {
 
 export const useBalances = () => {
     const { eth, weth } = useContext(BalanceContext);
-    console.log("weth", weth);
     return { eth, weth };
 };

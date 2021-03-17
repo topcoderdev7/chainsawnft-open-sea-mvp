@@ -7,15 +7,18 @@ const Auctions: React.FC<{ assets: NFT[] }> = ({ assets }) => {
         <main className={styles.auctions}>
             <h1 className={styles.title}>live auctions</h1>
             <div className={styles.auctionsContainer}>
-                {assets.map(({ description, imageUrl, name, slug }) => (
-                    <Asset
-                        key={name}
-                        slug={slug}
-                        description={description}
-                        imageUrl={imageUrl}
-                        name={name}
-                    />
-                ))}
+                {assets.map(
+                    ({ description, imageUrl, name, slug, reserve }) => (
+                        <Asset
+                            key={name}
+                            slug={slug}
+                            description={description}
+                            imageUrl={imageUrl}
+                            name={name}
+                            reserve={reserve}
+                        />
+                    ),
+                )}
             </div>
         </main>
     );

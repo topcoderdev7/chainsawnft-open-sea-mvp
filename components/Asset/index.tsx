@@ -6,7 +6,8 @@ const Asset: React.FC<{
     imageUrl: string;
     name: string;
     slug: string;
-}> = ({ description, imageUrl, name, slug }) => (
+    reserve: string;
+}> = ({ description, imageUrl, name, slug, reserve }) => (
     <Link href={`/asset/${slug}`}>
         <a>
             <div className={styles.asset}>
@@ -18,7 +19,7 @@ const Asset: React.FC<{
                         <h3>{name}</h3>
                     </div>
                     <p>{description}</p>
-                    <span>Reserve price: 1.2 ETH</span>
+                    {reserve && <span>Reserve price: {reserve}</span>}
                 </div>
             </div>
         </a>

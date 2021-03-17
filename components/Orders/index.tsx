@@ -11,7 +11,8 @@ const Orders: React.FC<{ address: string; tokenId: string }> = ({
 }) => {
     const { buyOrders, sellOrders } = useOrders(address, tokenId);
     const owner = useOwner(address, tokenId);
-    console.log(buyOrders, sellOrders);
+    console.log("buyOrders", buyOrders);
+    console.log("sellOrders", sellOrders);
     return (
         <div className={styles.orders}>
             <h3>List of orders</h3>

@@ -39,8 +39,10 @@ const BuyWidget: React.FC<{ address: string; tokenId: string }> = ({
                 }
             });
             sellOrders.forEach((sellOrder) => {
-                if (parseFloat(sellOrder.paymentTokenContract.ethPrice) > max) {
-                    max = parseFloat(sellOrder.paymentTokenContract.ethPrice);
+                if (parseFloat(sellOrder.basePrice.toString()) > max) {
+                    max = parseFloat(
+                        utils.formatEther(sellOrder.basePrice.toString()),
+                    );
                 }
             });
             setAmount(String(max));
