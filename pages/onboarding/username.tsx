@@ -23,7 +23,7 @@ export const UsernamePage = () => {
         console.log(
             "Redirected from /onboarding/username because they already have profile",
         );
-        // router.push("/onboarding/eth");
+        router.push("/onboarding/eth");
     }
 
     return (
