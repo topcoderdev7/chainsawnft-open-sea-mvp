@@ -1,0 +1,73 @@
+@import "../../styles/partials/underline";
+
+.header {
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @media screen and (max-width: 992px) {
+        padding: 30px 15px;
+    }
+
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+    }
+
+    .left {
+        width: 500px;
+        max-width: 100%;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .right {
+        display: flex;
+        align-items: center;
+
+        img {
+            width: 120px;
+        }
+
+        .links {
+            color: black;
+        }
+
+        .social {
+            a {
+                &:hover {
+                    @include underlineOnHover;
+                }
+            }
+
+            a img {
+                width: 25px;
+            }
+
+            & > *:not(:last-of-type) {
+                margin-right: 10px;
+            }
+        }
+
+        .links {
+            div {
+                text-align: right;
+            }
+
+            a {
+                display: inline-block;
+                color: black;
+                padding: 2px;
+                font-size: 16px;
+                text-decoration: none;
+                font-weight: medium;
+
+                &:hover {
+                    @include underlineOnHover;
+                }
+            }
+        }
+    }
+}

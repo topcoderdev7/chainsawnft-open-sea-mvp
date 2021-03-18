@@ -1,0 +1,32 @@
+.artist {
+    padding: 30px;
+
+    .header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .collections {
+        h3 {
+            display: block;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .collectionsContainer {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, 350px);
+            grid-gap: 30px;
+
+            @media only screen and (max-width: 1024px) {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            }
+        }
+    }
+
+    a {
+        text-decoration: none;
+    }
+}

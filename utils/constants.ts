@@ -1,3 +1,4 @@
+import { utils } from "ethers";
 /**
  * Any time you want to add / remove a token, do it here
  */
@@ -14,3 +15,6 @@ export const LIST_OF_TOKENS = [
 
 export const API_URL =
     process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
+
+// Max ETH we always keep for withdrawals
+export const MAX_ETH = utils.parseEther("0.014");

@@ -12,7 +12,7 @@ import { makeSeaport } from "../utils/seaport";
 
 let m: Magic; // Magic requires window to function
 
-interface User {
+export interface User {
     email: string;
     address: string;
     provider: ethers.providers.Web3Provider;
@@ -22,7 +22,7 @@ interface User {
 type UserContextData = {
     user: User | null;
     logout: () => void;
-    login: (_email: string) => void;
+    login: (_email: string) => Promise<User | null>;
 };
 
 const UserContext = createContext<UserContextData>({
@@ -59,15 +59,14 @@ export const UserContextProvider: React.FC = ({ children }) => {
             setUser(null);
         } catch (err) {
             // Do nothing
-            setUser(user);
         }
-    }, [user]);
+    }, []);
 
     /**
      * Login with magic, enrich context with address and provider for convenience
      * @param email
      */
-    const login = async (email: string) => {
+    const login = async (email: string): Promise<User | null> => {
         try {
             await m.auth.loginWithMagicLink({ email });
             const {
@@ -75,15 +74,18 @@ export const UserContextProvider: React.FC = ({ children }) => {
                 provider,
                 seaport,
             } = await getAddressAndProvider();
-            setUser({
+            const userData: User = {
                 email,
                 address,
                 provider,
                 seaport,
-            });
+            };
+            setUser(userData);
+            return userData;
         } catch (err) {
             logout();
         }
+        return null;
     };
 
     useEffect(() => {
@@ -112,11 +114,11 @@ export const UserContextProvider: React.FC = ({ children }) => {
                     });
                 }
             } catch (err) {
-                logout();
+                setUser(null);
             }
         };
         persistUser();
-    }, [logout]);
+    }, []);
 
     return (
         <UserContext.Provider

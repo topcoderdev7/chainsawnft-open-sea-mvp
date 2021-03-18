@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
-import { useEffect, useState } from "react";
-import { BuyOrder, SellOrder } from "../types";
+import { Order } from "opensea-js/lib/types";
+import { useCallback, useEffect, useState } from "react";
 import { getAsset } from "../utils/asset";
 import { makeSeaport } from "../utils/seaport";
 
@@ -10,29 +10,34 @@ import { makeSeaport } from "../utils/seaport";
  * @param id
  */
 const useOrders = (address: string, tokenId: string) => {
-    const [latestBuyOrders, setBuyOrders] = useState<BuyOrder[]>([]);
-    const [latestSellOrders, setSellOrders] = useState<SellOrder[]>([]);
+    const [latestBuyOrders, setBuyOrders] = useState<Order[]>([]);
+    const [latestSellOrders, setSellOrders] = useState<Order[]>([]);
 
-    useEffect(() => {
-        const fetchOrders = async () => {
-            const seaport = makeSeaport(
-                new ethers.providers.InfuraProvider(
-                    "homestead",
-                    process.env.NEXT_PUBLIC_INFURA_KEY,
-                ),
-            );
-            const { buyOrders, sellOrders } = await getAsset(
-                seaport,
-                address,
-                tokenId,
-            );
-            setBuyOrders(buyOrders);
-            setSellOrders(sellOrders);
-        };
-        fetchOrders();
+    const fetchOrders = useCallback(async () => {
+        const seaport = makeSeaport(
+            new ethers.providers.InfuraProvider(
+                "homestead",
+                process.env.NEXT_PUBLIC_INFURA_KEY,
+            ),
+        );
+        const { buyOrders, sellOrders } = await getAsset(
+            seaport,
+            address,
+            tokenId,
+        );
+        setBuyOrders(buyOrders);
+        setSellOrders(sellOrders);
     }, [address, tokenId]);
 
-    return { buyOrders: latestBuyOrders, sellOrders: latestSellOrders };
+    useEffect(() => {
+        fetchOrders();
+    }, [fetchOrders]);
+
+    return {
+        buyOrders: latestBuyOrders,
+        sellOrders: latestSellOrders,
+        reload: fetchOrders,
+    };
 };
 
 export default useOrders;

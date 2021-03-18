@@ -1,36 +1,38 @@
-import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState, FormEvent } from "react";
-import { useUser, useLogin, useLogout } from "../../context/UserContext";
+import { useLogin } from "../../context/UserContext";
+import { getInfuraProvider } from "../../utils/infura";
+import { hasGivenWETHAllowance } from "../../utils/weth";
 
 import styles from "./Signup.module.scss";
 
 const Signup = (): JSX.Element => {
-    const user = useUser();
-    const logout = useLogout();
     const [email, setEmail] = useState("");
-
     const login = useLogin();
+    const router = useRouter();
 
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        login(email);
-    };
+        const user = await login(email);
+        if (user) {
+            console.log("User is loggedin");
+        }
 
-    if (user) {
-        return (
-            <section className={styles.signup}>
-                <span>Logged in as {user.email}</span>
-                <Link href="/settings">
-                    <button>Change your name</button>
-                </Link>
-                <button onClick={logout}>Logout</button>
-            </section>
+        // Check if they have allowance, if they don't send them to onboarding
+        const allowance = await hasGivenWETHAllowance(
+            user.address,
+            getInfuraProvider(),
         );
-    }
+        if (!allowance) {
+            router.push("/onboarding/username");
+        } else {
+            router.push("/");
+        }
+    };
 
     return (
         <section className={styles.signup}>
-            <span>Log in to your wallet</span>
+            <span>Log in to start collecting!</span>
             <form onSubmit={handleSubmit}>
                 <input
                     type="email"

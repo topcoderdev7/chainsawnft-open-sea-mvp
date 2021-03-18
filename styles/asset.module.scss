@@ -1,0 +1,61 @@
+.singleAsset {
+    .imageContainer {
+        padding: 50px 0;
+        width: 100%;
+        background-color: #e9e9e9;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        img {
+            max-width: 95%;
+        }
+
+        h1 {
+            padding: 50px 0 0 0;
+        }
+    }
+
+    .left {
+        padding: 20px;
+
+        p {
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        span {
+            display: block;
+            margin-bottom: 30px;
+            max-width: 400px;
+        }
+
+        h1 {
+            font-size: 52px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+
+            @media screen and (max-width: 1024px) {
+                font-size: 36px;
+            }
+        }
+    }
+
+    .right {
+        max-width: 100%;
+        width: 520px;
+        padding: 20px;
+    }
+
+    .info {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        max-width: 1430px;
+        margin: 0 auto;
+
+        @media screen and (max-width: 1024px) {
+            flex-direction: column;
+        }
+    }
+}
