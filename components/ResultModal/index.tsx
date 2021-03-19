@@ -17,6 +17,7 @@ const ResultModal: React.FC<{
             )}
             <h2>{error ? "There was an issue" : "Success!"}</h2>
             <p>{message}</p>
+            <button onClick={handleClose}>Got it!</button>
         </div>
     </Modal>
 );
