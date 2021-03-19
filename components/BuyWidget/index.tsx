@@ -107,14 +107,7 @@ const BuyWidget: React.FC<{ address: string; tokenId: string }> = ({
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
                 />
-                <input
-                    disabled
-                    type="hidden"
-                    step="0.001"
-                    value={fromETHToUsd(amount)}
-                />
                 <div className={styles.buttonContainer}>
-                    <span>{fromETHToUsd(amount)}$</span>
                     <button disabled={loading}>
                         {loading ? "Loading" : "Buy"}
                     </button>
