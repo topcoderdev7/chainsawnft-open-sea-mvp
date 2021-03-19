@@ -29,7 +29,6 @@ export const UsernamePage = () => {
     return (
         <div className={styles.container}>
             <h2>Add your Username</h2>
-            <h3>{loading ? "Loading" : ""}</h3>
             <form onSubmit={handleSubmit}>
                 <input
                     placeholder="Satoshi"
@@ -37,7 +36,7 @@ export const UsernamePage = () => {
                     onChange={(e) => setName(e.target.value)}
                 />
                 <button type="submit" disabled={loading}>
-                    Save
+                    {loading ? "Loading" : "Save"}
                 </button>
             </form>
             <Link href="/onboarding/eth">

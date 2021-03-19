@@ -8,10 +8,12 @@ import styles from "./Signup.module.scss";
 
 const Signup = (): JSX.Element => {
     const [email, setEmail] = useState("");
+    const [loading, setLoading] = useState(false);
     const login = useLogin();
     const router = useRouter();
 
     const handleSubmit = async (e: FormEvent) => {
+        setLoading(true);
         e.preventDefault();
         const user = await login(email);
         if (user) {
@@ -28,11 +30,12 @@ const Signup = (): JSX.Element => {
         } else {
             router.push("/");
         }
+        setLoading(false);
     };
 
     return (
         <section className={styles.signup}>
-            <span>Log in to start collecting!</span>
+            <h2>Log in to start collecting!</h2>
             <form onSubmit={handleSubmit}>
                 <input
                     type="email"
@@ -41,7 +44,7 @@ const Signup = (): JSX.Element => {
                     placeholder="hello@example.com"
                 />
 
-                <button type="submit">Log in</button>
+                <button type="submit">{loading ? "Loading" : "Log in"}</button>
             </form>
         </section>
     );

@@ -42,13 +42,15 @@ const SettingsPage: React.FC = () => {
             <h2>Settings</h2>
             <p>Your username {profile?.username}</p>
             <h2>Change your Username</h2>
-            {loading ? "Changing your name" : ""}
+
             <form onSubmit={handleSubmit}>
                 <input
                     value={newName}
                     onChange={(e) => setNewName(e.target.value)}
                 />
-                <button type="submit">Change Name</button>
+                <button type="submit">
+                    {loading ? "Changing your name" : "Change Name"}
+                </button>
             </form>
 
             <button onClick={logoutAndExit}>Logout</button>
