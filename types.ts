@@ -1,5 +1,11 @@
 import { OpenSeaAsset, Order } from "opensea-js/lib/types";
 
+declare global {
+    interface Window {
+        ethereum?: any;
+    }
+}
+
 export type BuyOrder = Order;
 
 export type SellOrder = Order;

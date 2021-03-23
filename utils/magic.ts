@@ -1,11 +1,22 @@
-import { Magic } from "magic-sdk";
+import { Signer, utils } from "ethers";
 
 /**
- * Generates an auth token for magic,
- * throws if called when not logged in
+ * Does a raw signature given a signer
+ * @param signer
+ * @param message
+ * @returns
  */
-export const getToken = async () => {
-    const m = new Magic(process.env.NEXT_PUBLIC_MAGIC_KEY || "");
-    const token = await m.user.generateIdToken();
-    return token;
+export const getToken = async (signer: Signer, message: string) => {
+    const signature = await signer.signMessage(message);
+    return signature;
+};
+
+/**
+ * Given a signature and the message, returns the public address
+ * @param token
+ * @param message
+ * @returns
+ */
+export const verifyToken = (message: string, token: string): string => {
+    return utils.verifyMessage(message, token);
 };

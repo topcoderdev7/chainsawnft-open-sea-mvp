@@ -1,19 +1,12 @@
-import { Magic } from "magic-sdk";
-import {
-    createContext,
-    useState,
-    useEffect,
-    useContext,
-    useCallback,
-} from "react";
-import { ethers } from "ethers";
+import { createContext, useState, useEffect, useContext } from "react";
+import { ethers, providers } from "ethers";
 import Web3 from "web3";
+import { useWeb3React } from "@web3-react/core";
 import { makeSeaport } from "../utils/seaport";
-
-let m: Magic; // Magic requires window to function
+import useEagerConnect from "../hooks/useEagerConnect";
+import { injected } from "../utils/connectors";
 
 export interface User {
-    email: string;
     address: string;
     provider: ethers.providers.Web3Provider;
     seaport: any;
@@ -21,111 +14,68 @@ export interface User {
 
 type UserContextData = {
     user: User | null;
-    logout: () => void;
-    login: (_email: string) => Promise<User | null>;
+    login: () => Promise<void>;
 };
 
 const UserContext = createContext<UserContextData>({
     user: null,
-    login: (_email) => null,
-    logout: () => null,
+    login: () => null,
 });
 export default UserContext;
 
 export const UserContextProvider: React.FC = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
 
+    useEagerConnect(); // Adds users on first load
+    const { activate, active, library } = useWeb3React();
+
+    /** Login with metamask */
+    const activateMetamask = async () => activate(injected);
+
     /**
      * Given the Magic Provider, return address and provider
      */
-    const getAddressAndProvider = async () => {
-        const provider = new ethers.providers.Web3Provider(
-            m.rpcProvider as any,
-        );
+    const getAddressAndProvider = async (provider: providers.Web3Provider) => {
         const signer = provider.getSigner();
         const address = await signer.getAddress();
-        const web3 = new Web3(m.rpcProvider as any);
-        const seaport = makeSeaport(web3.currentProvider);
+        const seaport = makeSeaport();
 
         return { address, provider, seaport };
     };
 
     /**
-     * Logs the user out of magic
+     * On unlock set user
      */
-    const logout = useCallback(async () => {
-        try {
-            await m.user.logout();
-            setUser(null);
-        } catch (err) {
-            // Do nothing
-        }
-    }, []);
-
-    /**
-     * Login with magic, enrich context with address and provider for convenience
-     * @param email
-     */
-    const login = async (email: string): Promise<User | null> => {
-        try {
-            await m.auth.loginWithMagicLink({ email });
-            const {
-                address,
-                provider,
-                seaport,
-            } = await getAddressAndProvider();
-            const userData: User = {
-                email,
-                address,
-                provider,
-                seaport,
-            };
-            setUser(userData);
-            return userData;
-        } catch (err) {
-            logout();
-        }
-        return null;
-    };
-
     useEffect(() => {
-        m = new Magic(process.env.NEXT_PUBLIC_MAGIC_KEY || "");
-
-        /**
-         * Checks if the user is already logged in, if they are, log them in automatically
-         * Used in browser refreshes
-         */
-        const persistUser = async () => {
-            try {
-                const isLoggedIn = await m.user.isLoggedIn();
-
-                if (isLoggedIn) {
-                    const { email } = await m.user.getMetadata();
-                    const {
-                        address,
-                        provider,
-                        seaport,
-                    } = await getAddressAndProvider();
-                    setUser({
-                        email: String(email),
-                        address,
-                        provider,
-                        seaport,
-                    });
-                }
-            } catch (err) {
+        const fetchUser = async () => {
+            if (active) {
+                console.log("active", active);
+                const res = await getAddressAndProvider(library);
+                setUser(res);
+            } else {
                 setUser(null);
             }
         };
-        persistUser();
-    }, []);
+        fetchUser();
+    }, [active, library]);
+
+    /**
+     * Login with Metamask
+     */
+    const login = async (): Promise<void> => {
+        try {
+            activateMetamask();
+        } catch (err) {
+            alert(`Exception in loggign in ${alert}`);
+        }
+        return null;
+    };
 
     return (
         <UserContext.Provider
             value={{
                 user,
                 login,
-                logout,
             }}
         >
             {children}
@@ -137,12 +87,6 @@ export const useLogin = () => {
     const { login } = useContext(UserContext);
 
     return login;
-};
-
-export const useLogout = () => {
-    const { logout } = useContext(UserContext);
-
-    return logout;
 };
 
 export const useUser = () => {

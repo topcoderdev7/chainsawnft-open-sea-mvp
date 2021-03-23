@@ -4,15 +4,17 @@ import { useUser } from "../../context/UserContext";
 
 import styles from "./UserSignup.module.scss";
 import { useBalances } from "../../context/BalanceContext";
+import { useProfile } from "../../context/ProfileContext";
 
 const UserSignup = (): JSX.Element => {
     const user = useUser();
+    const profile = useProfile();
     const { eth: ethBalance, weth: wethBalance } = useBalances();
 
     if (user) {
         return (
             <section className={styles.signup}>
-                <span>Logged in as {user.email}</span>
+                <span>Logged in as {profile?.username || user?.address}</span>
                 <span className={styles.hidden}>
                     Your Address {user.address}
                 </span>
