@@ -19,7 +19,19 @@ const Asset: React.FC<{
                         <h3>{name}</h3>
                     </div>
                     <p>{description}</p>
-                    {reserve && <span>Reserve price: {reserve}</span>}
+                    <div className={styles.footer}>
+                        <div>
+                            <button>
+                                <img src="/images/bid-icon.svg" alt="bid" />
+                                Bid Now
+                            </button>
+                        </div>
+                        {reserve && (
+                            <div>
+                                <h4>Reserve price:</h4> <h3>{reserve}</h3>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </a>

@@ -6,6 +6,8 @@
         font-weight: 400;
         margin-bottom: 35px;
         font-size: 16px;
+        margin: 46px 18px 42px 2px;
+        font-size: 20px;
     }
 
     @media screen and (max-width: 768px) {
@@ -15,11 +17,12 @@
     .auctionsContainer {
         width: 100%;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(22vw, 1fr));
-        grid-gap: 30px;
+        grid-template-columns: repeat(4, 1fr);
+        grid-row-gap: 38px;
+        grid-column-gap: 43px;
 
-        @media only screen and (max-width: 1024px) {
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        @media only screen and (max-width: 1400px) {
+            grid-template-columns: repeat(1, 1fr);
         }
 
         a {
