@@ -4,12 +4,14 @@
     border-radius: 10px;
     padding: 25px 20px;
     margin-bottom: 30px;
+    color: #000;
 
     h3 {
         text-transform: uppercase;
         font-weight: 500;
         font-size: 32px;
         margin-bottom: 30px;
+        color: #000;
     }
 
     input {
@@ -17,7 +19,6 @@
         padding: 10px 15px;
         border-radius: 10px;
         border: none;
-        font-family: inherit;
         font-weight: 500;
         font-size: 20px;
         margin-bottom: 10px;
@@ -37,6 +38,7 @@
         button {
             padding: 10px 80px;
             border-radius: 5px;
+            border-radius: 8px;
             font-size: 18px;
             display: block;
             background-color: black;

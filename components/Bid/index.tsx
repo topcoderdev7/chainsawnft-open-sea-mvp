@@ -1,24 +1,23 @@
 import { utils } from "ethers";
 import React from "react";
-import { BuyOrder } from "../../types";
+import { OrderFromAPI } from "../../types";
 import styles from "./Bid.module.scss";
 
-const Bid: React.FC<{ buyOrder: BuyOrder }> = ({ buyOrder }) => {
+const Bid: React.FC<{ buyOrder: OrderFromAPI }> = ({ buyOrder }) => {
     const date = new Date(
-        Number(buyOrder.listingTime.toString()) * 1000,
+        Number(buyOrder.listing_time.toString()) * 1000,
     ).toISOString();
-
     return (
         <div className={styles.bid}>
             <div>
                 <p className={styles.bidder}>
-                    Bid Placed by {buyOrder.makerAccount.address}
+                    Bid Placed by {buyOrder.maker.address}
                 </p>
                 <p className={styles.date}>at {date}</p>
             </div>
 
             <p className={styles.price}>
-                {utils.formatEther(buyOrder.basePrice.toString())}
+                {utils.formatEther(buyOrder.base_price.toString())} ETH
             </p>
         </div>
     );

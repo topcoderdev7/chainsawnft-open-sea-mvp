@@ -1,24 +1,23 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
-import { utils } from "ethers";
+import { Order } from "opensea-js/lib/types";
 import { useUser } from "../../context/UserContext";
-import useOrders from "../../hooks/useOrders";
 import { bid } from "../../utils/bid";
+import findMaxBid from "../../utils/findMaxBid";
 import { fromStringToBN } from "../../utils/inputs";
 
 import styles from "./BuyWidget.module.scss";
 import { useBalances } from "../../context/BalanceContext";
 import LoadingModal from "../LoadingModal";
 import ResultModal from "../ResultModal";
+import { OrderFromAPI } from "../../types";
 
-const BuyWidget: React.FC<{ address: string; tokenId: string }> = ({
-    address,
-    tokenId,
-}) => {
-    const { buyOrders, sellOrders, reload: reloadOrders } = useOrders(
-        address,
-        tokenId,
-    );
-
+const BuyWidget: React.FC<{
+    address: string;
+    tokenId: string;
+    buyOrders: OrderFromAPI[];
+    sellOrders: Order[];
+    handleClose: () => void;
+}> = ({ address, tokenId, buyOrders, sellOrders, handleClose }) => {
     const user = useUser();
     const { weth: wethBalance } = useBalances();
 
@@ -32,23 +31,10 @@ const BuyWidget: React.FC<{ address: string; tokenId: string }> = ({
     // Find max ETH VALUE
     useEffect(() => {
         const findMax = () => {
-            let max = 0;
-            buyOrders.forEach((buyOrder) => {
-                if (parseFloat(buyOrder.basePrice.toString()) > max) {
-                    max = parseFloat(
-                        utils.formatEther(buyOrder.basePrice.toString()),
-                    );
-                }
-            });
-            sellOrders.forEach((sellOrder) => {
-                if (parseFloat(sellOrder.basePrice.toString()) > max) {
-                    max = parseFloat(
-                        utils.formatEther(sellOrder.basePrice.toString()),
-                    );
-                }
-            });
+            const max = findMaxBid(buyOrders);
             setAmount(String(max));
         };
+
         findMax();
     }, [buyOrders, sellOrders]);
 
@@ -86,7 +72,6 @@ const BuyWidget: React.FC<{ address: string; tokenId: string }> = ({
                 message:
                     "Success! The order went through! It takes up to 1 minute for the order to show",
             });
-            await reloadOrders();
         } catch (err) {
             setResult({
                 error: true,
@@ -115,7 +100,7 @@ const BuyWidget: React.FC<{ address: string; tokenId: string }> = ({
             {loading && <LoadingModal />}
             {result && (
                 <ResultModal
-                    handleClose={() => setResult(null)}
+                    handleClose={() => handleClose()}
                     result={result}
                 />
             )}

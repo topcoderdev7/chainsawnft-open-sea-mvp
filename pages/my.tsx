@@ -57,6 +57,7 @@ const MyCollectionPage: React.FC = () => {
                     reserve={reserve}
                 />
             ))}
+            {myTokens.length === 0 && <h3>No tokens in your collection :(</h3>}
         </div>
     );
 };

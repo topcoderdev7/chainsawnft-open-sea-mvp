@@ -9,7 +9,7 @@
 }
 
 .content {
-    position: absolute;
+    position: sticky;
     max-width: 720px;
     width: max(50vw, 320px);
     background: #fff;

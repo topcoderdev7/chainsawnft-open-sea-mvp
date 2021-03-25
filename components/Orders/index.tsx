@@ -1,26 +1,20 @@
-import useOrders from "../../hooks/useOrders";
-import useOwner from "../../hooks/useOwner";
+import { AssetFromAPI } from "../../types";
 import Bid from "../Bid";
 
 import styles from "./Orders.module.scss";
 
-const Orders: React.FC<{ address: string; tokenId: string }> = ({
-    address,
-    tokenId,
-}) => {
-    const { buyOrders } = useOrders(address, tokenId);
-    const owner = useOwner(address, tokenId);
+const Orders: React.FC<{
+    asset: AssetFromAPI;
+}> = ({ asset }) => {
+    const buyOrders = asset?.orders
+        ? asset.orders.filter((order) => order.side === 0)
+        : [];
     return (
         <div className={styles.orders}>
-            <h3>List of orders</h3>
-            <h4>Owner</h4>
-            <div className={`${styles.ordersSection} ${styles.owner}`}>
-                <p>{owner || "No owner yet"}</p>
-            </div>
             <div className={styles.ordersSection}>
-                <h4>History</h4>
+                <h2>History</h2>
                 {buyOrders.map((buyOrder) => (
-                    <Bid key={buyOrder.hash} buyOrder={buyOrder} />
+                    <Bid key={buyOrder.order_hash} buyOrder={buyOrder} />
                 ))}
                 {!buyOrders.length && <p>No orders yet</p>}
             </div>

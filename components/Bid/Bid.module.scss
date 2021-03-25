@@ -1,3 +1,4 @@
+@import "../../styles/mixins.scss";
 .bid {
     background: rgb(248, 248, 248);
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
@@ -6,6 +7,11 @@
     margin-bottom: 10px;
     display: flex;
     align-items: center;
+    border-bottom: 1px solid #d5d5d5;
+
+    &:first-of-type{
+        border-top: 1px solid #d5d5d5;
+    }
 
     .bidder {
         font-size: 16px;
@@ -14,10 +20,24 @@
 
     .price {
         font-size: 22px;
+        white-space: nowrap;
     }
 
     .date {
         font-size: 14px;
-        font-style: italic;
+    }
+}
+
+@include media-mobile-only {
+    .bid {
+        background: #eee;
+        div, p {
+            flex: 1;
+            white-space: nowrap;
+        }
+
+        .price {
+            text-align: right;
+        }
     }
 }

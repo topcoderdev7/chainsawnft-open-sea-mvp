@@ -2,7 +2,7 @@ import { Artist as ArtistInterface } from "../../types";
 import Artist from "../Artist";
 import styles from "./Artists.module.scss";
 
-const Auctions: React.FC<{ artists: ArtistInterface[] }> = ({ artists }) => {
+const Artists: React.FC<{ artists: ArtistInterface[] }> = ({ artists }) => {
     return (
         <main className={styles.auctions}>
             <h1 className={styles.title}>Artists</h1>
@@ -20,4 +20,4 @@ const Auctions: React.FC<{ artists: ArtistInterface[] }> = ({ artists }) => {
     );
 };
 
-export default Auctions;
+export default Artists;

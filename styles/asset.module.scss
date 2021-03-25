@@ -1,11 +1,41 @@
+@import "./mixins.scss";
+
 .singleAsset {
+    .masthead {
+        position: relative;
+    }
+    .imageBg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-size: cover;
+    
+    }
+
+    .assetMastHead {
+        padding-top: 79px;
+        display: flex;
+        padding-bottom: 186px;
+
+        -webkit-backdrop-filter: blur(50px);
+        backdrop-filter: blur(50px);
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
+
+        div {
+            flex: 1;
+        }
+    }
     .imageContainer {
         padding: 50px 0;
         width: 100%;
-        background-color: #e9e9e9;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-end;
+        text-align: right;
+        margin-right: 76.5px;
 
         img {
             max-width: 95%;
@@ -41,21 +71,187 @@
         }
     }
 
+    .description {
+        margin-bottom: 35.4px;
+    }
+
+    .description, .owner {
+        h3 {
+            margin-bottom: 12px;
+        }
+    }
+
+
+    h3 {
+        opacity: 0.54;
+        font-size: 17px;
+        font-weight: 500;
+    }
+
+    span {
+        font-weight: 400;
+        font-size: 400;
+        line-height: 22px;
+    }
+
+    .artist {
+        font-weight: 700;
+        font-size: 26px;
+    }
+
+    .name {
+        font-size: 19px;
+        font-weight: 400;
+        margin-bottom: 52px;
+    }
+
+    .details {
+        max-width: 420px;
+    }
+
+    .auction {
+        display: flex;
+        div:first-of-type{
+            
+            padding-right: 37.5px;
+        }
+        div:nth-of-type(2){
+            border-left: 1px solid #fff;
+            padding-left: 37.5px;
+        }
+        p {
+            font-size: 28px;
+            font-weight: bold;
+            font-stretch: normal;
+            white-space: nowrap;
+        }
+    }
+    .bidButton {
+        width: 100%;
+        background: #fff;
+        border-radius: 8px;
+        border: none;
+        padding: 19px 20px;
+        font-size: 20px;
+        font-weight: 700;
+        margin: 37.6px 0 35px;
+    }
+
     .right {
         max-width: 100%;
-        width: 520px;
+        width: 625.6px;
         padding: 20px;
     }
 
+    .relatedGrid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-row-gap: 28px;
+        grid-column-gap: 26px;
+    }
+
     .info {
+        position: relative;
+        top: -56px;
+        padding: 73px 119px 170px 131.5px;
+
+        background: #fff;
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
         max-width: 1430px;
         margin: 0 auto;
 
-        @media screen and (max-width: 1024px) {
+        h2 {
+            margin-bottom: 49px;
+        }
+    }
+}
+
+
+@include media-mobile-only {
+    .singleAsset {
+        .assetMastHead {
             flex-direction: column;
+            padding-top: 38px;
+            padding-bottom: 53px;
+            margin-bottom: 0;
+        }
+
+        .right, .left {
+            width: 100%;
+        }
+
+        .artist{
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .name {
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 44px;
+        }
+
+        .auction{
+            h3 {
+                font-size: 12px;
+                font-weight: 500;
+            }
+            p {
+                font-size: 15px;
+                font-weight: bold;
+            }
+        }
+
+        .bidButton {
+            font-size: 17px;
+            font-weight: bold;
+            padding: 13px 0 12px;
+            margin: 27.5px 0;
+        }
+
+        .imageContainer {
+            padding: 0 0 21px;
+            max-width: calc(100% - 36px);
+            margin: auto;
+            align-items: unset;
+            text-align: center;
+        }
+
+        .details{
+            text-align: center;
+            max-width: calc(100% - 36px);
+            margin: auto;
+        }
+
+        .description, .owner{
+            text-align: left;
+        }
+
+        .info {
+            background: #eeeeee;
+            position: static;
+
+            flex-direction: column-reverse;
+
+            padding: 20.5px 18px;
+
+            h2 {
+                text-align: center;
+            }
+
+            .relatedGrid {
+                grid-template-columns: repeat(1, 1fr);
+                grid-row-gap: 28px;
+
+                text-align: center;
+
+                img {
+                    width: 100%;
+                }
+            }
+            
         }
     }
 }

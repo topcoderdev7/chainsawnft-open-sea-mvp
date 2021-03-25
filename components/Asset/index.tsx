@@ -7,7 +7,8 @@ const Asset: React.FC<{
     name: string;
     slug: string;
     reserve: string;
-}> = ({ description, imageUrl, name, slug, reserve }) => (
+    artist: string;
+}> = ({ imageUrl, name, slug, reserve, artist }) => (
     <Link href={`/asset/${slug}`}>
         <a>
             <div className={styles.asset}>
@@ -15,16 +16,13 @@ const Asset: React.FC<{
                     <img src={imageUrl} alt={name} />
                 </div>
                 <div className={styles.info}>
-                    <div>
+                    <div className={styles.name}>
+                        <h2>{artist}</h2>
                         <h3>{name}</h3>
                     </div>
-                    <p>{description}</p>
                     <div className={styles.footer}>
                         <div>
-                            <button>
-                                <img src="/images/bid-icon.svg" alt="bid" />
-                                Bid Now
-                            </button>
+                            <button>Bid Now</button>
                         </div>
                         {reserve && (
                             <div>
