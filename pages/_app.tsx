@@ -20,7 +20,6 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
                     <BalanceContextProvider>
                         <Layout>
                             <Component {...pageProps} />
-                            <AllowanceReminder />
                         </Layout>
                     </BalanceContextProvider>
                 </ProfileContextProvider>

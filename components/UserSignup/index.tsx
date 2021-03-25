@@ -15,11 +15,12 @@ const UserSignup = (): JSX.Element => {
         return (
             <section className={styles.signup}>
                 <span>Logged in as {profile?.username || user?.address}</span>
+                {/* For Debugging */}
                 <span className={styles.hidden}>
                     Your Address {user.address}
                 </span>
                 <span className={styles.hidden}>
-                    Your ETH Balance: {utils.formatEther(ethBalance)}
+                    ETH Balance: {utils.formatEther(ethBalance)}
                 </span>
                 <span>WETH Balance: {utils.formatEther(wethBalance)} </span>
                 <ul>

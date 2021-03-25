@@ -101,7 +101,7 @@ export const ProfileContextProvider: React.FC = ({ children }) => {
 
     useEffect(() => {
         fetchProfile();
-    }, [fetchProfile]);
+    }, [user, fetchProfile]);
 
     return (
         <ProfileContext.Provider

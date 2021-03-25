@@ -95,8 +95,6 @@ const BuyWidget: React.FC<{ address: string; tokenId: string }> = ({
         setLoading(false);
     };
 
-    const fromETHToUsd = (ethAmount: string) => parseFloat(ethAmount) * 2;
-
     return (
         <div className={styles.purchase}>
             <h3>Buy</h3>

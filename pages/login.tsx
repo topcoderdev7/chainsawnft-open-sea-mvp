@@ -23,7 +23,8 @@ const LoginPage: React.FC = () => {
                     {!allowance && (
                         <p>
                             It seems like you didn&rsquo;t give allowance to the
-                            router, please do so to begin collecting
+                            router, you can do that when you place your first
+                            bid
                         </p>
                     )}
                 </div>

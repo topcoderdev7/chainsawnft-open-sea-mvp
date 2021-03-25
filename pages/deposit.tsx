@@ -6,6 +6,7 @@ import QRCode from "../components/QrCode";
 import CopyUserAddress from "../components/CopyUserAddress";
 import { useAllowance, useBalances } from "../context/BalanceContext";
 import styles from "../styles/landing.module.scss";
+import ConvertToWETH from "../components/ConvertToWETH";
 
 const DepositETH: React.FC = () => {
     const user = useUser();
@@ -21,7 +22,7 @@ const DepositETH: React.FC = () => {
 
     return (
         <div className={styles.container}>
-            <h2>Deposit ETH</h2>
+            <h2>Deposit ETH / WETH</h2>
             {allowance && (
                 <p>
                     NOTE: Since you already gave allowance, you can simply send
@@ -45,18 +46,7 @@ const DepositETH: React.FC = () => {
             )}
             <QRCode address={user.address} />
             <CopyUserAddress address={user.address} />
-            {ethBalance.gt(MAX_ETH) && (
-                <div>
-                    <h2>Convert ETH to WETH!</h2>
-                    <p>
-                        You seem to have some ETH, click this button to convert
-                        it to WETH
-                    </p>
-                    <button onClick={convertEthToWeth}>
-                        Convert ETH to WETH
-                    </button>
-                </div>
-            )}
+            <ConvertToWETH />
         </div>
     );
 };

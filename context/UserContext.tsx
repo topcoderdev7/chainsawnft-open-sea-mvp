@@ -27,7 +27,7 @@ export const UserContextProvider: React.FC = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
 
     useEagerConnect(); // Adds users on first load
-    const { activate, active, library } = useWeb3React();
+    const { activate, active, library, account } = useWeb3React();
 
     /** Login with metamask */
     const activateMetamask = async () => activate(injected);
@@ -50,6 +50,7 @@ export const UserContextProvider: React.FC = ({ children }) => {
         const fetchUser = async () => {
             if (active) {
                 console.log("active", active);
+                console.log("library", library);
                 const res = await getAddressAndProvider(library);
                 setUser(res);
             } else {
@@ -57,7 +58,7 @@ export const UserContextProvider: React.FC = ({ children }) => {
             }
         };
         fetchUser();
-    }, [active, library]);
+    }, [active, library, account]);
 
     /**
      * Login with Metamask
