@@ -21,7 +21,7 @@ export const Home: React.FC<{ assets: NFT[] }> = ({ assets }) => {
 export default Home;
 
 export async function getStaticProps() {
-    const tokenRes = await fetch(`${API_URL}/tokens?_limit=-1`);
+    const tokenRes = await fetch(`${API_URL}/tokens?_limit=-1&sold=false`);
     const tokens = await tokenRes.json();
 
     return {

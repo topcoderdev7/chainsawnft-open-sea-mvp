@@ -18,6 +18,7 @@ const BuyWidget: React.FC<{ address: string; tokenId: string }> = ({
         address,
         tokenId,
     );
+
     const user = useUser();
     const { weth: wethBalance } = useBalances();
 

@@ -1,6 +1,10 @@
+@import "./fonts.scss";
+
 html,
 body {
     background-color: rgb(238, 238, 238);
+    font-family: Futura, Poppins, 'Gill Sans', 'Gill Sans MT', sans-serif;
+    font-weight: 400;
 }
 
 *,

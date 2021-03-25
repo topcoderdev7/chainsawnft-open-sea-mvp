@@ -1,4 +1,3 @@
-import { utils } from "ethers";
 import useOrders from "../../hooks/useOrders";
 import useOwner from "../../hooks/useOwner";
 import Bid from "../Bid";
@@ -9,7 +8,7 @@ const Orders: React.FC<{ address: string; tokenId: string }> = ({
     address,
     tokenId,
 }) => {
-    const { buyOrders, sellOrders } = useOrders(address, tokenId);
+    const { buyOrders } = useOrders(address, tokenId);
     const owner = useOwner(address, tokenId);
     return (
         <div className={styles.orders}>
@@ -19,20 +18,11 @@ const Orders: React.FC<{ address: string; tokenId: string }> = ({
                 <p>{owner || "No owner yet"}</p>
             </div>
             <div className={styles.ordersSection}>
-                <h4>Buy Orders</h4>
+                <h4>History</h4>
                 {buyOrders.map((buyOrder) => (
                     <Bid key={buyOrder.hash} buyOrder={buyOrder} />
                 ))}
                 {!buyOrders.length && <p>No orders yet</p>}
-            </div>
-            <div className={styles.ordersSection}>
-                <h4>Sell Orders</h4>
-                {sellOrders.map((sellOrder) => (
-                    <p key={sellOrder.hash}>
-                        Ξ{utils.formatEther(sellOrder.basePrice.toString())}
-                    </p>
-                ))}
-                {!sellOrders.length && <p>No orders yet</p>}
             </div>
         </div>
     );
