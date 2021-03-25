@@ -9,7 +9,7 @@
     align-items: center;
     border-bottom: 1px solid #d5d5d5;
 
-    &:first-of-type{
+    &:first-of-type {
         border-top: 1px solid #d5d5d5;
     }
 
@@ -31,7 +31,8 @@
 @include media-mobile-only {
     .bid {
         background: #eee;
-        div, p {
+        div,
+        p {
             flex: 1;
             white-space: nowrap;
         }
