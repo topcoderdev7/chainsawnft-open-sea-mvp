@@ -7,7 +7,7 @@ const Asset: React.FC<{
     name: string;
     slug: string;
     reserve: string;
-    artist: string;
+    artist?: string;
 }> = ({ imageUrl, name, slug, reserve, artist }) => (
     <Link href={`/asset/${slug}`}>
         <a>
