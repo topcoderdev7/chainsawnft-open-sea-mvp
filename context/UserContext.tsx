@@ -1,10 +1,9 @@
 import { createContext, useState, useEffect, useContext } from "react";
 import { ethers, providers } from "ethers";
-import Web3 from "web3";
 import { useWeb3React } from "@web3-react/core";
 import { makeSeaport } from "../utils/seaport";
 import useEagerConnect from "../hooks/useEagerConnect";
-import { injected } from "../utils/connectors";
+import { injected, walletconnect } from "../utils/connectors";
 
 export interface User {
     address: string;
@@ -14,12 +13,12 @@ export interface User {
 
 type UserContextData = {
     user: User | null;
-    login: () => Promise<void>;
+    login: (useWalletConnect?: boolean) => Promise<void>;
 };
 
 const UserContext = createContext<UserContextData>({
     user: null,
-    login: () => null,
+    login: (useWalletConnect?: boolean) => null,
 });
 export default UserContext;
 
@@ -31,6 +30,9 @@ export const UserContextProvider: React.FC = ({ children }) => {
 
     /** Login with metamask */
     const activateMetamask = async () => activate(injected);
+
+    /** Login with walletconnect */
+    const activateWalletConnect = async () => activate(walletconnect);
 
     /**
      * Given the Magic Provider, return address and provider
@@ -63,9 +65,13 @@ export const UserContextProvider: React.FC = ({ children }) => {
     /**
      * Login with Metamask
      */
-    const login = async (): Promise<void> => {
+    const login = async (useWalletConnect?: boolean): Promise<void> => {
         try {
-            activateMetamask();
+            if (useWalletConnect) {
+                activateWalletConnect();
+            } else {
+                activateMetamask();
+            }
         } catch (err) {
             alert(`Exception in loggign in ${alert}`);
         }

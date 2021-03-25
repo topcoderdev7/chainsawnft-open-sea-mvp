@@ -7,18 +7,27 @@ const Signup = (): JSX.Element => {
     const [loading, setLoading] = useState(false);
     const login = useLogin();
 
-    const handleSubmit = async (e: FormEvent) => {
+    const handleMetamask = async (e: FormEvent) => {
         setLoading(true);
         e.preventDefault();
         await login();
     };
 
+    const handleWalletConnect = async (e: FormEvent) => {
+        setLoading(true);
+        e.preventDefault();
+        await login(true);
+    };
+
     return (
         <section className={styles.signup}>
             <h2>Log in with Metamask</h2>
-            <form onSubmit={handleSubmit}>
-                <button type="submit">{loading ? "Loading" : "Log in"}</button>
-            </form>
+            <button onClick={handleMetamask} type="submit">
+                {loading ? "Loading" : "Log in"}
+            </button>
+            <button onClick={handleWalletConnect} type="submit">
+                {loading ? "Loading" : "Log in with WalletConnect"}
+            </button>
         </section>
     );
 };
