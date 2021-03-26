@@ -1,0 +1,11 @@
+.container {
+    max-width: 368px;
+
+    video {
+        max-width: 100%;
+    }
+
+    .display {
+        pointer-events: none;
+    }
+}

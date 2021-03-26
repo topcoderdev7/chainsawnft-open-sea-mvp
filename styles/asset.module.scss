@@ -27,6 +27,14 @@
             flex: 1;
         }
     }
+
+    .viewPdf {
+        border: none;
+        background: none;
+        padding: 5px;
+        color: white;
+        margin-top: 12px;
+    }
     .imageContainer {
         padding: 50px 0;
         width: 100%;
@@ -40,9 +48,11 @@
             background: #fff;
             padding: 18px;
             text-align: center;
+            box-sizing: content-box;
+            margin: auto;
 
             img {
-                max-width: 368px;
+                max-width: min(calc(100vw - 36px - 49px), 368px);
             }
         }
 
@@ -162,8 +172,6 @@
         }
     }
 
-
-
     .info {
         position: relative;
         top: -56px;
@@ -181,7 +189,7 @@
         }
         .extra {
             margin-bottom: 49px;
-            
+
             h2 {
                 margin-bottom: 12px;
             }

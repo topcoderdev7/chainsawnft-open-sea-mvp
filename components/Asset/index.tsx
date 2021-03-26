@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { NFTFile } from "../../types";
+import VideoPlayer from "../VideoPlayer";
 import styles from "./Asset.module.scss";
 
 const Asset: React.FC<{
@@ -9,12 +11,18 @@ const Asset: React.FC<{
     reserve: string;
     artist?: string;
     onSale?: boolean;
-}> = ({ imageUrl, name, slug, reserve, artist, onSale }) => (
+    file?: NFTFile;
+}> = ({ imageUrl, name, slug, reserve, artist, onSale, file }) => (
     <Link href={`/asset/${slug}`}>
         <a>
             <div className={styles.asset}>
                 <div className={styles.imageContainer}>
-                    <img src={imageUrl} alt={name} />
+                    {file && file.type === "video" && file.link && (
+                        <VideoPlayer playbackId={file.link} display />
+                    )}
+                    {!(file && file.type === "video" && file.link) && (
+                        <img src={imageUrl} alt={name} />
+                    )}
                 </div>
                 <div className={styles.info}>
                     <div className={styles.name}>

@@ -40,6 +40,11 @@ export type SellOrder = Order;
 /**
  * Interface for an NFT retrieved from seaport.api.getAsset
  */
+
+export interface NFTFile {
+    type: "video" | "pdf" | null;
+    link: "string";
+}
 export interface NFT extends OpenSeaAsset {
     description: string;
     imageUrl: string;
@@ -62,6 +67,8 @@ export interface NFT extends OpenSeaAsset {
 
     extraTitle: string;
     extraContent: string;
+
+    file?: NFTFile;
 }
 
 /** STRAPI INTERFACES */

@@ -12,11 +12,15 @@ import findMaxBid from "../../utils/findMaxBid";
 import useOwner from "../../hooks/useOwner";
 import useRelatedAssets from "../../hooks/useRelatedAssets";
 import { useUser } from "../../context/UserContext";
+import VideoPlayer from "../../components/VideoPlayer";
 
 const BuyWidgetNoSsr = dynamic(() => import("../../components/BuyWidget"), {
     ssr: false,
 });
 const OrdersNoSsr = dynamic(() => import("../../components/Orders"), {
+    ssr: false,
+});
+const PDFViewer = dynamic(() => import("../../components/PDFViewer"), {
     ssr: false,
 });
 
@@ -38,6 +42,7 @@ const OrderModal: React.FC<{
 );
 
 const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
+    const [showPdfModal, setShowPdfModal] = useState(false);
     const user = useUser();
     const assetData = useAsset(asset.address, asset.tokenId);
     const [modalOpen, setModalOpen] = useState(false);
@@ -59,8 +64,22 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
                 <div className={styles.assetMastHead}>
                     <div className={styles.imageContainer}>
                         <span className={styles.image}>
-                            <img src={asset.imageUrl} alt={asset.name} />
+                            {asset?.file && asset?.file?.type === "video" && (
+                                <VideoPlayer playbackId={asset?.file?.link} />
+                            )}
+
+                            {!(
+                                asset?.file && asset?.file?.type === "video"
+                            ) && <img src={asset.imageUrl} alt={asset.name} />}
                         </span>
+                        {asset?.file && asset?.file?.type === "pdf" && (
+                            <button
+                                className={styles.viewPdf}
+                                onClick={() => setShowPdfModal(true)}
+                            >
+                                View PDF
+                            </button>
+                        )}
                     </div>
                     <div>
                         <div className={styles.details}>
@@ -163,6 +182,13 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
                     <OrdersNoSsr asset={assetData} />
                 </div>
             </div>
+            {showPdfModal && (
+                <Modal handleClose={() => setShowPdfModal(false)}>
+                    {asset?.file?.type === "pdf" && asset?.file?.link && (
+                        <PDFViewer file={asset.file.link} />
+                    )}
+                </Modal>
+            )}
         </main>
     );
 };

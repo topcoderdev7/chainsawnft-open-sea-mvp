@@ -3,7 +3,6 @@ import Asset from "../Asset";
 import styles from "./Auctions.module.scss";
 
 const Auctions: React.FC<{ assets: NFT[] }> = ({ assets }) => {
-    console.log("assets", assets[0]);
     return (
         <main className={styles.auctions}>
             {/* <h1 className={styles.title}>live auctions</h1> */}
@@ -17,6 +16,7 @@ const Auctions: React.FC<{ assets: NFT[] }> = ({ assets }) => {
                         reserve,
                         artist,
                         onSale,
+                        file,
                     }) => (
                         <Asset
                             onSale={onSale}
@@ -27,6 +27,7 @@ const Auctions: React.FC<{ assets: NFT[] }> = ({ assets }) => {
                             imageUrl={imageUrl}
                             name={name}
                             reserve={reserve}
+                            file={file}
                         />
                     ),
                 )}
