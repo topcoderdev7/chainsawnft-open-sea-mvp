@@ -16,7 +16,10 @@ const VideoPlayer: React.FC<{ playbackId: string; display?: boolean }> = ({
         const video = videoRef.current;
         if (!video) return;
 
-        video.controls = true;
+        if (!display) {
+            video.controls = true;
+        }
+
         let hls;
 
         if (video.canPlayType("application/vnd.apple.mpegurl")) {
