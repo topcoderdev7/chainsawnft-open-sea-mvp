@@ -16,8 +16,6 @@
         padding: 30px 18px;
     }
 
-
-
     @media screen and (max-width: 768px) {
         padding: 30px 18px;
     }
@@ -52,12 +50,10 @@
 
 @include media-mobile-only {
     .auctions {
-
         margin: auto;
         box-sizing: content-box;
         .title {
             text-align: center;
         }
-
     }
 }

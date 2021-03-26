@@ -10,7 +10,6 @@
     }
 }
 
-
 @mixin media-small-mobile-only {
     @media screen and (max-width: 450px) {
         @content;
