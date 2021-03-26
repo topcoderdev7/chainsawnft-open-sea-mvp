@@ -58,9 +58,9 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
                 />
                 <div className={styles.assetMastHead}>
                     <div className={styles.imageContainer}>
-                        <div className={styles.image}>
+                        <span className={styles.image}>
                             <img src={asset.imageUrl} alt={asset.name} />
-                        </div>
+                        </span>
                     </div>
                     <div>
                         <div className={styles.details}>
