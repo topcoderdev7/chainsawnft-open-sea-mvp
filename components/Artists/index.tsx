@@ -12,7 +12,8 @@ const Artists: React.FC<{ artists: ArtistInterface[] }> = ({ artists }) => {
                         key={artist.id}
                         slug={artist.slug}
                         imageUrl={artist.imageUrl}
-                        Name={artist.Name}
+                        name={artist.name}
+                        description={artist.description}
                     />
                 ))}
             </div>
