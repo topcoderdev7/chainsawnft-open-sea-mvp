@@ -64,6 +64,10 @@
 }
 
 @include media-mobile-only {
+    .slider {
+        position: relative;
+        margin: 0;
+    }
     .sliderContent {
         flex-direction: column;
         .left {

@@ -16,12 +16,12 @@
         }
 
         .smallLogo {
-            width: 44px;
+            width: 66px;
             vertical-align: middle;
         }
 
         .logo {
-            width: 173px;
+            width: 259.5px;
             vertical-align: middle;
         }
 
@@ -97,14 +97,21 @@
         padding: 30px 15px;
         text-align: center;
         .left {
+            white-space: nowrap;
             display: flex;
             justify-content: center;
             .social {
                 display: flex;
                 justify-content: center;
+                height: 41px;
+                align-items: center;
+            }
+            .smallLogo {
+                width: 44px;
             }
             .logo {
                 margin-right: 23.2px;
+                width: 173px;
             }
             &.bigLogo {
                 .smallLogo {
@@ -126,6 +133,17 @@
             .social {
                 display: none;
             }
+        }
+    }
+}
+
+
+@include media-small-mobile-only {
+    .header .left {
+        flex-direction: column;
+
+        div:first-of-type {
+            margin-bottom: 12px;
         }
     }
 }

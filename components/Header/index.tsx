@@ -5,13 +5,10 @@ import UserSignup from "../UserSignup";
 import styles from "./Header.module.scss";
 
 const Header: React.FC = () => {
-    const router = useRouter();
-    const isHome = router.pathname === "/";
-    console.log("isHome", isHome);
     return (
         <header>
             <div className={styles.header}>
-                <div className={`${styles.left} ${isHome && styles.bigLogo}`}>
+                <div className={styles.left}>
                     <div>
                         <Link href="/">
                             <a>
