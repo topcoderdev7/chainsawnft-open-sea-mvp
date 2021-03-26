@@ -12,6 +12,7 @@ import findMaxBid from "../../utils/findMaxBid";
 import useOwner from "../../hooks/useOwner";
 import useRelatedAssets from "../../hooks/useRelatedAssets";
 import { useUser } from "../../context/UserContext";
+import VideoPlayer from "../../components/VideoPlayer";
 
 const BuyWidgetNoSsr = dynamic(() => import("../../components/BuyWidget"), {
     ssr: false,
@@ -59,7 +60,13 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
                 <div className={styles.assetMastHead}>
                     <div className={styles.imageContainer}>
                         <span className={styles.image}>
-                            <img src={asset.imageUrl} alt={asset.name} />
+                            {asset?.file && asset?.file?.type === "video" && (
+                                <VideoPlayer playbackId={asset?.file?.link} />
+                            )}
+
+                            {!(
+                                asset?.file && asset?.file?.type === "video"
+                            ) && <img src={asset.imageUrl} alt={asset.name} />}
                         </span>
                     </div>
                     <div>
