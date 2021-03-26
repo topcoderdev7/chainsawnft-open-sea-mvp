@@ -56,13 +56,20 @@ export interface NFT extends OpenSeaAsset {
         slug: string;
         imageUrl: string;
     };
+
+    soldFor: string;
+    onSale: boolean;
+
+    extraTitle: string;
+    extraContent: string;
 }
 
 /** STRAPI INTERFACES */
 export interface Slide {
     title: string;
-    token: NFT;
+    token?: NFT;
     imageUrl: string;
+    url?: string;
 }
 /**
  * Model definition for collection

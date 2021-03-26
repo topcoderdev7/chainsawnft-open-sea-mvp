@@ -55,8 +55,8 @@
         margin-right: 216px;
 
         p {
-            font-weight: 600;
-            font-size: 20px;
+            font-weight: 500;
+            font-size: 15px;
         }
 
         span {
@@ -162,6 +162,8 @@
         }
     }
 
+
+
     .info {
         position: relative;
         top: -56px;
@@ -176,6 +178,13 @@
 
         h2 {
             margin-bottom: 49px;
+        }
+        .extra {
+            margin-bottom: 49px;
+            
+            h2 {
+                margin-bottom: 12px;
+            }
         }
     }
 }

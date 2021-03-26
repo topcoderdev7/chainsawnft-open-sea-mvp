@@ -34,7 +34,7 @@ export async function getStaticProps() {
     const slidesWithoutArtists = sliderData.slides as Slide[];
     const sliderWithArtist = await Promise.all(
         slidesWithoutArtists.map(async (slide) => {
-            if (slide.token.artist) {
+            if (slide?.token?.artist) {
                 const artistRes = await fetch(
                     `${API_URL}/artists/${slide.token.artist}`,
                 );

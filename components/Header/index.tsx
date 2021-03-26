@@ -53,11 +53,6 @@ const Header: React.FC = () => {
                                     <a>Artists</a>
                                 </Link>
                             </div>
-                            <div>
-                                <Link href="/collections">
-                                    <a>Collections</a>
-                                </Link>
-                            </div>
                         </div>
                         <div className={styles.social}>
                             <a href="https://www.instagram.com/chainsaw_nft">
