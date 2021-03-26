@@ -72,8 +72,9 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
                             <div className={styles.auction}>
                                 <div>
                                     <h3>Current Bid</h3>
-                                    <p>{currentBid}</p>
+                                    <p>{asset.onSale ? currentBid : "--"}</p>
                                 </div>
+
                                 {salesOrder?.closing_date && (
                                     <div>
                                         <h3>Auction Ends at</h3>
@@ -81,25 +82,29 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
                                     </div>
                                 )}
                             </div>
-                            {user && (
-                                <button
-                                    className={styles.bidButton}
-                                    onClick={() => setModalOpen(true)}
-                                    type="button"
-                                >
-                                    Bid Now
-                                </button>
-                            )}
+                            {asset.onSale && (
+                                <>
+                                    {user && (
+                                        <button
+                                            className={styles.bidButton}
+                                            onClick={() => setModalOpen(true)}
+                                            type="button"
+                                        >
+                                            Bid Now
+                                        </button>
+                                    )}
 
-                            {!user && (
-                                <Link href="/login">
-                                    <button
-                                        className={styles.bidButton}
-                                        type="button"
-                                    >
-                                        Bid Now
-                                    </button>
-                                </Link>
+                                    {!user && (
+                                        <Link href="/login">
+                                            <button
+                                                className={styles.bidButton}
+                                                type="button"
+                                            >
+                                                Bid Now
+                                            </button>
+                                        </Link>
+                                    )}
+                                </>
                             )}
 
                             {modalOpen && (

@@ -16,8 +16,10 @@ const Auctions: React.FC<{ assets: NFT[] }> = ({ assets }) => {
                         slug,
                         reserve,
                         artist,
+                        onSale,
                     }) => (
                         <Asset
+                            onSale={onSale}
                             artist={artist?.name}
                             key={name}
                             slug={slug}

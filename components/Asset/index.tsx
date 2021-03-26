@@ -8,7 +8,8 @@ const Asset: React.FC<{
     slug: string;
     reserve: string;
     artist?: string;
-}> = ({ imageUrl, name, slug, reserve, artist }) => (
+    onSale?: boolean;
+}> = ({ imageUrl, name, slug, reserve, artist, onSale }) => (
     <Link href={`/asset/${slug}`}>
         <a>
             <div className={styles.asset}>
@@ -21,9 +22,19 @@ const Asset: React.FC<{
                         <h3>{name}</h3>
                     </div>
                     <div className={styles.footer}>
-                        <div>
-                            <button>Bid Now</button>
-                        </div>
+                        {onSale && (
+                            <div>
+                                <button>Bid Now</button>
+                            </div>
+                        )}
+
+                        {!onSale && (
+                            <div className={styles.notAvail}>
+                                <h3>Price</h3>
+                                <h2>-</h2>
+                            </div>
+                        )}
+
                         {reserve && (
                             <div>
                                 <h4>Reserve price:</h4> <h3>{reserve}</h3>
