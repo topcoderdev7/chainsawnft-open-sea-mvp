@@ -5,17 +5,16 @@
     z-index: 9;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.79);
 }
 
 .content {
     position: sticky;
     max-width: 720px;
-    width: max(50vw, 320px);
+    width: max(50vw, 284px);
     background: #fff;
     padding: 56px 31px;
-    border-radius: 12px;
-    left: calc(max(50vw, 320px) / 2);
+    left: calc(max(50vw, 284px) / 2);
     top: 32px;
 
     text-align: center;

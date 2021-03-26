@@ -83,7 +83,8 @@ const BuyWidget: React.FC<{
 
     return (
         <div className={styles.purchase}>
-            <h3>Buy</h3>
+            <h3>Place a Bid</h3>
+            <p>Place a bid in WETH</p>
             <form onSubmit={handleSubmit}>
                 <input
                     type="number"
@@ -93,7 +94,7 @@ const BuyWidget: React.FC<{
                 />
                 <div className={styles.buttonContainer}>
                     <button disabled={loading}>
-                        {loading ? "Loading" : "Buy"}
+                        {loading ? "Loading" : "Bid"}
                     </button>
                 </div>
             </form>
