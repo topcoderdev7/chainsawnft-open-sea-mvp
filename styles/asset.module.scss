@@ -48,6 +48,8 @@
             background: #fff;
             padding: 18px;
             text-align: center;
+            box-sizing: content-box;
+            margin: auto;
 
             img {
                 max-width: min(calc(100vw - 36px - 49px), 368px);
