@@ -6,7 +6,7 @@ const Auctions: React.FC<{ assets: NFT[] }> = ({ assets }) => {
     console.log("assets", assets[0]);
     return (
         <main className={styles.auctions}>
-            <h1 className={styles.title}>live auctions</h1>
+            {/* <h1 className={styles.title}>live auctions</h1> */}
             <div className={styles.auctionsContainer}>
                 {assets.map(
                     ({

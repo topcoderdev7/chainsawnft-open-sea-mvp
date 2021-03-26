@@ -10,27 +10,23 @@ const UserSignup = (): JSX.Element => {
     const user = useUser();
     const profile = useProfile();
     const { eth: ethBalance, weth: wethBalance } = useBalances();
+    console.log("wethBalance", wethBalance);
 
     if (user) {
         return (
             <section className={styles.signup}>
-                <span>Logged in as {profile?.username || user?.address}</span>
+                <div>{profile?.username || user?.address}</div>
                 {/* For Debugging */}
-                <span className={styles.hidden}>
-                    Your Address {user.address}
-                </span>
-                <span className={styles.hidden}>
+                <div className={styles.hidden}>Your Address {user.address}</div>
+                <div className={styles.hidden}>
                     ETH Balance: {utils.formatEther(ethBalance)}
-                </span>
-                <span>WETH Balance: {utils.formatEther(wethBalance)} </span>
+                </div>
+                <div>WETH: {utils.formatEther(wethBalance)} </div>
                 <ul>
                     <li>
                         <Link href="/settings">
                             <a>Settings</a>
                         </Link>
-                    </li>
-                    <li>
-                        <Link href="/deposit">Deposit ETH</Link>
                     </li>
                     <li>
                         <Link href="/my">My Collection</Link>
@@ -42,9 +38,11 @@ const UserSignup = (): JSX.Element => {
 
     return (
         <section className={styles.signup}>
-            <Link href="/login">
-                <a>Signup</a>
-            </Link>
+            <div>
+                <Link href="/login">
+                    <a>Signup</a>
+                </Link>
+            </div>
         </section>
     );
 };

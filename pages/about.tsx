@@ -1,5 +1,7 @@
+import styles from "../styles/About.module.scss";
+
 const AboutPage: React.FC = () => (
-    <div>
+    <div className={styles.container}>
         <h2>About Page</h2>
         <div>
             <p>The about page goes here</p>

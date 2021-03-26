@@ -11,6 +11,7 @@ import Modal from "../../components/Modal";
 import findMaxBid from "../../utils/findMaxBid";
 import useOwner from "../../hooks/useOwner";
 import useRelatedAssets from "../../hooks/useRelatedAssets";
+import { useUser } from "../../context/UserContext";
 
 const BuyWidgetNoSsr = dynamic(() => import("../../components/BuyWidget"), {
     ssr: false,
@@ -37,6 +38,7 @@ const OrderModal: React.FC<{
 );
 
 const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
+    const user = useUser();
     const assetData = useAsset(asset.address, asset.tokenId);
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -77,13 +79,27 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
                                     </div>
                                 )}
                             </div>
-                            <button
-                                className={styles.bidButton}
-                                onClick={() => setModalOpen(true)}
-                                type="button"
-                            >
-                                Bid Now
-                            </button>
+                            {user && (
+                                <button
+                                    className={styles.bidButton}
+                                    onClick={() => setModalOpen(true)}
+                                    type="button"
+                                >
+                                    Bid Now
+                                </button>
+                            )}
+
+                            {!user && (
+                                <Link href="/login">
+                                    <button
+                                        className={styles.bidButton}
+                                        type="button"
+                                    >
+                                        Bid Now
+                                    </button>
+                                </Link>
+                            )}
+
                             {modalOpen && (
                                 <OrderModal
                                     buyOrders={assetData?.orders || []}

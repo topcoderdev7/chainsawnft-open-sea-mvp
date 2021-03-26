@@ -23,10 +23,6 @@
         grid-row-gap: 38px;
         grid-column-gap: 43px;
 
-        @media only screen and (max-width: 1400px) {
-            grid-template-columns: repeat(1, 1fr);
-        }
-
         a {
             text-decoration: none;
         }
@@ -34,9 +30,16 @@
 }
 
 @include media-mobile-only {
+
     .auctions {
+        max-width: 284px;
+        margin: auto;
+        box-sizing: content-box;
         .title {
             text-align: center;
+        }
+        .auctionsContainer {
+            grid-template-columns: repeat(1, 1fr);
         }
     }
 }

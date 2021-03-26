@@ -4,19 +4,18 @@ import { API_URL } from "../utils/constants";
 
 const useRelatedAssets = (nft: NFT): NFT[] => {
     const [related, setRelated] = useState<NFT[]>([]);
-    console.log("useRelatedAssets  nft.artist", nft.artist);
     useEffect(() => {
         const fetchRelated = async () => {
-            try {
-                const artistRes = await fetch(
-                    `${API_URL}/artists/${nft?.artist?.id}`,
-                );
-                console.log("artistRes", artistRes);
-                const artist = await artistRes.json();
-                console.log("res", artist);
-                setRelated(artist.tokens);
-            } catch (err) {
-                console.log("Exception in fetchRelated", err);
+            if (nft?.artist?.id) {
+                try {
+                    const artistRes = await fetch(
+                        `${API_URL}/artists/${nft?.artist?.id}`,
+                    );
+                    const artist = await artistRes.json();
+                    setRelated(artist.tokens);
+                } catch (err) {
+                    console.log("Exception in fetchRelated", err);
+                }
             }
         };
         fetchRelated();

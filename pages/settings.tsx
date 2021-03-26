@@ -52,6 +52,13 @@ const SettingsPage: React.FC = () => {
                     ? "You've given allowance"
                     : "You need to give allowance"}
             </div>
+
+            <div>
+                <h2>Deposit and Wrap ETH</h2>
+                <Link href="/deposit">
+                    <button>Deposit and Wrap ETH</button>
+                </Link>
+            </div>
         </div>
     );
 };

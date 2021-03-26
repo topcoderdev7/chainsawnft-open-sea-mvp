@@ -30,7 +30,7 @@ const LoginPage: React.FC = () => {
                 </div>
 
                 <Link href="/">
-                    <a>View Art</a>
+                    <button>View Art</button>
                 </Link>
                 <Link href="/settings">
                     <a>Change Settings</a>
