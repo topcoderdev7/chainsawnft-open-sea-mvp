@@ -3,17 +3,22 @@ import styles from "./Artist.module.scss";
 
 const Artist: React.FC<{
     imageUrl: string;
-    Name: string;
+    name: string;
     slug: string;
-}> = ({ imageUrl, Name, slug }) => (
+    description: string;
+}> = ({ imageUrl, name, slug, description }) => (
     <Link href={`/artist/${slug}`}>
         <a>
             <div className={styles.artist}>
                 <div className={styles.imageContainer}>
-                    <img src={imageUrl} alt={Name} />
+                    <img src={imageUrl} alt={name} />
                 </div>
                 <div className={styles.info}>
-                    <h3>{Name}</h3>
+                    <h3>{name}</h3>
+                    <p>{description}</p>
+                    <div>
+                        <button>See Collection</button>
+                    </div>
                 </div>
             </div>
         </a>

@@ -36,13 +36,23 @@
         text-align: right;
         margin-right: 76.5px;
 
+        .image {
+            background: #fff;
+            padding: 18px;
+            text-align: center;
+
+            img {
+                max-width: 368px;
+            }
+        }
+
         h1 {
             padding: 50px 0 0 0;
         }
     }
 
     .left {
-        padding: 20px;
+        margin-right: 216px;
 
         p {
             font-weight: 600;
@@ -142,6 +152,14 @@
         grid-template-columns: repeat(2, 1fr);
         grid-row-gap: 28px;
         grid-column-gap: 26px;
+    }
+
+    .relatedEntry {
+        max-width: 241px;
+
+        img {
+            max-width: 100%;
+        }
     }
 
     .info {

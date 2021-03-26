@@ -44,7 +44,7 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
 
     const related = useRelatedAssets(asset);
     console.log("related", related);
-    const salesOrder = assetData?.orders.find((order) => order.side === 1); // Find sell order
+    const salesOrder = assetData?.orders?.find((order) => order.side === 1); // Find sell order
     const currentBid = findMaxBid(assetData?.orders);
     console.log("assetData?.orders", assetData?.orders);
     const owner = useOwner(assetData);
@@ -58,7 +58,9 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
                 />
                 <div className={styles.assetMastHead}>
                     <div className={styles.imageContainer}>
-                        <img src={asset.imageUrl} alt={asset.name} />
+                        <span className={styles.image}>
+                            <img src={asset.imageUrl} alt={asset.name} />
+                        </span>
                     </div>
                     <div>
                         <div className={styles.details}>
@@ -132,14 +134,16 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
                     </h2>
                     <div className={styles.relatedGrid}>
                         {related.map((token) => (
-                            <Link href={`/asset/${token.slug}`}>
-                                <a>
-                                    <img
-                                        src={token.imageUrl}
-                                        alt={token.name}
-                                    />
-                                </a>
-                            </Link>
+                            <div className={styles.relatedEntry}>
+                                <Link href={`/asset/${token.slug}`}>
+                                    <a>
+                                        <img
+                                            src={token.imageUrl}
+                                            alt={token.name}
+                                        />
+                                    </a>
+                                </Link>
+                            </div>
                         ))}
                     </div>
                 </div>

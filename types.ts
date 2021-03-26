@@ -81,10 +81,12 @@ export interface Collection {
  */
 export interface Artist {
     id: string;
-    Name?: string;
+    name?: string;
     slug?: string;
     imageUrl?: string;
     collections: Collection[];
+    description?: string;
+    tokens: NFT[];
 }
 
 /**

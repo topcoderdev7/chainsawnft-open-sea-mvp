@@ -24,7 +24,7 @@ export const Home: React.FC<{ assets: NFT[]; slides: Slide[] }> = ({
 export default Home;
 
 export async function getStaticProps() {
-    const tokenRes = await fetch(`${API_URL}/tokens?_limit=-1`);
+    const tokenRes = await fetch(`${API_URL}/tokens?_limit=40`);
     const allTokens = await tokenRes.json();
 
     const slidesRes = await fetch(`${API_URL}/slider`);

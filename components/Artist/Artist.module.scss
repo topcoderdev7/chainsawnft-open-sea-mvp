@@ -1,11 +1,11 @@
 @import "../../styles/partials/underline";
 
 .artist {
-    background: white;
-    border-radius: 0 0 30px 30px;
+    background: #fff;
+    color: #000;
 
     .imageContainer {
-        height: 250px;
+        height: 214px;
 
         img {
             width: 100%;
@@ -15,29 +15,27 @@
         }
     }
 
+    button {
+        padding: 13px 12px;
+        background-color: #000;
+        border: none;
+        color: #fff;
+        border-radius: 8px;
+        font-size: 17px;
+        font-weight: 700;
+    }
+
     .info {
         text-align: center;
-        border: 1px solid black;
-        border-radius: 0 0 30px 30px;
-
-        a {
-            color: black;
-            &:hover {
-                @include underlineOnHover();
-            }
-        }
-
-        h3,
-        p,
-        span {
-            color: black;
-        }
-
+        padding: 24px 40px;
+        text-align: left;
         h3 {
-            display: inline-block;
+            margin-bottom: 23px;
+            font-size: 20px;
+        }
+        p {
+            margin-bottom: 48px;
             font-size: 15px;
-            text-transform: uppercase;
-            padding: 15px 0;
         }
     }
 }
