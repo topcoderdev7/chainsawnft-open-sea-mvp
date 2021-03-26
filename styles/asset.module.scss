@@ -50,7 +50,7 @@
             text-align: center;
 
             img {
-                max-width: 368px;
+                max-width: min(calc(100vw - 36px - 49px), 368px);
             }
         }
 
