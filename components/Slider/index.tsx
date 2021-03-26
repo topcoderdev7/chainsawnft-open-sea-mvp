@@ -18,13 +18,15 @@ const Slider: React.FC<{ slides: Slide[] }> = ({ slides }) => {
                 <div className={styles.left}>
                     <h1>{slide.title}</h1>
                 </div>
-                <div className={styles.right}>
-                    <h2>{slide?.token?.artist?.name}</h2>
-                    <h3>{slide?.token?.name}</h3>
-                    <Link href={`/asset/${slide.token.slug}`}>
-                        <button type="button">Bid Now</button>
-                    </Link>
-                </div>
+                {slide?.token && slide.token.slug && (
+                    <div className={styles.right}>
+                        <h2>{slide?.token?.artist?.name}</h2>
+                        <h3>{slide?.token?.name}</h3>
+                        <Link href={`/asset/${slide.token.slug}`}>
+                            <button type="button">Bid Now</button>
+                        </Link>
+                    </div>
+                )}
             </div>
         </div>
     );
