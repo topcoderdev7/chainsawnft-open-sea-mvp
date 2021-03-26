@@ -16,7 +16,7 @@ export const UsernamePage = () => {
         setLoading(true);
         await setProfile(name);
         setLoading(false);
-        router.push("/onboarding/eth");
+        router.push("/");
     };
 
     if (profile) {

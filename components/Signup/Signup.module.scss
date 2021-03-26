@@ -19,7 +19,6 @@
         font-weight: 300;
         padding: 16px 15px;
         border-radius: 7px;
-        font-family: inherit;
         width: 100%;
         border: none;
         font-weight: 500;
@@ -32,8 +31,8 @@
 
     button {
         display: block;
-        font-family: inherit;
-        background-color: #6851ff;
+        background-color: #000;
+        border-radius: 8px;
         color: #fff;
         border: none;
         font-size: 17px;

@@ -1,14 +1,13 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState, FormEvent } from "react";
-import { useLogout, useUser } from "../context/UserContext";
+import { useUser } from "../context/UserContext";
 import { useAllowance } from "../context/BalanceContext";
 import { useProfile, useSetProfile } from "../context/ProfileContext";
 import styles from "../styles/landing.module.scss";
 
 const SettingsPage: React.FC = () => {
     const user = useUser();
-    const logout = useLogout();
     const router = useRouter();
     const profile = useProfile();
     const setProfile = useSetProfile();
@@ -16,11 +15,6 @@ const SettingsPage: React.FC = () => {
     const [loading, setLoading] = useState(false);
 
     const allowance = useAllowance();
-
-    const logoutAndExit = async () => {
-        await logout();
-        router.push("/");
-    };
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
@@ -53,11 +47,17 @@ const SettingsPage: React.FC = () => {
                 </button>
             </form>
 
-            <button onClick={logoutAndExit}>Logout</button>
             <div className={styles.tiny}>
                 {allowance
                     ? "You've given allowance"
                     : "You need to give allowance"}
+            </div>
+
+            <div>
+                <h2>Deposit and Wrap ETH</h2>
+                <Link href="/deposit">
+                    <button>Deposit and Wrap ETH</button>
+                </Link>
             </div>
         </div>
     );

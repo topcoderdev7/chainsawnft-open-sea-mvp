@@ -1,4 +1,37 @@
+/* eslint-disable camelcase */
 import { OpenSeaAsset, Order } from "opensea-js/lib/types";
+
+declare global {
+    interface Window {
+        ethereum?: any;
+    }
+}
+
+/** OpenSEA API is better than SDK hence we use API */
+export interface OrderFromAPI {
+    order_hash: string;
+    side: number; // 0 for buy 1 for sell
+    closing_date: string; // String representing closing time (not sure of timezone)
+    listing_time: number; // Multiply by 1000 to get closing time in milliseconds
+    base_price: string; // String in wei of price
+    maker: {
+        address: string;
+    };
+}
+
+export interface AssetFromAPI {
+    top_ownerships: {
+        owner: {
+            address;
+        };
+    }[];
+    orders: OrderFromAPI[];
+    last_sale: {
+        total_price: string;
+    };
+    image_url: string;
+    name: string;
+}
 
 export type BuyOrder = Order;
 
@@ -16,9 +49,20 @@ export interface NFT extends OpenSeaAsset {
 
     slug: string;
     reserve: string;
+
+    artist: {
+        id: string;
+        name: string;
+        slug: string;
+        imageUrl: string;
+    };
 }
 
 /** STRAPI INTERFACES */
+export interface Slide {
+    title: string;
+    token: NFT;
+}
 /**
  * Model definition for collection
  */
