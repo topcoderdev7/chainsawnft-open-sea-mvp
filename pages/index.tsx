@@ -24,7 +24,7 @@ export const Home: React.FC<{ assets: NFT[]; slides: Slide[] }> = ({
 export default Home;
 
 export async function getStaticProps() {
-    const tokenRes = await fetch(`${API_URL}/tokens?_limit=40`);
+    const tokenRes = await fetch(`${API_URL}/tokens?_limit=-1`);
     const allTokens = await tokenRes.json();
 
     const slidesRes = await fetch(`${API_URL}/slider`);
@@ -47,11 +47,13 @@ export async function getStaticProps() {
         }),
     );
 
-    const availableTokens = allTokens.filter((token) => !token.sold);
+    const availableTokens: NFT[] = allTokens.filter((token) => !token.sold);
     const soldTokens = allTokens.filter((token) => token.sold);
     return {
         props: {
-            assets: availableTokens,
+            assets: availableTokens
+                .sort((a, b) => a.priority - b.priority)
+                .reverse(),
             sold: soldTokens,
             slides: sliderWithArtist,
         },
