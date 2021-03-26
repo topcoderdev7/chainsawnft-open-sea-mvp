@@ -1,22 +1,22 @@
 .signup {
     display: flex;
-    div, ul {
+    div,
+    ul {
         margin-right: 40px;
     }
 
     ul {
         list-style: none;
     }
-    
+
     h1 {
         font-weight: 300;
         font-size: 42px;
         margin-bottom: 30px;
     }
 
-
     div.hidden {
-        display: none!important;
+        display: none !important;
     }
 
     span {

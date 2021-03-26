@@ -26,7 +26,7 @@
         }
 
         &.bigLogo {
-            .smallLogo{
+            .smallLogo {
                 display: none;
             }
             .logo {
@@ -50,7 +50,6 @@
         }
     }
 
-
     .right {
         display: flex;
         align-items: center;
@@ -70,8 +69,6 @@
                 margin-right: 40px;
             }
         }
-
-
 
         .links {
             div {
@@ -94,7 +91,6 @@
     }
 }
 
-
 @include media-mobile-only {
     .header {
         flex-direction: column;
@@ -116,14 +112,13 @@
                     width: 44px;
                     vertical-align: middle;
                 }
-        
+
                 .logo {
                     display: inline;
                     width: 173px;
                     vertical-align: middle;
                     margin-right: 23.2px;
                 }
-        
             }
         }
         .right {
