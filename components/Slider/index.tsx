@@ -12,7 +12,7 @@ const Slider: React.FC<{ slides: Slide[] }> = ({ slides }) => {
         <div className={styles.slider}>
             <div
                 className={styles.bg}
-                style={{ backgroundImage: `url(${slide.token.imageUrl})` }}
+                style={{ backgroundImage: `url(${slide.imageUrl})` }}
             />
             <div className={styles.sliderContent}>
                 <div className={styles.left}>
