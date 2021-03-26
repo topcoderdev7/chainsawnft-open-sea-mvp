@@ -8,6 +8,7 @@ import { addWETHAllowance, wrapETH } from "../../utils/weth";
 import { useAllowance, useBalances } from "../../context/BalanceContext";
 import styles from "../../styles/landing.module.scss";
 import Loading from "../../components/Loading";
+import ConvertToWETH from "../../components/ConvertToWETH";
 
 const WETHPage: React.FC = () => {
     const user = useUser();
@@ -78,18 +79,7 @@ const WETHPage: React.FC = () => {
                         />
                         <h2>PART 2 Wrap ETH into WETH</h2>
                         <p>Wrap your ETH so you can start bidding!</p>
-                        {ethBalance.gt(MAX_ETH) && (
-                            <button
-                                disabled={loading}
-                                onClick={convertEthToWeth}
-                            >
-                                {loading ? (
-                                    <Loading message="Approving. Please Wait" />
-                                ) : (
-                                    "Approve"
-                                )}
-                            </button>
-                        )}
+                        <ConvertToWETH />
                     </div>
                 )}
 

@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
+import { AssetFromAPI } from "../types";
 import { API_URL } from "../utils/constants";
 
-const useOwner = (address: string, tokenId: string) => {
+const useOwner = (asset: AssetFromAPI) => {
     const [assetOwner, setAssetOwner] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchOwner = async () => {
             try {
-                const res = await fetch(
-                    `https://api.opensea.io/api/v1/asset/${address}/${tokenId}`,
-                );
-                const data = await res.json();
-                const { owner } = data.top_ownerships[0];
+                const { owner } = asset.top_ownerships[0];
                 setAssetOwner(owner.address);
                 try {
                     const profileRes = await fetch(
@@ -27,7 +24,7 @@ const useOwner = (address: string, tokenId: string) => {
             }
         };
         fetchOwner();
-    }, [address, tokenId]);
+    }, [asset]);
 
     return assetOwner;
 };

@@ -47,16 +47,20 @@ const MyCollectionPage: React.FC = () => {
     return (
         <div className={styles.container}>
             <h2>Your Collection</h2>
-            {myTokens.map(({ description, imageUrl, name, slug, reserve }) => (
-                <Asset
-                    key={name}
-                    slug={slug}
-                    description={description}
-                    imageUrl={imageUrl}
-                    name={name}
-                    reserve={reserve}
-                />
-            ))}
+            {myTokens.map(
+                ({ description, imageUrl, name, slug, reserve, artist }) => (
+                    <Asset
+                        key={name}
+                        artist={artist?.name}
+                        slug={slug}
+                        description={description}
+                        imageUrl={imageUrl}
+                        name={name}
+                        reserve={reserve}
+                    />
+                ),
+            )}
+            {myTokens.length === 0 && <h3>No tokens in your collection :(</h3>}
         </div>
     );
 };

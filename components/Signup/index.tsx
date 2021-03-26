@@ -1,48 +1,33 @@
-import { useRouter } from "next/router";
 import { useState, FormEvent } from "react";
 import { useLogin } from "../../context/UserContext";
-import { getInfuraProvider } from "../../utils/infura";
-import { hasGivenWETHAllowance } from "../../utils/weth";
 
 import styles from "./Signup.module.scss";
 
 const Signup = (): JSX.Element => {
-    const [email, setEmail] = useState("");
+    const [loading, setLoading] = useState(false);
     const login = useLogin();
-    const router = useRouter();
 
-    const handleSubmit = async (e: FormEvent) => {
+    const handleMetamask = async (e: FormEvent) => {
+        setLoading(true);
         e.preventDefault();
-        const user = await login(email);
-        if (user) {
-            console.log("User is loggedin");
-        }
+        await login();
+    };
 
-        // Check if they have allowance, if they don't send them to onboarding
-        const allowance = await hasGivenWETHAllowance(
-            user.address,
-            getInfuraProvider(),
-        );
-        if (!allowance) {
-            router.push("/onboarding/username");
-        } else {
-            router.push("/");
-        }
+    const handleWalletConnect = async (e: FormEvent) => {
+        setLoading(true);
+        e.preventDefault();
+        await login(true);
     };
 
     return (
         <section className={styles.signup}>
-            <span>Log in to start collecting!</span>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="hello@example.com"
-                />
-
-                <button type="submit">Log in</button>
-            </form>
+            <h2>Log in with Metamask</h2>
+            <button onClick={handleMetamask} type="submit">
+                {loading ? "Loading" : "Log in"}
+            </button>
+            <button onClick={handleWalletConnect} type="submit">
+                {loading ? "Loading" : "Log in with WalletConnect"}
+            </button>
         </section>
     );
 };

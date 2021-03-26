@@ -3,3 +3,15 @@
     max-width: 720px;
     margin: auto;
 }
+
+@mixin media-mobile-only {
+    @media screen and (max-width: 1400px) {
+        @content;
+    }
+}
+
+@mixin media-small-mobile-only {
+    @media screen and (max-width: 450px) {
+        @content;
+    }
+}

@@ -1,8 +1,6 @@
 import {
     createContext,
     useState,
-    Dispatch,
-    SetStateAction,
     useEffect,
     useContext,
     useCallback,
@@ -31,7 +29,7 @@ export default ProfileContext;
 export const ProfileContextProvider: React.FC = ({ children }) => {
     const user = useUser();
     const [profile, setProfile] = useState<Profile | null>(null);
-
+    console.log("ProfileContextProvider profile", profile);
     /**
      * Fetch Profile given user address
      */
@@ -61,7 +59,10 @@ export const ProfileContextProvider: React.FC = ({ children }) => {
     const updateProfile = useCallback(
         async (newName: string): Promise<void> => {
             try {
-                const token = await getToken();
+                const token = await getToken(
+                    user.provider.getSigner(),
+                    "profile",
+                );
 
                 let res: any = null;
                 if (profile) {
@@ -100,7 +101,7 @@ export const ProfileContextProvider: React.FC = ({ children }) => {
 
     useEffect(() => {
         fetchProfile();
-    }, [fetchProfile]);
+    }, [user, fetchProfile]);
 
     return (
         <ProfileContext.Provider
