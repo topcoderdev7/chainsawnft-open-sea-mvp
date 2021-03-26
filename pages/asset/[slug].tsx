@@ -132,6 +132,13 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
             </div>
             <div className={styles.info}>
                 <div className={styles.left}>
+                    {asset?.extraTitle && asset?.extraContent && (
+                        <div className={styles.extra}>
+                            <h2>{asset?.extraTitle}</h2>
+                            <p>{asset?.extraContent}</p>
+                        </div>
+                    )}
+
                     <h2>
                         {asset?.artist?.name
                             ? `More Works from ${asset.artist.name}`

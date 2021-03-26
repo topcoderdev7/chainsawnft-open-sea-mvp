@@ -59,6 +59,9 @@ export interface NFT extends OpenSeaAsset {
 
     soldFor: string;
     onSale: boolean;
+
+    extraTitle: string;
+    extraContent: string;
 }
 
 /** STRAPI INTERFACES */
