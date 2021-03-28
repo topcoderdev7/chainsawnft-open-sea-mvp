@@ -30,22 +30,7 @@ export async function getStaticProps() {
     const slidesRes = await fetch(`${API_URL}/slider`);
     const sliderData = await slidesRes.json();
 
-    // Populate artist data in slider
     const slidesWithoutArtists = sliderData.slides as Slide[];
-    const sliderWithArtist = await Promise.all(
-        slidesWithoutArtists.map(async (slide) => {
-            if (slide?.token?.artist) {
-                const artistRes = await fetch(
-                    `${API_URL}/artists/${slide.token.artist}`,
-                );
-                const artist = await artistRes.json();
-                // eslint-disable-next-line
-                slide.token.artist = artist;
-            }
-
-            return slide;
-        }),
-    );
 
     const availableTokens: NFT[] = allTokens.filter((token) => !token.sold);
     const soldTokens = allTokens.filter((token) => token.sold);
@@ -55,7 +40,7 @@ export async function getStaticProps() {
                 .sort((a, b) => a.priority - b.priority)
                 .reverse(),
             sold: soldTokens,
-            slides: sliderWithArtist,
+            slides: slidesWithoutArtists,
         },
     };
 }
