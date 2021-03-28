@@ -48,10 +48,8 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
     const [modalOpen, setModalOpen] = useState(false);
 
     const related = useRelatedAssets(asset);
-    console.log("related", related);
     const salesOrder = assetData?.orders?.find((order) => order.side === 1); // Find sell order
     const currentBid = findMaxBid(assetData?.orders);
-    console.log("assetData?.orders", assetData?.orders);
     const owner = useOwner(assetData);
 
     return (
@@ -81,76 +79,18 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
                             </button>
                         )}
                     </div>
-                    <div>
-                        <div className={styles.details}>
-                            <h2 className={styles.artist}>
-                                {asset?.artist?.name}
-                            </h2>
-                            <h2 className={styles.name}>{asset.name}</h2>
-
-                            <div className={styles.auction}>
-                                <div>
-                                    <h3>Current Bid</h3>
-                                    <p>{asset.onSale ? currentBid : "--"}</p>
-                                </div>
-
-                                {salesOrder?.closing_date && (
-                                    <div>
-                                        <h3>Auction Ends at</h3>
-                                        <p>{salesOrder.closing_date}</p>
-                                    </div>
-                                )}
-                            </div>
-                            {asset.onSale && (
-                                <>
-                                    {user && (
-                                        <button
-                                            className={styles.bidButton}
-                                            onClick={() => setModalOpen(true)}
-                                            type="button"
-                                        >
-                                            Bid Now
-                                        </button>
-                                    )}
-
-                                    {!user && (
-                                        <Link href="/login">
-                                            <button
-                                                className={styles.bidButton}
-                                                type="button"
-                                            >
-                                                Bid Now
-                                            </button>
-                                        </Link>
-                                    )}
-                                </>
-                            )}
-
-                            {modalOpen && (
-                                <OrderModal
-                                    buyOrders={assetData?.orders || []}
-                                    handleClose={() => setModalOpen(false)}
-                                    address={asset.address}
-                                    tokenId={asset.tokenId}
-                                />
-                            )}
-                            <div className={styles.description}>
-                                <h3>Description</h3>
-                                <span>{asset.description}</span>
-                            </div>
-
-                            <div className={styles.owner}>
-                                <h3>Owner</h3>
-                                <div>
-                                    <span>{owner || "No owner yet"}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <div />
                 </div>
             </div>
             <div className={styles.info}>
                 <div className={styles.left}>
+                    <h2 className={styles.artist}>{asset?.artist?.name}</h2>
+                    <h2 className={styles.name}>{asset.name}</h2>
+                    <div className={styles.description}>
+                        <h3>Description</h3>
+                        <span>{asset.description}</span>
+                    </div>
+
                     {asset?.extraTitle && asset?.extraContent && (
                         <div className={styles.extra}>
                             <h2>{asset?.extraTitle}</h2>
@@ -179,7 +119,68 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
                     </div>
                 </div>
                 <div className={styles.right}>
+                    <div className={styles.details}>
+                        <div className={styles.auction}>
+                            <div>
+                                <h3>Current Bid</h3>
+                                <p>{asset.onSale ? currentBid : "--"}</p>
+                            </div>
+
+                            <div>
+                                <h3>Auction Ends at</h3>
+                                <p>
+                                    {salesOrder?.closing_date
+                                        ? salesOrder.closing_date
+                                        : "-"}
+                                </p>
+                            </div>
+                        </div>
+                        {!asset.onSale && (
+                            <button className={styles.bidButton} type="button">
+                                -
+                            </button>
+                        )}
+                        {asset.onSale && (
+                            <>
+                                {user && (
+                                    <button
+                                        className={styles.bidButton}
+                                        onClick={() => setModalOpen(true)}
+                                        type="button"
+                                    >
+                                        Bid Now
+                                    </button>
+                                )}
+
+                                {!user && (
+                                    <Link href="/login">
+                                        <button
+                                            className={styles.bidButton}
+                                            type="button"
+                                        >
+                                            Bid Now
+                                        </button>
+                                    </Link>
+                                )}
+                            </>
+                        )}
+
+                        {modalOpen && (
+                            <OrderModal
+                                buyOrders={assetData?.orders || []}
+                                handleClose={() => setModalOpen(false)}
+                                address={asset.address}
+                                tokenId={asset.tokenId}
+                            />
+                        )}
+                    </div>
                     <OrdersNoSsr asset={assetData} />
+                    <div className={styles.owner}>
+                        <h3>Owner</h3>
+                        <div>
+                            <span>{owner || asset?.artist?.name}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             {showPdfModal && (
