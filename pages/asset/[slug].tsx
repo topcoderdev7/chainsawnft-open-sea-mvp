@@ -1,6 +1,5 @@
 import dynamic from "next/dynamic";
 import { useState } from "react";
-import { Order } from "opensea-js/lib/types";
 import Link from "next/link";
 import { API_URL } from "../../utils/constants";
 import { NFT, OrderFromAPI } from "../../types";
@@ -8,6 +7,7 @@ import { NFT, OrderFromAPI } from "../../types";
 import styles from "../../styles/asset.module.scss";
 import useAsset from "../../hooks/useAsset";
 import Modal from "../../components/Modal";
+import Countdown from "../../components/Countdown";
 import findMaxBid from "../../utils/findMaxBid";
 import useOwner from "../../hooks/useOwner";
 import useRelatedAssets from "../../hooks/useRelatedAssets";
@@ -129,9 +129,15 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
                             <div>
                                 <h3>Auction Ends at</h3>
                                 <p>
-                                    {salesOrder?.closing_date
-                                        ? salesOrder.closing_date
-                                        : "-"}
+                                    {salesOrder?.listing_time ? (
+                                        <Countdown
+                                            date={
+                                                salesOrder?.listing_time * 1000
+                                            }
+                                        />
+                                    ) : (
+                                        "-"
+                                    )}
                                 </p>
                             </div>
                         </div>
