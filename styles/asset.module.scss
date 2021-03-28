@@ -14,9 +14,8 @@
     }
 
     .assetMastHead {
-        padding-top: 79px;
-        display: flex;
-        padding-bottom: 186px;
+        padding-top: 50px;
+        padding-bottom: 106px;
 
         -webkit-backdrop-filter: blur(50px);
         backdrop-filter: blur(50px);
@@ -36,7 +35,6 @@
         margin-top: 12px;
     }
     .imageContainer {
-        padding: 50px 0;
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -52,7 +50,11 @@
             margin: auto;
 
             img {
-                max-width: min(calc(100vw - 36px - 49px), 368px);
+                // max-width: min(calc(100vw - 36px - 49px), 368px);
+                // 189.5 = header height
+                // 79 186 padding top and bottom
+                // 73 padding top container below
+                height: calc(100vh - 189.5px - 79px - 186px - 73px);
             }
         }
 
@@ -109,9 +111,10 @@
         line-height: 22px;
     }
 
-    .artist {
+    h2.artist {
         font-weight: 700;
         font-size: 26px;
+        margin-bottom: 12px !important;
     }
 
     .name {
@@ -126,6 +129,9 @@
 
     .auction {
         display: flex;
+        > div {
+            flex: 1;
+        }
         div:first-of-type {
             padding-right: 37.5px;
         }
@@ -142,7 +148,8 @@
     }
     .bidButton {
         width: 100%;
-        background: #fff;
+        background: #6851ff;
+        color: #fff;
         border-radius: 8px;
         border: none;
         padding: 19px 20px;
@@ -166,6 +173,7 @@
 
     .relatedEntry {
         max-width: 241px;
+        margin: auto;
 
         img {
             max-width: 100%;
@@ -198,9 +206,14 @@
 }
 
 @include media-mobile-only {
+    .imageContainer {
+        img {
+            height: unset !important;
+            width: 100%;
+        }
+    }
     .singleAsset {
         .assetMastHead {
-            flex-direction: column;
             padding-top: 38px;
             padding-bottom: 53px;
             margin-bottom: 0;
@@ -214,6 +227,7 @@
         .artist {
             font-size: 17px;
             font-weight: bold;
+            margin-bottom: 12px;
         }
 
         .name {
@@ -263,7 +277,7 @@
             background: #eeeeee;
             position: static;
 
-            flex-direction: column-reverse;
+            flex-direction: column;
 
             padding: 20.5px 18px;
 

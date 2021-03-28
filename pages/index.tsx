@@ -24,36 +24,23 @@ export const Home: React.FC<{ assets: NFT[]; slides: Slide[] }> = ({
 export default Home;
 
 export async function getStaticProps() {
-    const tokenRes = await fetch(`${API_URL}/tokens?_limit=40`);
+    const tokenRes = await fetch(`${API_URL}/tokens?_limit=-1`);
     const allTokens = await tokenRes.json();
 
     const slidesRes = await fetch(`${API_URL}/slider`);
     const sliderData = await slidesRes.json();
 
-    // Populate artist data in slider
     const slidesWithoutArtists = sliderData.slides as Slide[];
-    const sliderWithArtist = await Promise.all(
-        slidesWithoutArtists.map(async (slide) => {
-            if (slide?.token?.artist) {
-                const artistRes = await fetch(
-                    `${API_URL}/artists/${slide.token.artist}`,
-                );
-                const artist = await artistRes.json();
-                // eslint-disable-next-line
-                slide.token.artist = artist;
-            }
 
-            return slide;
-        }),
-    );
-
-    const availableTokens = allTokens.filter((token) => !token.sold);
+    const availableTokens: NFT[] = allTokens.filter((token) => !token.sold);
     const soldTokens = allTokens.filter((token) => token.sold);
     return {
         props: {
-            assets: availableTokens,
+            assets: availableTokens
+                .sort((a, b) => a.priority - b.priority)
+                .reverse(),
             sold: soldTokens,
-            slides: sliderWithArtist,
+            slides: slidesWithoutArtists,
         },
     };
 }

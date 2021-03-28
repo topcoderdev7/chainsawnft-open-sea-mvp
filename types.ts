@@ -69,14 +69,14 @@ export interface NFT extends OpenSeaAsset {
     extraContent: string;
 
     file?: NFTFile;
+
+    priority: number; // The higher the top most token
 }
 
 /** STRAPI INTERFACES */
 export interface Slide {
-    title: string;
-    token?: NFT;
     imageUrl: string;
-    url?: string;
+    url: string;
 }
 /**
  * Model definition for collection
