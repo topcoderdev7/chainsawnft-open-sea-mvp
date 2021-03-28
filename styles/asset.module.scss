@@ -114,7 +114,7 @@
     h2.artist {
         font-weight: 700;
         font-size: 26px;
-        margin-bottom: 12px!important;
+        margin-bottom: 12px !important;
     }
 
     .name {
@@ -208,7 +208,7 @@
 @include media-mobile-only {
     .imageContainer {
         img {
-            height: unset!important;
+            height: unset !important;
             width: 100%;
         }
     }
