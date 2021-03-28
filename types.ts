@@ -75,10 +75,8 @@ export interface NFT extends OpenSeaAsset {
 
 /** STRAPI INTERFACES */
 export interface Slide {
-    title: string;
-    token?: NFT;
     imageUrl: string;
-    url?: string;
+    url: string;
 }
 /**
  * Model definition for collection

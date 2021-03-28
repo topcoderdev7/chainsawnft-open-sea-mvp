@@ -1,8 +1,11 @@
 @import "../../styles//mixins.scss";
-
+.sliderContainer {
+    margin: 0 30px 46px;
+}
 .slider {
     position: relative;
-    margin: 0 30px 46px;
+
+    height: 282px;
 
     .bg {
         position: absolute;
@@ -62,6 +65,9 @@
 }
 
 @include media-mobile-only {
+    .sliderContainer {
+        margin: 0;
+    }
     .slider {
         position: relative;
         margin: 0;
