@@ -13,7 +13,7 @@ const SingleArtistPage: React.FC<{ artist: Artist }> = ({ artist }) => {
                 <div className={styles.imageContainer} />
                 <div className={styles.info}>
                     <h1>{artist.name}</h1>
-                    <div>
+                    <div className={styles.extraInfo}>
                         <h2>{artist?.extraTitle}</h2>
                         {artist?.extraContent && (
                             <MarkdownRenderer markdown={artist.extraContent} />

@@ -1,6 +1,16 @@
 .artist {
     padding: 30px;
 
+    .info {
+        h1 {
+            margin-bottom: 49px;
+        }
+    }
+
+    .extraInfo {
+        margin-bottom: 49px;
+    }
+
     .header {
         display: flex;
         flex-direction: column;
