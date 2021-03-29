@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-const defaultImg = "/images/logo.png";
+const defaultImg = "https://www.chainsaw.fun/images/logo.png";
 
 const HeadWithImage: React.FC<{
     imageUrl?: string;
