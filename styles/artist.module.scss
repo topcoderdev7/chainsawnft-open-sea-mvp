@@ -1,10 +1,9 @@
 .artist {
-    padding: 30px 60px;  
+    padding: 30px 60px;
     max-width: 1600px;
     margin: auto;
 
     .info {
-
         h1 {
             margin-bottom: 49px;
         }
@@ -31,19 +30,19 @@
             width: 100%;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-    
+
             grid-row-gap: 38px;
             grid-column-gap: 43px;
-    
+
             @media screen and (max-width: 1559px) {
                 margin: auto;
                 grid-template-columns: repeat(3, 1fr);
             }
-    
+
             @media screen and (max-width: 1189px) {
                 grid-template-columns: repeat(2, 1fr);
             }
-    
+
             @media screen and (max-width: 778px) {
                 grid-template-columns: repeat(1, 1fr);
                 margin: auto;
