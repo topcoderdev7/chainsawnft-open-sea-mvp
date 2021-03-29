@@ -5,10 +5,16 @@ import Collection from "../../components/Collection";
 
 import styles from "../../styles/artist.module.scss";
 import Auctions from "../../components/Auctions";
+import HeadWithImage from "../../components/HeadWithImage";
 
 const SingleArtistPage: React.FC<{ artist: Artist }> = ({ artist }) => {
     return (
         <main className={styles.artist}>
+            <HeadWithImage
+                imageUrl={artist.imageUrl}
+                title={artist.name}
+                description={artist.description}
+            />
             <div className={styles.header}>
                 <div className={styles.imageContainer} />
                 <div className={styles.info}>
