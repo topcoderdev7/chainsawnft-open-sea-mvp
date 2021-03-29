@@ -70,7 +70,10 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
                     style={{ backgroundImage: `url(${asset.imageUrl})` }}
                 />
                 <div className={styles.assetMastHead}>
-                    <button onClick={() => router.back()}>
+                    <button
+                        className={styles.goBack}
+                        onClick={() => router.back()}
+                    >
                         <img src="/images/back-arrow.svg" alt="Back" />
                     </button>
                     <div className={styles.imageContainer}>
