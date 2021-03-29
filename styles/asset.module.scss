@@ -54,7 +54,7 @@
                 // 89.5 = header height
                 // 79 186 padding top and bottom
                 // 73 padding top container below - 13 px = 60
-                height: calc(100vh - 89.5px - 79px - 186px - 60px)
+                height: calc(100vh - 89.5px - 79px - 186px - 60px);
             }
         }
 
@@ -205,7 +205,7 @@
     }
 }
 
-@media screen and (max-width: 1559px){
+@media screen and (max-width: 1559px) {
     .singleAsset .left {
         margin-right: 22px;
     }
