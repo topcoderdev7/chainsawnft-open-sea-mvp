@@ -2,7 +2,6 @@
 
 .asset {
     background: white;
-    max-width: 368px;
     margin: auto;
 
     .imageContainer {
@@ -41,6 +40,7 @@
 
         a {
             color: #000;
+            
             &:hover {
                 @include underlineOnHover();
             }
