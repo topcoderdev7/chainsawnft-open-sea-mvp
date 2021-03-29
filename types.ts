@@ -101,6 +101,9 @@ export interface Artist {
     collections: Collection[];
     description?: string;
     tokens: NFT[];
+
+    extraTitle?: string;
+    extraContent?: string;
 }
 
 /**

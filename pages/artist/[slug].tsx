@@ -1,3 +1,4 @@
+import MarkdownRenderer from "react-markdown-renderer";
 import { API_URL } from "../../utils/constants";
 import { Artist, Collection as CollectionInterface } from "../../types";
 import Collection from "../../components/Collection";
@@ -9,14 +10,14 @@ const SingleArtistPage: React.FC<{ artist: Artist }> = ({ artist }) => {
     return (
         <main className={styles.artist}>
             <div className={styles.header}>
-                <div className={styles.imageContainer}>
-                    {artist.imageUrl && (
-                        <img src={artist.imageUrl} alt={artist.name} />
-                    )}
-                </div>
+                <div className={styles.imageContainer} />
                 <div className={styles.info}>
-                    <div className={styles.left}>
-                        <h1>{artist.name}</h1>
+                    <h1>{artist.name}</h1>
+                    <div>
+                        <h2>{artist?.extraTitle}</h2>
+                        {artist?.extraContent && (
+                            <MarkdownRenderer markdown={artist.extraContent} />
+                        )}
                     </div>
                 </div>
             </div>
