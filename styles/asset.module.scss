@@ -25,6 +25,14 @@
         div {
             flex: 1;
         }
+
+        .goBack {
+            background: none;
+            border: none;
+            margin-left: 60px;
+            cursor: pointer;
+            outline: none;
+        }
     }
 
     .viewPdf {
@@ -228,6 +236,10 @@
             padding-top: 38px;
             padding-bottom: 53px;
             margin-bottom: 0;
+
+            .goBack {
+                margin-left: 18px;
+            }
         }
 
         .right,

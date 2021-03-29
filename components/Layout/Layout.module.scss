@@ -1,19 +1,11 @@
 .layout {
-    margin: auto;
-    max-width: 1600px;
-    margin: auto;
-    padding: 0 60px;
+    // margin: auto;
+    // max-width: 1600px;
+    // margin: auto;
+    // padding: 0 60px;
 
-    // @media screen and (max-width: 1559px) {
-    //     max-width: 1190px;
+    // @media screen and (max-width: 778px) {
+    //     max-width: 100%;
+    //     padding: 0 18px;
     // }
-
-    // @media screen and (max-width: 1189px) {
-    //     max-width: 779px;
-    // }
-
-    @media screen and (max-width: 778px) {
-        max-width: 100%;
-        padding: 0 18px;
-    }
 }

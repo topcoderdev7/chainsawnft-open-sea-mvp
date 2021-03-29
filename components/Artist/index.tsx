@@ -1,3 +1,4 @@
+import MarkdownRenderer from "react-markdown-renderer";
 import Link from "next/link";
 import styles from "./Artist.module.scss";
 
@@ -15,7 +16,7 @@ const Artist: React.FC<{
                 </div>
                 <div className={styles.info}>
                     <h3>{name}</h3>
-                    <p>{description}</p>
+                    {description && <MarkdownRenderer markdown={description} />}
                     <div>
                         <button>See Collection</button>
                     </div>
