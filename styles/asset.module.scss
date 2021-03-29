@@ -52,7 +52,8 @@
             box-sizing: content-box;
             margin: auto;
 
-            img, video{
+            img,
+            video {
                 // max-width: min(calc(100vw - 36px - 49px), 368px);
                 // 89.5 = header height
                 // 79 186 padding top and bottom

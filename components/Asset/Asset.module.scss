@@ -40,7 +40,7 @@
 
         a {
             color: #000;
-            
+
             &:hover {
                 @include underlineOnHover();
             }

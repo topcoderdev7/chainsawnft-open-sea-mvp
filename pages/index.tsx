@@ -4,6 +4,7 @@ import { API_URL } from "../utils/constants";
 import { NFT, Slide } from "../types";
 import Auctions from "../components/Auctions";
 import Slider from "../components/Slider";
+import HeadWithImage from "../components/HeadWithImage";
 
 export const Home: React.FC<{ assets: NFT[]; slides: Slide[] }> = ({
     assets,
@@ -15,6 +16,7 @@ export const Home: React.FC<{ assets: NFT[]; slides: Slide[] }> = ({
                 <title>Chainsaw NFT</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
+            <HeadWithImage />
             <Slider slides={slides} />
             <Auctions assets={assets} />
         </div>

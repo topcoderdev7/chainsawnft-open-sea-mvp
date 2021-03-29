@@ -14,6 +14,7 @@ import useOwner from "../../hooks/useOwner";
 import useRelatedAssets from "../../hooks/useRelatedAssets";
 import { useUser } from "../../context/UserContext";
 import VideoPlayer from "../../components/VideoPlayer";
+import HeadWithImage from "../../components/HeadWithImage";
 
 const BuyWidgetNoSsr = dynamic(() => import("../../components/BuyWidget"), {
     ssr: false,
@@ -55,6 +56,11 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
 
     return (
         <main className={styles.singleAsset}>
+            <HeadWithImage
+                title={asset.name}
+                description={asset.description}
+                imageUrl={asset.imageUrl}
+            />
             <div className={styles.masthead}>
                 <div
                     className={styles.imageBg}
