@@ -2,10 +2,19 @@
 @import "../../styles/mixins";
 
 .header {
-    padding: 10px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    margin: auto;
+    max-width: 1600px;
+    margin: auto;
+    padding: 10px 60px;
+
+    @media screen and (max-width: 778px) {
+        max-width: 100%;
+        padding: 0 18px;
+    }
 
     .left {
         width: 500px;

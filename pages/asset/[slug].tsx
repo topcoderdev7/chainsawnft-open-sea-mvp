@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import { useState } from "react";
 import Link from "next/link";
 import MarkdownRenderer from "react-markdown-renderer";
+import { useRouter } from "next/router";
 import { API_URL } from "../../utils/constants";
 import { NFT, OrderFromAPI } from "../../types";
 
@@ -54,6 +55,8 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
     const currentBid = findMaxBid(assetData?.orders);
     const owner = useOwner(assetData);
 
+    const router = useRouter();
+
     return (
         <main className={styles.singleAsset}>
             <HeadWithImage
@@ -67,6 +70,9 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
                     style={{ backgroundImage: `url(${asset.imageUrl})` }}
                 />
                 <div className={styles.assetMastHead}>
+                    <button onClick={() => router.back()}>
+                        <img src="/images/back-arrow.svg" alt="Back" />
+                    </button>
                     <div className={styles.imageContainer}>
                         <span className={styles.image}>
                             {asset?.file && asset?.file?.type === "video" && (

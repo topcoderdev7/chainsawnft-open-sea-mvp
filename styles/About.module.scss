@@ -1,4 +1,14 @@
 .container {
+    margin: auto;
+    max-width: 1600px;
+    margin: auto;
+    padding: 0 60px;
+
+    @media screen and (max-width: 778px) {
+        max-width: 100%;
+        padding: 0 18px;
+    }
+    
     text-align: center;
     p {
         font-size: 17px;
