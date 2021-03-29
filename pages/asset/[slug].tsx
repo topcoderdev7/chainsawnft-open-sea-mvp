@@ -100,7 +100,11 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
             </div>
             <div className={styles.info}>
                 <div className={styles.left}>
-                    <h2 className={styles.artist}>{asset?.artist?.name}</h2>
+                    <h2 className={styles.artist}>
+                        <Link href={`/artist/${asset.artist.slug}`}>
+                            <a>{asset?.artist?.name}</a>
+                        </Link>
+                    </h2>
                     <h2 className={styles.name}>{asset.name}</h2>
                     <div className={styles.description}>
                         <h3>Description</h3>
