@@ -10,7 +10,6 @@ const UserSignup = (): JSX.Element => {
     const user = useUser();
     const profile = useProfile();
     const { eth: ethBalance, weth: wethBalance } = useBalances();
-    console.log("wethBalance", wethBalance);
 
     if (user) {
         return (
