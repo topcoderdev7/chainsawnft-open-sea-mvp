@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import Link from "next/link";
+import MarkdownRenderer from "react-markdown-renderer";
 import { API_URL } from "../../utils/constants";
 import { NFT, OrderFromAPI } from "../../types";
 
@@ -88,13 +89,15 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
                     <h2 className={styles.name}>{asset.name}</h2>
                     <div className={styles.description}>
                         <h3>Description</h3>
-                        <span>{asset.description}</span>
+                        <span>
+                            <MarkdownRenderer markdown={asset.description} />
+                        </span>
                     </div>
 
-                    {asset?.extraTitle && asset?.extraContent && (
+                    {asset.extraTitle && asset.extraContent && (
                         <div className={styles.extra}>
                             <h2>{asset?.extraTitle}</h2>
-                            <p>{asset?.extraContent}</p>
+                            <MarkdownRenderer markdown={asset?.extraContent} />
                         </div>
                     )}
 

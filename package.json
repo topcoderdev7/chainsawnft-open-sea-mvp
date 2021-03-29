@@ -45,6 +45,7 @@
         "react-copy-to-clipboard": "^5.0.3",
         "react-countdown": "^2.3.1",
         "react-dom": "^17.0.1",
+        "react-markdown-renderer": "^1.4.0",
         "react-pdf": "^5.2.0",
         "sass": "^1.32.5",
         "swr": "^0.5.3",
