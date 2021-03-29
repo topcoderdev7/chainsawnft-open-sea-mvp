@@ -102,9 +102,13 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
                     )}
 
                     <h2>
-                        {asset?.artist?.name
-                            ? `More Works from ${asset.artist.name}`
-                            : "More works"}{" "}
+                        {asset?.artist?.name ? (
+                            <Link href={`/artist/${asset.artist.slug}`}>
+                                <a>More Artwork From {asset.artist.name}</a>
+                            </Link>
+                        ) : (
+                            "More works"
+                        )}{" "}
                     </h2>
                     <div className={styles.relatedGrid}>
                         {related.map((token) => (

@@ -29,7 +29,7 @@ export default ProfileContext;
 export const ProfileContextProvider: React.FC = ({ children }) => {
     const user = useUser();
     const [profile, setProfile] = useState<Profile | null>(null);
-    console.log("ProfileContextProvider profile", profile);
+
     /**
      * Fetch Profile given user address
      */
