@@ -2,7 +2,7 @@
 @import "../../styles/mixins";
 
 .header {
-    padding: 62px 30px 58px;
+    padding: 10px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -93,19 +93,8 @@
 
 @include media-mobile-only {
     .header {
-        flex-direction: column;
         padding: 30px 15px;
-        text-align: center;
         .left {
-            white-space: nowrap;
-            display: flex;
-            justify-content: center;
-            .social {
-                display: flex;
-                justify-content: center;
-                height: 41px;
-                align-items: center;
-            }
             .smallLogo {
                 width: 44px;
             }
@@ -128,16 +117,33 @@
                 }
             }
         }
+
+    }
+}
+
+@include media-small-mobile-only {
+    .header {
+        flex-direction: column;
+        text-align: center;
+        .left {
+            white-space: nowrap;
+            display: flex;
+            justify-content: center;
+            .social {
+                display: flex;
+                justify-content: center;
+                height: 41px;
+                align-items: center;
+            }
+        }
         .right {
-            margin-top: 33px;
+            margin-top: 12px;
+
             .social {
                 display: none;
             }
         }
     }
-}
-
-@include media-small-mobile-only {
     .header .left {
         flex-direction: column;
 

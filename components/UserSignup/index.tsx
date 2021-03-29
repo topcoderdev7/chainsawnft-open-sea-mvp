@@ -40,7 +40,7 @@ const UserSignup = (): JSX.Element => {
         <section className={styles.signup}>
             <div>
                 <Link href="/login">
-                    <a>Signup</a>
+                    <a>Connect Wallet</a>
                 </Link>
             </div>
         </section>

@@ -51,10 +51,10 @@
 
             img {
                 // max-width: min(calc(100vw - 36px - 49px), 368px);
-                // 189.5 = header height
+                // 89.5 = header height
                 // 79 186 padding top and bottom
-                // 73 padding top container below
-                height: calc(100vh - 189.5px - 79px - 186px - 73px);
+                // 73 padding top container below - 13 px = 60
+                height: calc(100vh - 89.5px - 79px - 186px - 60px)
             }
         }
 
@@ -205,7 +205,13 @@
     }
 }
 
-@include media-mobile-only {
+@media screen and (max-width: 1559px){
+    .singleAsset .left {
+        margin-right: 22px;
+    }
+}
+
+@include media-tablet-and-smaller {
     .imageContainer {
         img {
             height: unset !important;
