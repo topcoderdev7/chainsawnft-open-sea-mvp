@@ -1,6 +1,6 @@
-import styles from "../styles/About.module.scss";
+import styles from "../styles/Press.module.scss";
 
-const AboutPage: React.FC = () => (
+const PressPage: React.FC = () => (
     <div className={styles.container}>
         <h2>About Page</h2>
         <div>
@@ -9,4 +9,4 @@ const AboutPage: React.FC = () => (
     </div>
 );
 
-export default AboutPage;
+export default PressPage;
