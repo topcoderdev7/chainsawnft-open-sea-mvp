@@ -7,7 +7,7 @@ const AboutPage: React.FC = () => (
 
             <p>Chain/Saw is a space for artists and collectors to both create and experiment with a new digital art paradigm,</p>
             <p> and ultimately shape it. </p>
-            <p> </p>
+            <p>  </p>
             <p>As an NFT marketplace, Chain/Saw presents a curated selection of visionary projects that call into</p>
             <p>question what blockchain art can be. Chain/Saw was founded by Frank Musarra, an artist, musician, and</p>
             <p>creative technologist deeply embedded at the intersection of art and technology. The project arose</p>
