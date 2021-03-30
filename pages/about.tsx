@@ -5,6 +5,9 @@ const AboutPage: React.FC = () => (
         {/* <h2>About Page</h2> */}
         <div>
             <p>Interview!</p>
+            <p>Artists have always been able shift the ways in which we experience artwork,</p>
+
+
         </div>
     </div>
 );
