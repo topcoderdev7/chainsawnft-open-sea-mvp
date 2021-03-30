@@ -10,7 +10,27 @@
         padding: 0 18px;
     }
 
-    .title {
+    .headline {
+        display: flex;
+
+        .title,
+        .divider,
+        .rightLink {
+            white-space: nowrap;
+        }
+        .divider {
+            flex: 12;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            hr {
+                background: #232323;
+                opacity: 0.28;
+            }
+        }
+    }
+
+    .title h2 {
         text-transform: uppercase;
         font-weight: 400;
         margin-bottom: 35px;
@@ -55,7 +75,14 @@
         margin: auto;
         box-sizing: content-box;
         .title {
-            text-align: center;
+            flex: 1;
+            h2 {
+                text-align: center;
+            }
+        }
+        .divider,
+        .rightLink {
+            display: none;
         }
     }
 }

@@ -149,7 +149,7 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
                         <div className={styles.auction}>
                             <div>
                                 <h3>Current Bid</h3>
-                                <p>{asset.onSale ? currentBid : "--"}</p>
+                                <p>{asset.onSale ? currentBid : "---"}</p>
                             </div>
 
                             <div>
@@ -163,14 +163,14 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
                                             }
                                         />
                                     ) : (
-                                        "-"
+                                        "---"
                                     )}
                                 </p>
                             </div>
                         </div>
                         {!asset.onSale && (
                             <button className={styles.bidButton} type="button">
-                                -
+                                Friday, April 2nd
                             </button>
                         )}
                         {asset.onSale && (

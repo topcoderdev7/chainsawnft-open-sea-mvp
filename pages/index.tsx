@@ -29,10 +29,14 @@ export async function getStaticProps() {
     const tokenRes = await fetch(`${API_URL}/tokens?_limit=-1`);
     const allTokens = await tokenRes.json();
 
-    const slidesRes = await fetch(`${API_URL}/slider`);
-    const sliderData = await slidesRes.json();
-
-    const slidesWithoutArtists = sliderData.slides as Slide[];
+    let slides = [];
+    try {
+        const slidesRes = await fetch(`${API_URL}/slider`);
+        const sliderData = await slidesRes.json();
+        slides = sliderData.slides as Slide[];
+    } catch (err) {
+        console.log("Exception in loading slides, defaulting to empty list");
+    }
 
     const availableTokens: NFT[] = allTokens.filter((token) => !token.sold);
     const soldTokens = allTokens.filter((token) => token.sold);
@@ -42,7 +46,7 @@ export async function getStaticProps() {
                 .sort((a, b) => a.priority - b.priority)
                 .reverse(),
             sold: soldTokens,
-            slides: slidesWithoutArtists,
+            slides,
         },
     };
 }
