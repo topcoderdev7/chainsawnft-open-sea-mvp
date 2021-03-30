@@ -35,7 +35,7 @@ export const Home: React.FC<{
 export default Home;
 
 export async function getStaticProps() {
-    const pageNumber = parseInt(0, 10);
+    const pageNumber = 0;
     const page = pageNumber * TOKENS_PER_PAGE;
     const nextPage = page + TOKENS_PER_PAGE;
 
