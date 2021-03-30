@@ -13,7 +13,9 @@
     .headline {
         display: flex;
 
-        .title, .divider, .rightLink {
+        .title,
+        .divider,
+        .rightLink {
             white-space: nowrap;
         }
         .divider {
@@ -78,7 +80,8 @@
                 text-align: center;
             }
         }
-        .divider, .rightLink {
+        .divider,
+        .rightLink {
             display: none;
         }
     }
