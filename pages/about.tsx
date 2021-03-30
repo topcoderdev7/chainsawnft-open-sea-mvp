@@ -4,7 +4,7 @@ const AboutPage: React.FC = () => (
     <div className={styles.container}>
         {/* <h2>About Page</h2> */}
         <div>
-            <p>About!</p>
+            <p>Interview!</p>
         </div>
     </div>
 );
