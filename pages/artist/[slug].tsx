@@ -1,4 +1,5 @@
-import MarkdownRenderer from "react-markdown-renderer";
+import MarkdownRenderer from "../../components/MarkdownRenderer";
+
 import { API_URL } from "../../utils/constants";
 import { Artist, Collection as CollectionInterface } from "../../types";
 import Collection from "../../components/Collection";
