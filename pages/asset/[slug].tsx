@@ -1,7 +1,6 @@
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import Link from "next/link";
-import MarkdownRenderer from "react-markdown-renderer";
 import { useRouter } from "next/router";
 import { API_URL } from "../../utils/constants";
 import { NFT, OrderFromAPI } from "../../types";
@@ -16,6 +15,7 @@ import useRelatedAssets from "../../hooks/useRelatedAssets";
 import { useUser } from "../../context/UserContext";
 import VideoPlayer from "../../components/VideoPlayer";
 import HeadWithImage from "../../components/HeadWithImage";
+import MarkdownRenderer from "../../components/MarkdownRenderer";
 
 const BuyWidgetNoSsr = dynamic(() => import("../../components/BuyWidget"), {
     ssr: false,

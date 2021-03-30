@@ -8,13 +8,9 @@
     margin: auto;
     padding: 0 60px;
 
-    @media screen and (max-width: 778px) {
+    @media screen and (max-width: 1400px) {
         max-width: 100%;
-        padding: 0 18px;
-    }
-
-    @media screen and (max-width: 768px) {
-        padding: 30px 18px;
+        padding: 30px 15px;
     }
 
     .auctionsContainer {

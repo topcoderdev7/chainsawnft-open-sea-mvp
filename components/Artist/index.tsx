@@ -1,5 +1,5 @@
-import MarkdownRenderer from "react-markdown-renderer";
 import Link from "next/link";
+import MarkdownRenderer from "../MarkdownRenderer";
 import styles from "./Artist.module.scss";
 
 const Artist: React.FC<{
