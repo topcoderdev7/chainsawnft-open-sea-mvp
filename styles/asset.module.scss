@@ -224,6 +224,15 @@
     }
 }
 
+@include media-mobile-only {
+    .singleAsset {
+        .assetMastHead {
+            .goBack {
+                margin-left: 18px;
+            }
+        }
+    }
+}
 @include media-tablet-and-smaller {
     .imageContainer {
         img {

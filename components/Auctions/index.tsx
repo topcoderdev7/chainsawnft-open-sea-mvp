@@ -7,7 +7,7 @@ const Auctions: React.FC<{ assets: NFT[] }> = ({ assets }) => {
         <main className={styles.auctions}>
             <div className={styles.headline}>
                 <div className={styles.title}>
-                    <h2>live auctions</h2>
+                    <img alt="Live Auctions" src="/images/Auctions.png" />
                 </div>
                 <div className={styles.divider}>
                     <hr />
