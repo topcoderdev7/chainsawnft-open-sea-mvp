@@ -1,9 +1,7 @@
 import MarkdownRenderer from "../../components/MarkdownRenderer";
 
 import { API_URL } from "../../utils/constants";
-import { Artist, Collection as CollectionInterface } from "../../types";
-import Collection from "../../components/Collection";
-
+import { Artist } from "../../types";
 import styles from "../../styles/artist.module.scss";
 import Auctions from "../../components/Auctions";
 import HeadWithImage from "../../components/HeadWithImage";

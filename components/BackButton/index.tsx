@@ -13,7 +13,7 @@ const BackButton = () => {
             className={styles.backBtn}
             type="button"
         >
-            <span>&#8592;</span>
+            <img src="/images/back-arrow.svg" alt="Back" />
         </button>
     );
 };
