@@ -59,9 +59,6 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
     const router = useRouter();
 
     const handle = useFullScreenHandle();
-
-    console.log("handle", handle.active);
-
     return (
         <main className={styles.singleAsset}>
             <HeadWithImage
