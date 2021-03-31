@@ -53,9 +53,17 @@ const VideoPlayer: React.FC<{ playbackId: string; display?: boolean }> = ({
                     muted
                     ref={videoRef}
                     poster={poster}
+                    playsInline
                 />
             ) : (
-                <video autoPlay loop muted ref={videoRef} poster={poster} />
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    ref={videoRef}
+                    poster={poster}
+                    playsInline
+                />
             )}
         </div>
     );
