@@ -105,6 +105,10 @@ export interface Artist {
 
     extraTitle?: string;
     extraContent?: string;
+
+    websiteUrl: string;
+    instagramUrl: string;
+    twitterUrl: string;
 }
 
 /**
