@@ -1,0 +1,15 @@
+.backBtn {
+    background-color: rgba(0, 0, 0, 0.19);
+    border: none;
+    border-radius: 50%;
+    width: 53px;
+    height: 53px;
+    cursor: pointer;
+
+    span {
+        color: #eeeeee;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 0;
+    }
+}
