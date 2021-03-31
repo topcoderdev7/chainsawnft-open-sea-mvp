@@ -8,6 +8,8 @@ import styles from "../../styles/artist.module.scss";
 import Auctions from "../../components/Auctions";
 import HeadWithImage from "../../components/HeadWithImage";
 
+import BackButton from "../../components/BackButton";
+
 const SingleArtistPage: React.FC<{ artist: Artist }> = ({ artist }) => {
     return (
         <main className={styles.artist}>
@@ -16,10 +18,37 @@ const SingleArtistPage: React.FC<{ artist: Artist }> = ({ artist }) => {
                 title={artist.name}
                 description={artist.description}
             />
+            <div className={styles.btnContainer}>
+                <BackButton />
+            </div>
             <div className={styles.header}>
-                <div className={styles.imageContainer} />
+                <div className={styles.imageContainer}>
+                    <img src={artist.imageUrl} alt={artist.name} />
+                </div>
                 <div className={styles.info}>
                     <h1>{artist.name}</h1>
+                    <div className={styles.socials}>
+                        {artist.websiteUrl && (
+                            <a href={artist.websiteUrl}>
+                                <img src="/images/website.svg" alt="Website" />
+                            </a>
+                        )}
+                        {artist.twitterUrl && (
+                            <a href={artist.twitterUrl}>
+                                <img src="/images/twitter.svg" alt="Twitter" />
+                            </a>
+                        )}
+                        {artist.instagramUrl && (
+                            <a href={artist.instagramUrl}>
+                                <img
+                                    src="/images/instagram.svg"
+                                    alt="Instagram"
+                                />
+                            </a>
+                        )}
+                    </div>
+                    <MarkdownRenderer markdown={artist.description} />
+
                     <div className={styles.extraInfo}>
                         <h2>{artist?.extraTitle}</h2>
                         {artist?.extraContent && (
@@ -28,26 +57,6 @@ const SingleArtistPage: React.FC<{ artist: Artist }> = ({ artist }) => {
                     </div>
                 </div>
             </div>
-            {artist?.collections?.length > 0 && (
-                <div className={styles.collections}>
-                    <h3>Collections ({artist.collections.length}): </h3>
-                    <div className={styles.collectionsContainer}>
-                        {artist.collections.map(
-                            (collection: CollectionInterface) => (
-                                <Collection
-                                    key={collection.slug}
-                                    imageUrl={collection.imageUrl}
-                                    name={collection.name}
-                                    slug={collection.slug}
-                                    id={collection.id}
-                                    assets={collection.assets}
-                                />
-                            ),
-                        )}
-                    </div>
-                </div>
-            )}
-
             {artist?.tokens?.length && <Auctions assets={artist.tokens} />}
         </main>
     );
