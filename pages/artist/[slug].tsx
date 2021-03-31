@@ -22,9 +22,12 @@ const SingleArtistPage: React.FC<{ artist: Artist }> = ({ artist }) => {
                 <BackButton />
             </div>
             <div className={styles.header}>
-                <div className={styles.imageContainer}>
-                    <img src={artist.imageUrl} alt={artist.name} />
-                </div>
+                <img
+                    src={artist.imageUrl}
+                    alt={artist.name}
+                    className={styles.artistAvatar}
+                />
+
                 <div className={styles.info}>
                     <h1>{artist.name}</h1>
                     <div className={styles.socials}>
