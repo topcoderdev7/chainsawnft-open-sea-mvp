@@ -170,7 +170,7 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
                         </div>
                         {!asset.onSale && (
                             <button className={styles.bidButton} type="button">
-                                Friday, April 2nd
+                                {asset.buttonMessage || "Coming Soon"}
                             </button>
                         )}
                         {asset.onSale && (

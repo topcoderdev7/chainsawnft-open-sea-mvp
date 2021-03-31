@@ -71,6 +71,7 @@ export interface NFT extends OpenSeaAsset {
     file?: NFTFile;
 
     priority: number; // The higher the top most token
+    buttonMessage: string; // Button to show when product not available
 }
 
 /** STRAPI INTERFACES */
