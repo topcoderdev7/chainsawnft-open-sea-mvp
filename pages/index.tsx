@@ -39,7 +39,7 @@ export async function getStaticProps() {
     const page = pageNumber * TOKENS_PER_PAGE;
     const nextPage = page + TOKENS_PER_PAGE;
 
-    const tokenRes = await fetch(`${API_URL}/tokens?_limit=-1`);
+    const tokenRes = await fetch(`${API_URL}/tokens?_limit=${TOKENS_PER_PAGE}`);
     const allTokens = await tokenRes.json();
 
     let slides = [];
