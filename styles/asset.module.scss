@@ -13,6 +13,19 @@
         background-size: cover;
     }
 
+    .fullScreen {
+        position: absolute;
+        right: 60px;
+        background: rgba(0, 0, 0, 0.19);
+        color: #fff;
+        border: none;
+        height: 70px;
+        width: 70px;
+        border-radius: 70px;
+        bottom: 70px;
+        outline: none;
+    }
+
     .assetMastHead {
         padding-top: 50px;
         padding-bottom: 106px;
@@ -67,6 +80,13 @@
                 // 79 186 padding top and bottom
                 // 73 padding top container below - 13 px = 60
                 height: calc(100vh - 89.5px - 79px - 186px - 60px);
+            }
+
+            &.active {
+                img,
+                video {
+                    height: calc(75vh);
+                }
             }
         }
 
