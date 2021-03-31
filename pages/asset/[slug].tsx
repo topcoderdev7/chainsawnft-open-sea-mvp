@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { API_URL } from "../../utils/constants";
 import { NFT, OrderFromAPI } from "../../types";
 
@@ -57,6 +58,10 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
 
     const router = useRouter();
 
+    const handle = useFullScreenHandle();
+
+    console.log("handle", handle.active);
+
     return (
         <main className={styles.singleAsset}>
             <HeadWithImage
@@ -64,40 +69,69 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
                 description={asset.description}
                 imageUrl={asset.imageUrl}
             />
-            <div className={styles.masthead}>
-                <div
-                    className={styles.imageBg}
-                    style={{ backgroundImage: `url(${asset.imageUrl})` }}
-                />
-                <div className={styles.assetMastHead}>
-                    <button
-                        className={styles.goBack}
-                        onClick={() => router.back()}
-                    >
-                        <img src="/images/back-arrow.svg" alt="Back" />
-                    </button>
-                    <div className={styles.imageContainer}>
-                        <span className={styles.image}>
-                            {asset?.file && asset?.file?.type === "video" && (
-                                <VideoPlayer playbackId={asset?.file?.link} />
-                            )}
-
-                            {!(
-                                asset?.file && asset?.file?.type === "video"
-                            ) && <img src={asset.imageUrl} alt={asset.name} />}
-                        </span>
-                        {asset?.file && asset?.file?.type === "pdf" && (
-                            <button
-                                className={styles.viewPdf}
-                                onClick={() => setShowPdfModal(true)}
+            <FullScreen handle={handle}>
+                <div className={styles.masthead}>
+                    <div
+                        className={styles.imageBg}
+                        style={{ backgroundImage: `url(${asset.imageUrl})` }}
+                    />
+                    <div className={styles.assetMastHead}>
+                        <button
+                            className={styles.goBack}
+                            onClick={
+                                handle.active
+                                    ? () => handle.exit()
+                                    : () => router.back()
+                            }
+                        >
+                            <img src="/images/back-arrow.svg" alt="Back" />
+                        </button>
+                        <div className={styles.imageContainer}>
+                            <span
+                                className={`${styles.image} ${
+                                    handle.active ? styles.active : ""
+                                }`}
                             >
-                                View PDF
-                            </button>
-                        )}
+                                {asset?.file &&
+                                    asset?.file?.type === "video" && (
+                                        <VideoPlayer
+                                            playbackId={asset?.file?.link}
+                                        />
+                                    )}
+
+                                {!(
+                                    asset?.file && asset?.file?.type === "video"
+                                ) && (
+                                    <img
+                                        src={asset.imageUrl}
+                                        alt={asset.name}
+                                    />
+                                )}
+                            </span>
+                            {asset?.file && asset?.file?.type === "pdf" && (
+                                <button
+                                    className={styles.viewPdf}
+                                    onClick={() => setShowPdfModal(true)}
+                                >
+                                    View PDF
+                                </button>
+                            )}
+                        </div>
+                        <button
+                            type="button"
+                            className={styles.fullScreen}
+                            onClick={
+                                handle.active
+                                    ? () => handle.exit()
+                                    : () => handle.enter()
+                            }
+                        >
+                            {handle.active ? "Close" : "FullScreen"}
+                        </button>
+                        <div />
                     </div>
-                    <div />
                 </div>
-            </div>
+            </FullScreen>
             <div className={styles.info}>
                 <div className={styles.left}>
                     <h2 className={styles.artist}>
