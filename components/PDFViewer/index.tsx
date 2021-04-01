@@ -27,7 +27,10 @@ const PDFViewer: React.FC<{ file: string }> = ({ file }) => {
     return (
         <div className={styles.container}>
             <Document file={file} onLoadSuccess={onDocumentLoadSuccess}>
-                <Page pageNumber={pageNumber} height={500} />
+                <Page
+                    pageNumber={pageNumber}
+                    height={window?.innerWidth < 1200 ? 280 : 500}
+                />
             </Document>
             <div className={styles.controls}>
                 <button onClick={prevPage}>

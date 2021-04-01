@@ -261,6 +261,11 @@
         }
     }
     .singleAsset {
+
+        .fullScreen {
+            display: none;
+        }
+        
         .assetMastHead {
             padding-top: 38px;
             padding-bottom: 53px;
