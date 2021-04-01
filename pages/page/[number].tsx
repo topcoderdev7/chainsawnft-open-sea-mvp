@@ -23,7 +23,12 @@ export const Home: React.FC<{
             <Slider slides={slides} />
             <Auctions assets={assets} />
             <div className={styles.pageLink}>
-                {pageNumber > 0 && (
+                {pageNumber === 1 && (
+                    <Link href="/">
+                        <a>Prev Page</a>
+                    </Link>
+                )}
+                {pageNumber > 1 && (
                     <Link href={`/page/${pageNumber - 1}`}>
                         <a>Prev Page</a>
                     </Link>
@@ -61,7 +66,7 @@ export async function getStaticProps({ params }) {
     const nextPage = page + TOKENS_PER_PAGE;
 
     const tokenRes = await fetch(
-        `${API_URL}/tokens?_start=${page}&_limit=${TOKENS_PER_PAGE}`,
+        `${API_URL}/tokens?_start=${page}&_limit=${TOKENS_PER_PAGE}&_sort=priority:DESC`,
     );
     const allTokens = await tokenRes.json();
 

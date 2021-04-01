@@ -62,7 +62,7 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
     return (
         <main className={styles.singleAsset}>
             <HeadWithImage
-                title={asset.name}
+                title={`${asset?.artist?.name} - ${asset.name}`}
                 description={asset.description}
                 imageUrl={asset.imageUrl}
             />

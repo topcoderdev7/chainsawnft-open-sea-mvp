@@ -1,3 +1,4 @@
+@import "../../styles//mixins.scss";
 .container {
     position: fixed;
     top: 0;
@@ -21,5 +22,9 @@
     img {
         width: 71px;
         margin-bottom: 34px;
+    }
+
+    @include media-mobile-only {
+        width: 100%;
     }
 }
