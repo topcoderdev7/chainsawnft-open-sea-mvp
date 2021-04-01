@@ -4,8 +4,7 @@ import { API_URL } from "../utils/constants";
 import { Faq } from "../types";
 import FaqAccordion from "../components/FaqAccordion";
 
-export const FaqPage: React.FC<{ faq: Faq }> = ({ faq }) => {
-    console.log(faq);
+export const FaqPage: React.FC<{ faq: Faq[] }> = ({ faq }) => {
     return (
         <div className={styles.faq}>
             <Head>
@@ -13,7 +12,7 @@ export const FaqPage: React.FC<{ faq: Faq }> = ({ faq }) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <h1>Frequently Asked Questions</h1>
-            <FaqAccordion questionsAndAnswers={faq.QandA} />
+            <FaqAccordion faq={faq} />
         </div>
     );
 };
@@ -21,9 +20,14 @@ export const FaqPage: React.FC<{ faq: Faq }> = ({ faq }) => {
 export default FaqPage;
 
 export async function getStaticProps() {
-    const faqRes = await fetch(`${API_URL}/faq`);
-    const faq = await faqRes.json();
-    console.log(faq);
+    let faq = [];
+    try {
+        const faqRes = await fetch(`${API_URL}/faq`);
+        const faqData = await faqRes.json();
+        faq = faqData.QandA;
+    } catch (err) {
+        console.log("Exception in fetching faq", err);
+    }
 
     return {
         props: {

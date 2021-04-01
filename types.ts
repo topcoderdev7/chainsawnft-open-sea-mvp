@@ -124,11 +124,8 @@ export interface Profile {
 /**
  * Model definition for faq and QandA
  */
-export interface QandA {
+export interface Faq {
     id: number;
     question: string;
     answer: string;
-}
-export interface Faq {
-    QandA: QandA[];
 }

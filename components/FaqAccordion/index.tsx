@@ -1,16 +1,14 @@
 import React from "react";
-import { QandA } from "../../types";
+import { Faq } from "../../types";
 
 import AccordionItem from "../AccordionItem";
 
 import styles from "./FaqAccordion.module.scss";
 
-const Accordion: React.FC<{ questionsAndAnswers: QandA[] }> = ({
-    questionsAndAnswers,
-}) => {
+const Accordion: React.FC<{ faq: Faq[] }> = ({ faq }) => {
     return (
         <ul className={styles.faqAccordion}>
-            {questionsAndAnswers.map(({ id, question, answer }) => (
+            {faq.map(({ id, question, answer }) => (
                 <AccordionItem
                     key={id}
                     id={id}
