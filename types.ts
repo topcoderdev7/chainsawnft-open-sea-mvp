@@ -120,3 +120,15 @@ export interface Profile {
     username?: string;
     address?: string;
 }
+
+/**
+ * Model definition for faq and QandA
+ */
+export interface QandA {
+    id: number;
+    question: string;
+    answer: string;
+}
+export interface Faq {
+    QandA: QandA[];
+}
