@@ -1,7 +1,7 @@
 import { useAllowance } from "../../context/BalanceContext";
 import Modal from "../Modal";
 
-const LoadingModal: React.FC<{ hideAllowance: boolean }> = ({
+const LoadingModal: React.FC<{ hideAllowance?: boolean }> = ({
     hideAllowance = false,
 }) => {
     const allowance = useAllowance();
