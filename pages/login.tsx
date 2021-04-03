@@ -30,7 +30,9 @@ const LoginPage: React.FC = () => {
                 </div>
 
                 <Link href="/">
-                    <button>View Art</button>
+                    <button className={styles.enterButton}>
+                        ENTER CHAINSAW
+                    </button>
                 </Link>
                 <Link href="/settings">
                     <a>Change Settings</a>

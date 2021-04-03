@@ -4,7 +4,7 @@ import Asset from "../components/Asset";
 import { useUser } from "../context/UserContext";
 import styles from "../styles/landing.module.scss";
 import { NFT } from "../types";
-import { fetchUserCollection, formatTokens } from "../utils/collection";
+import { fetchUserCollection } from "../utils/collection";
 import { API_URL } from "../utils/constants";
 
 /**
@@ -25,6 +25,7 @@ const useAllTokens = () => {
 };
 
 const useMyTokensCollection = (tokens: NFT[], userAddress?: string) => {
+    console.log("useMyTokensCollection userAddress", userAddress);
     const [collection, setCollection] = useState<NFT[]>([]);
 
     useEffect(() => {
