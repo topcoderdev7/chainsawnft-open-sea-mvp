@@ -1,16 +1,18 @@
 import { useAllowance } from "../../context/BalanceContext";
 import Modal from "../Modal";
 
-const LoadingModal: React.FC = () => {
+const LoadingModal: React.FC<{ hideAllowance?: boolean }> = ({
+    hideAllowance = false,
+}) => {
     const allowance = useAllowance();
     return (
         <Modal handleClose={() => null}>
             <div>
                 <img src="/images/loading-black.svg" alt="Loading" />
                 <h2>Loading</h2>
-                <p>Sending your Buy Order</p>
+                <p>Sending your Order</p>
 
-                {!allowance && (
+                {!hideAllowance && !allowance && (
                     <div>
                         <span>
                             If this is your first order, you will have to
