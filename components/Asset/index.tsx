@@ -1,3 +1,4 @@
+import { utils } from "ethers";
 import Link from "next/link";
 import { NFTFile } from "../../types";
 import VideoPlayer from "../VideoPlayer";
@@ -12,7 +13,19 @@ const Asset: React.FC<{
     artist?: string;
     onSale?: boolean;
     file?: NFTFile;
-}> = ({ imageUrl, name, slug, reserve, artist, onSale, file }) => (
+    sold?: boolean;
+    soldFor: string;
+}> = ({
+    imageUrl,
+    name,
+    slug,
+    reserve,
+    artist,
+    onSale,
+    file,
+    sold,
+    soldFor,
+}) => (
     <Link href={`/asset/${slug}`}>
         <a>
             <div className={styles.asset}>
@@ -30,7 +43,7 @@ const Asset: React.FC<{
                         <h3>{name}</h3>
                     </div>
                     <div className={styles.footer}>
-                        {onSale && (
+                        {onSale && !sold && (
                             <div>
                                 <button>Bid Now</button>
                             </div>
@@ -43,7 +56,14 @@ const Asset: React.FC<{
                             </div>
                         )}
 
-                        {reserve && (
+                        {sold && (
+                            <div>
+                                <h4>Sold for</h4>{" "}
+                                <h3>{utils.formatEther(soldFor)}</h3>
+                            </div>
+                        )}
+
+                        {reserve && !sold && (
                             <div>
                                 <h4>Reserve price:</h4> <h3>{reserve}</h3>
                             </div>
