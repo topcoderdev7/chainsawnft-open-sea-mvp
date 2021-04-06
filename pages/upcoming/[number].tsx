@@ -79,15 +79,9 @@ export async function getStaticProps({ params }) {
     const count = await tokenCountRes.json();
 
     const hasMore = count / nextPage > 1;
-
-    const availableTokens: NFT[] = allTokens.filter((token) => !token.sold);
-    const soldTokens = allTokens.filter((token) => token.sold);
     return {
         props: {
-            assets: availableTokens
-                .sort((a, b) => a.priority - b.priority)
-                .reverse(),
-            sold: soldTokens,
+            assets: allTokens,
             hasMore,
             pageNumber,
         },

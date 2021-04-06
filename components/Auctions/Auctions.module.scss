@@ -22,6 +22,11 @@
         .divider,
         .rightLink {
             white-space: nowrap;
+            align-self: center;
+
+            a {
+                margin-left: 15px;
+            }
         }
         .divider {
             flex: 12;

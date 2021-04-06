@@ -1,10 +1,12 @@
+import Link from "next/link";
 import { NFT } from "../../types";
 import Asset from "../Asset";
 import styles from "./Auctions.module.scss";
 
-const Auctions: React.FC<{ assets: NFT[]; title?: string }> = ({
+const Auctions: React.FC<{ assets: NFT[]; title?: string; link?: string }> = ({
     assets,
     title,
+    link,
 }) => {
     return (
         <main className={styles.auctions}>
@@ -19,7 +21,9 @@ const Auctions: React.FC<{ assets: NFT[]; title?: string }> = ({
                 <div className={styles.divider}>
                     <hr />
                 </div>
-                <div className={styles.rightLink} />
+                <div className={styles.rightLink}>
+                    {link && <Link href={link}>View All</Link>}
+                </div>
             </div>
             <div className={styles.auctionsContainer}>
                 {assets.map(

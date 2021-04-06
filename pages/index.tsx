@@ -29,14 +29,9 @@ export const Home: React.FC<{
             </Head>
             <HeadWithImage />
             <Slider slides={slides} />
-            <Auctions assets={assets} />
-            <Auctions assets={sold} title="Sold" />
-            <Auctions assets={upcoming} title="Upcoming" />
-            <div className={styles.pageLink}>
-                <Link href="/auctions/0">
-                    <a>All Auctions</a>
-                </Link>
-            </div>
+            <Auctions assets={assets} link="/auctions/0" />
+            <Auctions assets={sold} title="Sold" link="/sold/0" />
+            <Auctions assets={upcoming} title="Upcoming" link="/upcoming/0" />
         </div>
     );
 };

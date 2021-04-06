@@ -91,7 +91,7 @@ export async function getStaticProps({ params }) {
     const hasMore = count / nextPage > 1;
     return {
         props: {
-            assets: allTokens.sort((a, b) => a.priority - b.priority).reverse(),
+            assets: allTokens,
             slides,
             hasMore,
             pageNumber,
