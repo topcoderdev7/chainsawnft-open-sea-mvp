@@ -30,10 +30,8 @@ export const Home: React.FC<{
             <HeadWithImage />
             <Slider slides={slides} />
             <Auctions assets={assets} />
-            <h2>Sold</h2>
-            <Auctions assets={sold} />
-            <h2>Upcoming</h2>
-            <Auctions assets={upcoming} />
+            <Auctions assets={sold} title="Sold" />
+            <Auctions assets={upcoming} title="Upcoming" />
             <div className={styles.pageLink}>
                 <Link href="/auctions/0">
                     <a>All Auctions</a>

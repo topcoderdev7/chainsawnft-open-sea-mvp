@@ -2,12 +2,19 @@ import { NFT } from "../../types";
 import Asset from "../Asset";
 import styles from "./Auctions.module.scss";
 
-const Auctions: React.FC<{ assets: NFT[] }> = ({ assets }) => {
+const Auctions: React.FC<{ assets: NFT[]; title?: string }> = ({
+    assets,
+    title,
+}) => {
     return (
         <main className={styles.auctions}>
             <div className={styles.headline}>
                 <div className={styles.title}>
-                    <img alt="Live Auctions" src="/images/Auctions.png" />
+                    {title ? (
+                        <h2>{title}</h2>
+                    ) : (
+                        <img alt="Live Auctions" src="/images/Auctions.png" />
+                    )}
                 </div>
                 <div className={styles.divider}>
                     <hr />
