@@ -27,6 +27,8 @@ const SingleCollectionPage: React.FC<{ collection: Collection }> = ({
                                     name={asset.token.name}
                                     slug={asset.token.slug}
                                     key={asset.id}
+                                    soldFor={asset.token.soldFor}
+                                    sold={asset.token.sold}
                                 />
                             ) : null;
                         },

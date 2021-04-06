@@ -74,7 +74,7 @@ export async function getStaticProps({ params }) {
 
     return {
         props: {
-            artists: artists.sort((a, b) => a.priority - b.priority).reverse(),
+            artists,
             pageNumber,
             hasMore,
         },

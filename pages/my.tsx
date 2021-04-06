@@ -49,7 +49,16 @@ const MyCollectionPage: React.FC = () => {
         <div className={styles.container}>
             <h2>Your Collection</h2>
             {myTokens.map(
-                ({ description, imageUrl, name, slug, reserve, artist }) => (
+                ({
+                    description,
+                    imageUrl,
+                    name,
+                    slug,
+                    reserve,
+                    artist,
+                    sold,
+                    soldFor,
+                }) => (
                     <Asset
                         key={name}
                         artist={artist?.name}
@@ -58,6 +67,8 @@ const MyCollectionPage: React.FC = () => {
                         imageUrl={imageUrl}
                         name={name}
                         reserve={reserve}
+                        sold={sold}
+                        soldFor={soldFor}
                     />
                 ),
             )}
