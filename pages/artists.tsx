@@ -20,7 +20,7 @@ export const ArtistsHome: React.FC<{ artists: Artist[] }> = ({ artists }) => {
 export default ArtistsHome;
 
 export async function getStaticProps() {
-    const artistRes = await fetch(`${API_URL}/artists`);
+    const artistRes = await fetch(`${API_URL}/artists?_limit=-1`);
     const artists = await artistRes.json();
 
     return {

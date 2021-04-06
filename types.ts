@@ -109,6 +109,8 @@ export interface Artist {
     websiteUrl: string;
     instagramUrl: string;
     twitterUrl: string;
+
+    priority: number; // The higher the top most
 }
 
 /**

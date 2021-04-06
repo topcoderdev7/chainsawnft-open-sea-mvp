@@ -7,3 +7,4 @@ export const API_URL =
 export const MAX_ETH = utils.parseEther("0.014");
 
 export const TOKENS_PER_PAGE = 40;
+export const ARTISTS_PER_PAGE = 40;
