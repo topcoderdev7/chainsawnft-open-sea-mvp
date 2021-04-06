@@ -46,21 +46,25 @@ export const Home: React.FC<{
 export default Home;
 
 export async function getStaticProps() {
+    /** Get tokens with auctions */
     const availableTokenRes = await fetch(
         `${API_URL}/tokens?_limit=${TOKENS_IN_HOME}&${AVAILABLE_TOKENS_QUERY}`,
     );
     const availableTokens = await availableTokenRes.json();
 
+    /** Get tokens sold */
     const soldTokensRes = await fetch(
         `${API_URL}/tokens?_limit=${SOLD_TOKENS_IN_HOME}&${SOLD_TOKENS_QUERY}`,
     );
     const sold = await soldTokensRes.json();
 
+    /** Get tokens not on sale and not sold */
     const upcomingTokensRes = await fetch(
         `${API_URL}/tokens?_limit=${UPCOMING_TOKENS_IN_HOME}&${UPCOMING_TOKENS_QUERY}`,
     );
     const upcoming = await upcomingTokensRes.json();
 
+    /** Get slides */
     let slides = [];
     try {
         const slidesRes = await fetch(`${API_URL}/slider`);
