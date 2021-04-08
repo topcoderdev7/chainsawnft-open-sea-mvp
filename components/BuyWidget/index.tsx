@@ -63,7 +63,7 @@ const BuyWidget: React.FC<{
                 user.seaport,
                 address,
                 tokenId,
-                "ERC1155",
+                "ERC721", // TODO: Make this change dynamically based on type of token
                 user.address,
                 parseFloat(amount || "0"),
             );
