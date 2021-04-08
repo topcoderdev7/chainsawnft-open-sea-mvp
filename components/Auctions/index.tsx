@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { NFT } from "../../types";
 import Asset from "../Asset";
+import AssetOnSale from "../AssetOnSale";
 import styles from "./Auctions.module.scss";
 
 const Auctions: React.FC<{ assets: NFT[]; title?: string; link?: string }> = ({
@@ -38,20 +39,42 @@ const Auctions: React.FC<{ assets: NFT[]; title?: string; link?: string }> = ({
                         file,
                         sold,
                         soldFor,
+                        address,
+                        tokenId,
                     }) => (
-                        <Asset
-                            onSale={onSale}
-                            artist={artist?.name}
-                            key={name}
-                            sold={sold}
-                            soldFor={soldFor}
-                            slug={slug}
-                            description={description}
-                            imageUrl={imageUrl}
-                            name={name}
-                            reserve={reserve}
-                            file={file}
-                        />
+                        <>
+                            {onSale && !sold ? (
+                                <AssetOnSale
+                                    address={address}
+                                    tokenId={tokenId}
+                                    onSale={onSale}
+                                    artist={artist?.name}
+                                    key={name}
+                                    sold={sold}
+                                    soldFor={soldFor}
+                                    slug={slug}
+                                    description={description}
+                                    imageUrl={imageUrl}
+                                    name={name}
+                                    reserve={reserve}
+                                    file={file}
+                                />
+                            ) : (
+                                <Asset
+                                    onSale={onSale}
+                                    artist={artist?.name}
+                                    key={name}
+                                    sold={sold}
+                                    soldFor={soldFor}
+                                    slug={slug}
+                                    description={description}
+                                    imageUrl={imageUrl}
+                                    name={name}
+                                    reserve={reserve}
+                                    file={file}
+                                />
+                            )}
+                        </>
                     ),
                 )}
             </div>
