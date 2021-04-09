@@ -25,7 +25,6 @@ const useAllTokens = () => {
 };
 
 const useMyTokensCollection = (tokens: NFT[], userAddress?: string) => {
-    console.log("useMyTokensCollection userAddress", userAddress);
     const [collection, setCollection] = useState<NFT[]>([]);
 
     useEffect(() => {
