@@ -40,7 +40,11 @@ export const UserContextProvider: React.FC = ({ children }) => {
     const getAddressAndProvider = async (provider: any) => {
         const signer = provider.getSigner();
         const address = await signer.getAddress();
-        const seaport = makeSeaport(provider?.bridge ? provider : undefined);
+
+        console.log("provider", provider);
+        const seaport = makeSeaport(
+            provider.provider ? provider.provider : provider,
+        );
 
         return { address, provider, seaport };
     };
@@ -55,9 +59,7 @@ export const UserContextProvider: React.FC = ({ children }) => {
                 console.log("library", library);
                 console.log("library", library.provider);
                 try {
-                    const res = await getAddressAndProvider(
-                        library?.provider?.bridge ? library?.provider : library,
-                    );
+                    const res = await getAddressAndProvider(library);
                     setUser(res);
                 } catch (err) {
                     alert(`Issue with getAddressAndProvider ${err}`);
