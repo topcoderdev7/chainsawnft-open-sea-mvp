@@ -48,7 +48,10 @@ const OrderModal: React.FC<{
 const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
     const [showPdfModal, setShowPdfModal] = useState(false);
     const user = useUser();
-    const assetData = useAsset(asset.address, asset.tokenId);
+    const { asset: assetData, fetchAsset } = useAsset(
+        asset.address,
+        asset.tokenId,
+    );
     const [modalOpen, setModalOpen] = useState(false);
 
     const related = useRelatedAssets(asset);
@@ -246,7 +249,10 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
                         {modalOpen && (
                             <OrderModal
                                 buyOrders={assetData?.orders || []}
-                                handleClose={() => setModalOpen(false)}
+                                handleClose={() => {
+                                    setModalOpen(false);
+                                    fetchAsset();
+                                }}
                                 address={asset.address}
                                 tokenId={asset.tokenId}
                             />

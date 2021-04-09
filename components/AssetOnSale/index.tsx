@@ -1,8 +1,6 @@
 import { utils } from "ethers";
 import Link from "next/link";
-import useAsset from "../../hooks/useAsset";
 import { NFTFile, OrderFromAPI } from "../../types";
-import findMaxBid from "../../utils/findMaxBid";
 import VideoPlayer from "../VideoPlayer";
 import styles from "./AssetOnSale.module.scss";
 import Countdown from "../Countdown";

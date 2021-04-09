@@ -40,7 +40,7 @@ export const UserContextProvider: React.FC = ({ children }) => {
     const getAddressAndProvider = async (provider: providers.Web3Provider) => {
         const signer = provider.getSigner();
         const address = await signer.getAddress();
-        const seaport = makeSeaport(provider);
+        const seaport = makeSeaport();
 
         return { address, provider, seaport };
     };
