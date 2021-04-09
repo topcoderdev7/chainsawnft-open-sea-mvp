@@ -36,7 +36,6 @@ const AssetOnSale: React.FC<{
     const assetData = useAsset(address, tokenId);
     const salesOrder = assetData?.orders?.find((order) => order.side === 1); // Find sell order
     const currentBid = findMaxBid(assetData?.orders);
-    console.log("currentBid", currentBid);
     return (
         <Link href={`/asset/${slug}`}>
             <a>
@@ -77,13 +76,13 @@ const AssetOnSale: React.FC<{
                                     {currentBid > 0 && (
                                         <div>
                                             <h3>Current Bid</h3>
-                                            <p>{currentBid}</p>
+                                            <p>{currentBid} ETH</p>
                                         </div>
                                     )}
                                     {currentBid === 0 && (
                                         <div>
                                             <h3>Reserve price</h3>
-                                            <p>{reserve}</p>
+                                            <p>{reserve} ETH</p>
                                         </div>
                                     )}
                                 </div>

@@ -180,7 +180,9 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
                         <div className={styles.auction}>
                             <div>
                                 <h3>Current Bid</h3>
-                                <p>{asset.onSale ? currentBid : "---"}</p>
+                                <p>
+                                    {asset.onSale ? `${currentBid} ETH` : "---"}
+                                </p>
                             </div>
 
                             <div>
