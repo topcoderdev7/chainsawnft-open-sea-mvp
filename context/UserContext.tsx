@@ -37,10 +37,10 @@ export const UserContextProvider: React.FC = ({ children }) => {
     /**
      * Given the Magic Provider, return address and provider
      */
-    const getAddressAndProvider = async (provider: providers.Web3Provider) => {
+    const getAddressAndProvider = async (provider: any) => {
         const signer = provider.getSigner();
         const address = await signer.getAddress();
-        const seaport = makeSeaport();
+        const seaport = makeSeaport(provider?.bridge ? provider : undefined);
 
         return { address, provider, seaport };
     };
@@ -53,8 +53,11 @@ export const UserContextProvider: React.FC = ({ children }) => {
             if (active) {
                 console.log("active", active);
                 console.log("library", library);
+                console.log("library", library.provider);
                 try {
-                    const res = await getAddressAndProvider(library);
+                    const res = await getAddressAndProvider(
+                        library?.provider?.bridge ? library?.provider : library,
+                    );
                     setUser(res);
                 } catch (err) {
                     alert(`Issue with getAddressAndProvider ${err}`);

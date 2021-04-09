@@ -25,14 +25,12 @@ const DepositETH: React.FC = () => {
             <h2>Deposit ETH / WETH</h2>
             {allowance && (
                 <p>
-                    NOTE: Since you already gave allowance, you can simply send
-                    WETH to save some gas
+                    NOTE: You have given Chain/Saw approval to use your wallet.
+                    Now you can convert some of your ETH balance to WETH for
+                    bidding
                 </p>
             )}
-            <div>
-                ETH Balance (Used for gas and converted into WETH):{" "}
-                {utils.formatEther(ethBalance.toString())}
-            </div>
+            <div>ETH Balance: {utils.formatEther(ethBalance.toString())}</div>
             <div>
                 WETH Balance (Used for bidding):{" "}
                 {utils.formatEther(wethBalance.toString())}

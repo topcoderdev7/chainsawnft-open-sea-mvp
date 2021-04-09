@@ -10,7 +10,9 @@ const LoadingModal: React.FC<{ hideAllowance?: boolean }> = ({
             <div>
                 <img src="/images/loading-black.svg" alt="Loading" />
                 <h2>Loading</h2>
-                <p>Sending your Order</p>
+                <p>
+                    Connecting to your wallet - this may take a few minutes...
+                </p>
 
                 {!hideAllowance && !allowance && (
                     <div>
