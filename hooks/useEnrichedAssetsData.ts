@@ -1,7 +1,7 @@
 import groupBy from "lodash.groupby";
 
 import { useEffect, useState } from "react";
-import { AssetFromAPI, NFT, NFTWithOpenSeaData } from "../types";
+import { AssetFromAPI, NFT, NFTWithOpenSeaData, OrderFromAPI } from "../types";
 import findMaxBid from "../utils/findMaxBid";
 
 interface FormattedTokens {
@@ -40,9 +40,9 @@ const tokensFromOpenSea = async (
 };
 
 const useEnrichedAssetsData = (assets: NFT[]) => {
-    const [updatedAssets, setUpdatedAssets] = useState<NFTWithOpenSeaData[]>(
-        [],
-    );
+    const [updatedAssets, setUpdatedAssets] = useState<
+        NFTWithOpenSeaData[] | null
+    >(null);
 
     useEffect(() => {
         const fetchAsset = async () => {
@@ -91,7 +91,7 @@ const useEnrichedAssetsData = (assets: NFT[]) => {
         fetchAsset();
     }, [assets]);
 
-    return updatedAssets;
+    return updatedAssets || assets;
 };
 
 export default useEnrichedAssetsData;
