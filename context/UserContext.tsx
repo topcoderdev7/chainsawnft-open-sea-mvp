@@ -53,7 +53,6 @@ export const UserContextProvider: React.FC = ({ children }) => {
             if (active) {
                 console.log("active", active);
                 console.log("library", library);
-                window.library = library;
                 try {
                     const res = await getAddressAndProvider(library);
                     setUser(res);
