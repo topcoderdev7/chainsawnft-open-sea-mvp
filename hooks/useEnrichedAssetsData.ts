@@ -91,7 +91,7 @@ const useEnrichedAssetsData = (assets: NFT[]) => {
         fetchAsset();
     }, [assets]);
 
-    return updatedAssets || assets;
+    return updatedAssets || (assets as NFTWithOpenSeaData[]);
 };
 
 export default useEnrichedAssetsData;

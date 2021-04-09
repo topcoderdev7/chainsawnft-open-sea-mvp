@@ -20,8 +20,8 @@ const AssetOnSale: React.FC<{
     file?: NFTFile;
     sold?: boolean;
     soldFor: string;
-    salesOrder: OrderFromAPI;
-    currentBid: number;
+    salesOrder?: OrderFromAPI;
+    currentBid?: number;
 }> = ({
     address,
     tokenId,
