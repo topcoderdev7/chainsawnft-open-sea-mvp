@@ -49,7 +49,7 @@ const SettingsPage: React.FC = () => {
 
             <div className={styles.tiny}>
                 {allowance
-                    ? "You've given allowance for Chain/Saw to connect to your wallet"
+                    ? "You've given approval for Chain/Saw to connect to your wallet"
                     : "You need to give allowance"}
             </div>
 

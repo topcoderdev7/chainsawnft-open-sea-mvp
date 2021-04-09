@@ -22,7 +22,7 @@ const LoginPage: React.FC = () => {
                     )}
                     {!allowance && (
                         <p>
-                            It seems like you didn&rsquo;t give allowance to the
+                            It seems like you didn&rsquo;t give approval to the
                             router, you can do that when you place your first
                             bid
                         </p>
