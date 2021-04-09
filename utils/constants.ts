@@ -6,9 +6,9 @@ export const API_URL =
 // Max ETH we always keep for withdrawals
 export const MAX_ETH = utils.parseEther("0.014");
 
-export const TOKENS_IN_HOME = 8;
-export const SOLD_TOKENS_IN_HOME = 4;
-export const UPCOMING_TOKENS_IN_HOME = 4;
+export const TOKENS_IN_HOME = 40;
+export const SOLD_TOKENS_IN_HOME = 40;
+export const UPCOMING_TOKENS_IN_HOME = 40;
 
 export const TOKENS_PER_PAGE = 40;
 export const ARTISTS_PER_PAGE = 40;
