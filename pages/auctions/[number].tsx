@@ -7,7 +7,7 @@ import {
     TOKENS_PER_PAGE,
 } from "../../utils/constants";
 import { NFT, Slide } from "../../types";
-import Auctions from "../../components/Auctions";
+import ActiveAuctions from "../../components/ActiveAuctions";
 import Slider from "../../components/Slider";
 import HeadWithImage from "../../components/HeadWithImage";
 
@@ -25,7 +25,7 @@ export const Home: React.FC<{
             </Head>
             <HeadWithImage />
             <Slider slides={slides} />
-            <Auctions assets={assets} />
+            <ActiveAuctions assets={assets} />
             <div className={styles.pageLink}>
                 {pageNumber === 1 && (
                     <Link href="/">

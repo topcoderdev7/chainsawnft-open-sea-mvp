@@ -1,29 +1,20 @@
 import Link from "next/link";
+import useEnrichedAssetsData from "../../hooks/useEnrichedAssetsData";
 import { NFT } from "../../types";
 import Asset from "../Asset";
+import AssetOnSale from "../AssetOnSale";
 import styles from "./Auctions.module.scss";
-
-const fromTitleToImageUrl = (title: string): string => {
-    switch (title) {
-        case "Sold":
-            return "/images/Sold.png";
-        case "Upcoming":
-            return "/images/Upcoming.png";
-        default:
-            return "/images/Auctions.png";
-    }
-};
 
 const Auctions: React.FC<{
     assets: NFT[];
-    title?: string;
     link?: string;
-}> = ({ assets, title, link }) => {
+}> = ({ assets, link }) => {
+    const enrichedAssets = useEnrichedAssetsData(assets);
     return (
         <main className={styles.auctions}>
             <div className={styles.headline}>
                 <div className={styles.title}>
-                    <img alt="Live Auctions" src={fromTitleToImageUrl(title)} />
+                    <img alt="Live Auctions" src="/images/Auctions.png" />
                 </div>
                 <div className={styles.divider}>
                     <hr />
@@ -33,7 +24,7 @@ const Auctions: React.FC<{
                 </div>
             </div>
             <div className={styles.auctionsContainer}>
-                {assets.map(
+                {enrichedAssets.map(
                     ({
                         description,
                         imageUrl,
@@ -45,9 +36,15 @@ const Auctions: React.FC<{
                         file,
                         sold,
                         soldFor,
+                        address,
+                        tokenId,
+                        salesOrder,
+                        currentBid,
                     }) => (
                         <>
-                            <Asset
+                            <AssetOnSale
+                                address={address}
+                                tokenId={tokenId}
                                 onSale={onSale}
                                 artist={artist?.name}
                                 key={name}
@@ -59,6 +56,8 @@ const Auctions: React.FC<{
                                 name={name}
                                 reserve={reserve}
                                 file={file}
+                                salesOrder={salesOrder}
+                                currentBid={currentBid}
                             />
                         </>
                     ),

@@ -1,7 +1,7 @@
 import { utils } from "ethers";
 import Link from "next/link";
 import useAsset from "../../hooks/useAsset";
-import { NFTFile } from "../../types";
+import { NFTFile, OrderFromAPI } from "../../types";
 import findMaxBid from "../../utils/findMaxBid";
 import VideoPlayer from "../VideoPlayer";
 import styles from "./AssetOnSale.module.scss";
@@ -20,6 +20,8 @@ const AssetOnSale: React.FC<{
     file?: NFTFile;
     sold?: boolean;
     soldFor: string;
+    salesOrder: OrderFromAPI;
+    currentBid: number;
 }> = ({
     address,
     tokenId,
@@ -32,10 +34,9 @@ const AssetOnSale: React.FC<{
     file,
     sold,
     soldFor,
+    salesOrder,
+    currentBid,
 }) => {
-    const assetData = useAsset(address, tokenId);
-    const salesOrder = assetData?.orders?.find((order) => order.side === 1); // Find sell order
-    const currentBid = findMaxBid(assetData?.orders);
     return (
         <Link href={`/asset/${slug}`}>
             <a>

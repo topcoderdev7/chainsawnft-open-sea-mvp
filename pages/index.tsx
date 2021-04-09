@@ -12,6 +12,7 @@ import {
 } from "../utils/constants";
 import { NFT, Slide } from "../types";
 import Auctions from "../components/Auctions";
+import ActiveAuctions from "../components/ActiveAuctions";
 import Slider from "../components/Slider";
 import HeadWithImage from "../components/HeadWithImage";
 
@@ -30,7 +31,7 @@ export const Home: React.FC<{
             <HeadWithImage />
             <Slider slides={slides} />
             {assets?.length > 0 && (
-                <Auctions assets={assets} link="/auctions/0" />
+                <ActiveAuctions assets={assets} link="/auctions/0" />
             )}
             {sold?.length > 0 && (
                 <Auctions assets={sold} title="Sold" link="/sold/0" />

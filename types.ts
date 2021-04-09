@@ -31,6 +31,13 @@ export interface AssetFromAPI {
     };
     image_url: string;
     name: string;
+
+    token_id: string;
+    asset_contract: {
+        address: string;
+    };
+    sell_orders: OrderFromAPI[];
+    top_bid: OrderFromAPI;
 }
 
 export type BuyOrder = Order;
@@ -73,6 +80,11 @@ export interface NFT extends OpenSeaAsset {
 
     priority: number; // The higher the top most token
     buttonMessage: string; // Button to show when product not available
+}
+
+export interface NFTWithOpenSeaData extends NFT {
+    salesOrder: OrderFromAPI;
+    currentBid: number;
 }
 
 /** STRAPI INTERFACES */

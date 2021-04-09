@@ -6,6 +6,7 @@ export const API_URL =
 // Max ETH we always keep for withdrawals
 export const MAX_ETH = utils.parseEther("0.014");
 
+// Always keep these below 50 to ensure OpenSea Api can handle the requests
 export const TOKENS_IN_HOME = 40;
 export const SOLD_TOKENS_IN_HOME = 40;
 export const UPCOMING_TOKENS_IN_HOME = 40;
