@@ -4,6 +4,17 @@ import Asset from "../Asset";
 import AssetOnSale from "../AssetOnSale";
 import styles from "./Auctions.module.scss";
 
+const fromTitleToImageUrl = (title: string): string => {
+    switch (title) {
+        case "Sold":
+            return "/images/Sold.png";
+        case "Upcoming":
+            return "/images/Upcoming.png";
+        default:
+            return "/images/Auctions.png";
+    }
+};
+
 const Auctions: React.FC<{ assets: NFT[]; title?: string; link?: string }> = ({
     assets,
     title,
@@ -13,11 +24,7 @@ const Auctions: React.FC<{ assets: NFT[]; title?: string; link?: string }> = ({
         <main className={styles.auctions}>
             <div className={styles.headline}>
                 <div className={styles.title}>
-                    {title ? (
-                        <h2>{title}</h2>
-                    ) : (
-                        <img alt="Live Auctions" src="/images/Auctions.png" />
-                    )}
+                    <img alt="Live Auctions" src={fromTitleToImageUrl(title)} />
                 </div>
                 <div className={styles.divider}>
                     <hr />
