@@ -178,28 +178,40 @@ const SingleAssetPage: React.FC<{ asset: NFT }> = ({ asset }) => {
                 <div className={styles.right}>
                     <div className={styles.details}>
                         <div className={styles.auction}>
-                            <div>
-                                <h3>Current Bid</h3>
-                                <p>
-                                    {asset.onSale ? `${currentBid} ETH` : "---"}
-                                </p>
-                            </div>
-
-                            <div>
-                                <h3>Auction Ends at</h3>
-                                <p>
-                                    {salesOrder?.listing_time &&
-                                    asset.onSale ? (
-                                        <Countdown
-                                            date={
-                                                salesOrder?.listing_time * 1000
-                                            }
-                                        />
-                                    ) : (
-                                        "---"
+                            {asset.onSale && (
+                                <>
+                                    {currentBid > 0 && (
+                                        <div>
+                                            <h3>Current Bid</h3>
+                                            <p>{currentBid} ETH</p>
+                                        </div>
                                     )}
-                                </p>
-                            </div>
+                                    {currentBid === 0 && (
+                                        <div>
+                                            <h3>Reserve price</h3>
+                                            <p>{asset.reserve} ETH</p>
+                                        </div>
+                                    )}
+                                </>
+                            )}
+                            {asset.onSale && (
+                                <div>
+                                    <h3>Auction Ends at</h3>
+                                    <p>
+                                        {salesOrder?.listing_time &&
+                                        asset.onSale ? (
+                                            <Countdown
+                                                date={
+                                                    salesOrder?.listing_time *
+                                                    1000
+                                                }
+                                            />
+                                        ) : (
+                                            "---"
+                                        )}
+                                    </p>
+                                </div>
+                            )}
                         </div>
                         {!asset.onSale && (
                             <button className={styles.bidButton} type="button">
