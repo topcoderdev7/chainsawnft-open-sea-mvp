@@ -58,6 +58,11 @@ const Header: React.FC = () => {
                                     <a>Conversations</a>
                                 </Link>
                             </div>
+                            <div>
+                                <Link href="/faq">
+                                    <a>FAQ</a>
+                                </Link>
+                            </div>
                         </div>
                         <div className={styles.social}>
                             <a href="https://www.instagram.com/chainsaw_nft">

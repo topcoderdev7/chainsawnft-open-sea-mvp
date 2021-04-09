@@ -11,11 +11,6 @@ const Footer: React.FC = () => (
         <div>
             <h3>Sign Up For Drops</h3>
             <MailchimpSubscribe url={url} />
-            <div>
-                <Link href="/faq">
-                    <a>FAQ</a>
-                </Link>
-            </div>
         </div>
     </footer>
 );
