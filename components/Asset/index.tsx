@@ -49,13 +49,6 @@ const Asset: React.FC<{
                             </div>
                         )}
 
-                        {!onSale && (
-                            <div className={styles.notAvail}>
-                                <h3>Price</h3>
-                                <h2>---</h2>
-                            </div>
-                        )}
-
                         {sold && (
                             <div>
                                 <h4>Sold for</h4>{" "}

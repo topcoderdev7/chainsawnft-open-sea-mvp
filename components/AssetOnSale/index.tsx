@@ -72,13 +72,7 @@ const AssetOnSale: React.FC<{
                                     <div>
                                         <button>Bid Now</button>
                                     </div>
-                                    {currentBid > 0 && (
-                                        <div>
-                                            <h3>Current Bid</h3>
-                                            <p>{currentBid} ETH</p>
-                                        </div>
-                                    )}
-                                    {currentBid === 0 && (
+                                    {!salesOrder?.listing_time && (
                                         <div>
                                             <h3>Reserve price</h3>
                                             <p>{reserve} ETH</p>
