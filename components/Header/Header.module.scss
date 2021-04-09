@@ -101,6 +101,9 @@
 @include media-mobile-only {
     .header {
         padding: 30px 15px;
+
+        flex-direction: column;
+        text-align: center;
         .left {
             .smallLogo {
                 width: 44px;
@@ -143,6 +146,7 @@
             }
         }
         .right {
+            flex-direction: column;
             margin-top: 12px;
 
             .social {

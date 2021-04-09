@@ -2,9 +2,17 @@
 
 .signup {
     display: flex;
+    white-space: nowrap;
     div,
     ul {
-        margin-right: 40px;
+        display: flex;
+        margin-left: 40px;
+        li {
+            padding-right: 40px;
+        }
+    }
+    .connectWallet {
+        padding-right: 40px;
     }
 
     ul {

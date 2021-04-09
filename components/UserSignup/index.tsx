@@ -14,13 +14,17 @@ const UserSignup = (): JSX.Element => {
     if (user) {
         return (
             <section className={styles.signup}>
-                <div>{profile?.username || user?.address}</div>
+                <div>
+                    {profile?.username || String(user?.address).substring(0, 6)}
+                </div>
                 {/* For Debugging */}
                 <div className={styles.hidden}>Your Address {user.address}</div>
                 <div className={styles.hidden}>
                     ETH Balance: {utils.formatEther(ethBalance)}
                 </div>
-                <div>WETH: {utils.formatEther(wethBalance)} </div>
+                <div className={styles.hidden}>
+                    WETH: {utils.formatEther(wethBalance)}{" "}
+                </div>
                 <ul>
                     <li>
                         <Link href="/settings">
@@ -37,7 +41,7 @@ const UserSignup = (): JSX.Element => {
 
     return (
         <section className={styles.signup}>
-            <div>
+            <div className={styles.connectWallet}>
                 <Link href="/login">
                     <a>Connect Wallet</a>
                 </Link>
