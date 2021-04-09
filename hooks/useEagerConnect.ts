@@ -9,15 +9,19 @@ const useEagerConnect = (): boolean => {
     const [tried, setTried] = useState(false);
 
     useEffect(() => {
-        injected.isAuthorized().then((isAuthorized: boolean) => {
-            if (isAuthorized) {
-                activate(injected, undefined, true).catch(() => {
+        try {
+            injected.isAuthorized().then((isAuthorized: boolean) => {
+                if (isAuthorized) {
+                    activate(injected, undefined, true).catch(() => {
+                        setTried(true);
+                    });
+                } else {
                     setTried(true);
-                });
-            } else {
-                setTried(true);
-            }
-        });
+                }
+            });
+        } catch (err) {
+            setTried(true);
+        }
         // eslint-disable-next-line
     }, []); // intentionally only running on mount (make sure it's only mounted once :))
 
