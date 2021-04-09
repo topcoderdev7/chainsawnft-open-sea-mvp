@@ -29,11 +29,13 @@ export const Home: React.FC<{
             </Head>
             <HeadWithImage />
             <Slider slides={slides} />
-            {assets?.length && <Auctions assets={assets} link="/auctions/0" />}
-            {sold?.length && (
+            {assets?.length > 0 && (
+                <Auctions assets={assets} link="/auctions/0" />
+            )}
+            {sold?.length > 0 && (
                 <Auctions assets={sold} title="Sold" link="/sold/0" />
             )}
-            {upcoming?.length && (
+            {upcoming?.length > 0 && (
                 <Auctions
                     assets={upcoming}
                     title="Upcoming"
