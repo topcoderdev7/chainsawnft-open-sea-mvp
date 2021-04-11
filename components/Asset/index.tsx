@@ -49,7 +49,7 @@ const Asset: React.FC<{
                             </div>
                         )}
 
-                        {sold && (
+                        {sold && soldFor && (
                             <div>
                                 <h4>Sold for</h4>{" "}
                                 <h3>{utils.formatEther(soldFor)}</h3>
