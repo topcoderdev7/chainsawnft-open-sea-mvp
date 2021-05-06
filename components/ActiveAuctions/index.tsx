@@ -3,6 +3,7 @@ import useEnrichedAssetsData from "../../hooks/useEnrichedAssetsData";
 import { NFT } from "../../types";
 import Asset from "../Asset";
 import AssetOnSale from "../AssetOnSale";
+import Footer from "../Footer";
 import styles from "./Auctions.module.scss";
 
 const Auctions: React.FC<{
@@ -79,6 +80,7 @@ const Auctions: React.FC<{
                             alt="Chainsaw"
                         />
                     </div>
+                    <Footer />
                 </div>
             </div>
         </main>

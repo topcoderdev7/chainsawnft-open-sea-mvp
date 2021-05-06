@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import Footer from "../Footer";
 import Header from "../Header";
 import LandingHeader from "../LandingHeader";
 import styles from "./Layout.module.scss";
@@ -15,7 +14,6 @@ const Layout: React.FC = ({ children }) => {
             {!isLanding && <Header />}
 
             {children}
-            <Footer />
         </div>
     );
 };
