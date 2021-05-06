@@ -47,55 +47,57 @@ const AssetOnSale: React.FC<{
                             <img src={imageUrl} alt={name} />
                         )}
                     </div>
-                    <div className={styles.info}>
-                        <div className={styles.name}>
-                            <h2>{artist}</h2>
-                            <h3>{name}</h3>
-                        </div>
+                    {false &&
+                        <div className={styles.info}>
+                            <div className={styles.name}>
+                                <h2>{artist}</h2>
+                                <h3>{name}</h3>
+                            </div>
 
-                        <div className={styles.ends}>
-                            <h3>Auction Ends at</h3>
-                            <p>
-                                {salesOrder?.listing_time && onSale ? (
-                                    <Countdown
-                                        date={salesOrder?.listing_time * 1000}
-                                    />
-                                ) : (
-                                    "---"
-                                )}
-                            </p>
-                        </div>
-
-                        <div className={styles.footer}>
-                            {onSale && !sold && (
-                                <div className={styles.buyButton}>
-                                    <div>
-                                        <button>Bid Now</button>
-                                    </div>
-                                    {!salesOrder?.listing_time && (
-                                        <div>
-                                            <h3>Reserve price</h3>
-                                            <p>{reserve} ETH</p>
-                                        </div>
+                            <div className={styles.ends}>
+                                <h3>Auction Ends at</h3>
+                                <p>
+                                    {salesOrder?.listing_time && onSale ? (
+                                        <Countdown
+                                            date={salesOrder?.listing_time * 1000}
+                                        />
+                                    ) : (
+                                        "---"
                                     )}
-                                </div>
-                            )}
+                                </p>
+                            </div>
 
-                            {!onSale && (
-                                <div className={styles.notAvail}>
-                                    <h3>Price</h3>
-                                    <h2>---</h2>
-                                </div>
-                            )}
+                            <div className={styles.footer}>
+                                {onSale && !sold && (
+                                    <div className={styles.buyButton}>
+                                        <div>
+                                            <button>Bid Now</button>
+                                        </div>
+                                        {!salesOrder?.listing_time && (
+                                            <div>
+                                                <h3>Reserve price</h3>
+                                                <p>{reserve} ETH</p>
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
 
-                            {sold && (
-                                <div>
-                                    <h4>Sold for</h4>{" "}
-                                    <h3>{utils.formatEther(soldFor)}</h3>
-                                </div>
-                            )}
+                                {!onSale && (
+                                    <div className={styles.notAvail}>
+                                        <h3>Price</h3>
+                                        <h2>---</h2>
+                                    </div>
+                                )}
+
+                                {sold && (
+                                    <div>
+                                        <h4>Sold for</h4>{" "}
+                                        <h3>{utils.formatEther(soldFor)}</h3>
+                                    </div>
+                                )}
+                            </div>
                         </div>
-                    </div>
+                    }
                 </div>
             </a>
         </Link>

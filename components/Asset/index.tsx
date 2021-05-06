@@ -37,32 +37,34 @@ const Asset: React.FC<{
                         <img src={imageUrl} alt={name} />
                     )}
                 </div>
-                <div className={styles.info}>
-                    <div className={styles.name}>
-                        <h2>{artist}</h2>
-                        <h3>{name}</h3>
-                    </div>
-                    <div className={styles.footer}>
-                        {onSale && !sold && (
-                            <div>
-                                <button>Bid Now</button>
-                            </div>
-                        )}
+                {false &&
+                    <div className={styles.info}>
+                        <div className={styles.name}>
+                            <h2>{artist}</h2>
+                            <h3>{name}</h3>
+                        </div>
+                        <div className={styles.footer}>
+                            {onSale && !sold && (
+                                <div>
+                                    <button>Bid Now</button>
+                                </div>
+                            )}
 
-                        {sold && soldFor && (
-                            <div>
-                                <h4>Sold for</h4>{" "}
-                                <h3>{utils.formatEther(soldFor)}</h3>
-                            </div>
-                        )}
+                            {sold && soldFor && (
+                                <div>
+                                    <h4>Sold for</h4>{" "}
+                                    <h3>{utils.formatEther(soldFor)}</h3>
+                                </div>
+                            )}
 
-                        {reserve && !sold && (
-                            <div>
-                                <h4>Reserve price:</h4> <h3>{reserve} ETH</h3>
-                            </div>
-                        )}
+                            {reserve && !sold && (
+                                <div>
+                                    <h4>Reserve price:</h4> <h3>{reserve} ETH</h3>
+                                </div>
+                            )}
+                        </div>
                     </div>
-                </div>
+                }
             </div>
         </a>
     </Link>

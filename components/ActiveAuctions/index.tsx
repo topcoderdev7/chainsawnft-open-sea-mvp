@@ -23,45 +23,63 @@ const Auctions: React.FC<{
                     {link && <Link href={link}>View All</Link>}
                 </div>
             </div>
-            <div className={styles.auctionsContainer}>
-                {enrichedAssets.map(
-                    ({
-                        description,
-                        imageUrl,
-                        name,
-                        slug,
-                        reserve,
-                        artist,
-                        onSale,
-                        file,
-                        sold,
-                        soldFor,
-                        address,
-                        tokenId,
-                        salesOrder,
-                        currentBid,
-                    }) => (
-                        <>
-                            <AssetOnSale
-                                address={address}
-                                tokenId={tokenId}
-                                onSale={onSale}
-                                artist={artist?.name}
-                                key={name}
-                                sold={sold}
-                                soldFor={soldFor}
-                                slug={slug}
-                                description={description}
-                                imageUrl={imageUrl}
-                                name={name}
-                                reserve={reserve}
-                                file={file}
-                                salesOrder={salesOrder}
-                                currentBid={currentBid}
-                            />
-                        </>
-                    ),
-                )}
+            <div className={styles.auctionsLayout}>
+                <div className={styles.leftSection}>
+                    <div className={styles.auctionsContainer}>
+                        {enrichedAssets.map(
+                            ({
+                                description,
+                                imageUrl,
+                                name,
+                                slug,
+                                reserve,
+                                artist,
+                                onSale,
+                                file,
+                                sold,
+                                soldFor,
+                                address,
+                                tokenId,
+                                salesOrder,
+                                currentBid,
+                            }) => (
+                                <>
+                                    <AssetOnSale
+                                        address={address}
+                                        tokenId={tokenId}
+                                        onSale={onSale}
+                                        artist={artist?.name}
+                                        key={name}
+                                        sold={sold}
+                                        soldFor={soldFor}
+                                        slug={slug}
+                                        description={description}
+                                        imageUrl={imageUrl}
+                                        name={name}
+                                        reserve={reserve}
+                                        file={file}
+                                        salesOrder={salesOrder}
+                                        currentBid={currentBid}
+                                    />
+                                </>
+                            ),
+                        )}
+                    </div>
+                </div>
+                <div className={styles.rightSection}>
+                    <div className={styles.logoContainer}>
+                        <img
+                            className={styles.smallLogo}
+                            src="/images/logoclear.png"
+                            alt="Chainsaw"
+                        />
+                        <img
+                            className={styles.logo}
+                            src="/images/logo.png"
+                            alt="Chainsaw"
+                        />
+                    </div>
+                </div>
             </div>
         </main>
     );
