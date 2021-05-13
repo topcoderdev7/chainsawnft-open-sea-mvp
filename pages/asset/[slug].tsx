@@ -21,9 +21,11 @@ import MarkdownRenderer from "../../components/MarkdownRenderer";
 const BuyWidgetNoSsr = dynamic(() => import("../../components/BuyWidget"), {
     ssr: false,
 });
+
 const OrdersNoSsr = dynamic(() => import("../../components/Orders"), {
     ssr: false,
 });
+
 const PDFViewer = dynamic(() => import("../../components/PDFViewer"), {
     ssr: false,
 });

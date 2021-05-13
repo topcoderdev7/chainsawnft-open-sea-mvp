@@ -40,12 +40,12 @@ const AssetOnSale: React.FC<{
             <a>
                 <div className={styles.asset}>
                     <div className={styles.imageContainer}>
-                        {file && file.type === "video" && file.link && (
+                        {/* {file && file.type === "video" && file.link && (
                             <VideoPlayer playbackId={file.link} display />
                         )}
                         {!(file && file.type === "video" && file.link) && (
                             <img src={imageUrl} alt={name} />
-                        )}
+                        )} */}
                     </div>
                     <div className={styles.info}>
                         <div className={styles.name}>

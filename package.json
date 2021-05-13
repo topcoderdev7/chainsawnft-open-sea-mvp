@@ -39,6 +39,7 @@
         "ethers": "^5.0.31",
         "hls.js": "^0.14.17",
         "lodash.groupby": "^4.6.0",
+        "moment": "^2.29.1",
         "next": "latest",
         "opensea-js": "^1.1.10",
         "react": "^17.0.1",
